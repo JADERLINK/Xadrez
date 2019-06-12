@@ -29,6 +29,7 @@ namespace Xadrez
             ModoEditor = false;
 
             // começa o com o player 1
+            PlayerDoUsuario = 1;
             Player = 1;
             RivalDoPlayer = 2;
 
@@ -70,6 +71,9 @@ namespace Xadrez
 
             ChecandoSeOReiEstaEmXequeMate = false;
             //ReiRivalFoiColocadoEmXeque = false;
+
+            ModoEditor_TemCasaSelecionada = false;
+
 
             labelInfoRei = "";
 

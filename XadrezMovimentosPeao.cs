@@ -67,6 +67,7 @@ namespace Xadrez
                             DescricaoDosBotoesInfoMov[ID_NA_DIAGONAL] = NomeDESCRICAO_NAOPODECOLOCAR + NomeEmBranco + NomeDESCRICAO_PODEENPASSANT;
                             CORESNASCASAS[ID_NA_DIAGONAL] = CORES_NAOPODECOLOCAR;
                             ImagemNasCasasL2[ID_NA_DIAGONAL] = IMAGEM_NAOPODERENPASSANT;
+                            IDDosStatusDeSelecao[ID_NA_DIAGONAL] = 08;
                         }
                         else
                         {
@@ -76,6 +77,7 @@ namespace Xadrez
                             DescricaoDosBotoesInfoMov[ID_NA_DIAGONAL] = NomeDESCRICAO_PODEENPASSANT;
                             CORESNASCASAS[ID_NA_DIAGONAL] = CORES_PODEENPASSANT;
                             ImagemNasCasasL2[ID_NA_DIAGONAL] = IMAGEM_PODERENPASSANT;
+                            IDDosStatusDeSelecao[ID_NA_DIAGONAL] = 05;
                         }
                     }
                     else
@@ -86,6 +88,7 @@ namespace Xadrez
                         DescricaoDosBotoesInfoMov[ID_NA_DIAGONAL] = NomeDESCRICAO_PODEENPASSANT;
                         CORESNASCASAS[ID_NA_DIAGONAL] = CORES_PODEENPASSANT;
                         ImagemNasCasasL2[ID_NA_DIAGONAL] = IMAGEM_PODERENPASSANT;
+                        IDDosStatusDeSelecao[ID_NA_DIAGONAL] = 05;
                     }
 
 
@@ -121,6 +124,7 @@ namespace Xadrez
                             DescricaoDosBotoesInfoMov[ID_NA_DIAGONAL] = NomeDESCRICAO_NAOPODECOLOCAR + NomeEmBranco + NomeDESCRICAO_PODEENPASSANT;
                             CORESNASCASAS[ID_NA_DIAGONAL] = CORES_NAOPODECOLOCAR;
                             ImagemNasCasasL2[ID_NA_DIAGONAL] = IMAGEM_NAOPODERENPASSANT;
+                            IDDosStatusDeSelecao[ID_NA_DIAGONAL] = 08;
                         }
                         else
                         {
@@ -130,6 +134,7 @@ namespace Xadrez
                             DescricaoDosBotoesInfoMov[ID_NA_DIAGONAL] = NomeDESCRICAO_PODEENPASSANT;
                             CORESNASCASAS[ID_NA_DIAGONAL] = CORES_PODEENPASSANT;
                             ImagemNasCasasL2[ID_NA_DIAGONAL] = IMAGEM_PODERENPASSANT;
+                            IDDosStatusDeSelecao[ID_NA_DIAGONAL] = 05;
                         }
                     }
                     else
@@ -140,6 +145,7 @@ namespace Xadrez
                         DescricaoDosBotoesInfoMov[ID_NA_DIAGONAL] = NomeDESCRICAO_PODEENPASSANT;
                         CORESNASCASAS[ID_NA_DIAGONAL] = CORES_PODEENPASSANT;
                         ImagemNasCasasL2[ID_NA_DIAGONAL] = IMAGEM_PODERENPASSANT;
+                        IDDosStatusDeSelecao[ID_NA_DIAGONAL] = 05;
                     }
 
                 }

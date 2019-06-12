@@ -539,7 +539,7 @@ namespace Xadrez
                     ColunaAbaixoDaPessa[1] = 34;
                     ColunaAbaixoDaPessa[2] = 42;
                     ColunaAbaixoDaPessa[3] = 50;
-                    ColunaAbaixoDaPessa[3] = 58;
+                    ColunaAbaixoDaPessa[4] = 58;
                     ColunaAcimaDaPessa[0] = 10;
                     ColunaAcimaDaPessa[1] = 2;
                     LinhaAdireitaDaPessa[0] = 19;
@@ -1866,7 +1866,7 @@ namespace Xadrez
                     DiagonalDireitaCimaDaPessa[1] = 46;
                     DiagonalDireitaCimaDaPessa[2] = 39;
                     DiagonalEsquerdaCimaDaPessa[0] = 51;
-                    DiagonalEsquerdaCimaDaPessa[1] = 46;
+                    DiagonalEsquerdaCimaDaPessa[1] = 42;
                     DiagonalEsquerdaCimaDaPessa[2] = 33;
                     DiagonalEsquerdaCimaDaPessa[3] = 24;
                     CavaloJogadas[0] = 43;

@@ -38,6 +38,14 @@
             this.carregarParaEditarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarNovoJogoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.jogoOnlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hostearPartidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.conectarNaPartidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.desconectarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.requisitarNovaPartidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.requisitarJogoCarregadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.requisitarDadosDoTabuleiroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.corNosNomesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oNOFFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,12 +132,12 @@
             this.labelDisplay8 = new System.Windows.Forms.Label();
             this.labelDisplayH = new System.Windows.Forms.Label();
             this.buttonConcluirJogada = new System.Windows.Forms.Button();
-            this.labeltraduz002 = new System.Windows.Forms.Label();
+            this.labelTraduz002 = new System.Windows.Forms.Label();
             this.labelPlayerColor = new System.Windows.Forms.Label();
-            this.textBoxLog = new System.Windows.Forms.TextBox();
+            this.textBoxChat = new System.Windows.Forms.TextBox();
             this.toolTipDescricaoDasCasas = new System.Windows.Forms.ToolTip(this.components);
             this.comboBoxPeao = new System.Windows.Forms.ComboBox();
-            this.labeltraduz001 = new System.Windows.Forms.Label();
+            this.labelTraduz001 = new System.Windows.Forms.Label();
             this.button2H = new System.Windows.Forms.Button();
             this.button1H = new System.Windows.Forms.Button();
             this.button3H = new System.Windows.Forms.Button();
@@ -144,7 +152,6 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panelJogoNormal = new System.Windows.Forms.Panel();
-            this.labelTraduz003 = new System.Windows.Forms.Label();
             this.panelModoEditar = new System.Windows.Forms.Panel();
             this.labelTraduz012 = new System.Windows.Forms.Label();
             this.numericUpDownInfoDebug = new System.Windows.Forms.NumericUpDown();
@@ -168,6 +175,27 @@
             this.radioButton_Edit_Subistituir = new System.Windows.Forms.RadioButton();
             this.radioButton_Edit_Selecionar = new System.Windows.Forms.RadioButton();
             this.labelInfoRei = new System.Windows.Forms.Label();
+            this.panelTemTabuleiro = new System.Windows.Forms.Panel();
+            this.panelCHAT = new System.Windows.Forms.Panel();
+            this.labelTtraduz020 = new System.Windows.Forms.Label();
+            this.textBoxEnviaProChat = new System.Windows.Forms.TextBox();
+            this.panelHostearPartida = new System.Windows.Forms.Panel();
+            this.panelComOsRadiosDaPartida = new System.Windows.Forms.Panel();
+            this.radioButtonHostCarregarPartida = new System.Windows.Forms.RadioButton();
+            this.radioButtonHostNovaPartida = new System.Windows.Forms.RadioButton();
+            this.labelTraduz016 = new System.Windows.Forms.Label();
+            this.labelTraduz015 = new System.Windows.Forms.Label();
+            this.buttonHostear = new System.Windows.Forms.Button();
+            this.numericUpDownHostDoor = new System.Windows.Forms.NumericUpDown();
+            this.textBoxHostIP = new System.Windows.Forms.TextBox();
+            this.labelTraduz013 = new System.Windows.Forms.Label();
+            this.panelConectar = new System.Windows.Forms.Panel();
+            this.labelTraduz014 = new System.Windows.Forms.Label();
+            this.labelTraduz017 = new System.Windows.Forms.Label();
+            this.labelTraduz018 = new System.Windows.Forms.Label();
+            this.textBoxClientIP = new System.Windows.Forms.TextBox();
+            this.numericUpDownClientDoor = new System.Windows.Forms.NumericUpDown();
+            this.buttonConectar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panelTabuleiro.SuspendLayout();
             this.panelJogoNormal.SuspendLayout();
@@ -178,19 +206,28 @@
             this.groupBoxEditorPessa.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEmqualRodadaAPessaFoiMexida)).BeginInit();
             this.groupBoxModoDeEdicao.SuspendLayout();
+            this.panelTemTabuleiro.SuspendLayout();
+            this.panelCHAT.SuspendLayout();
+            this.panelHostearPartida.SuspendLayout();
+            this.panelComOsRadiosDaPartida.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHostDoor)).BeginInit();
+            this.panelConectar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownClientDoor)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuToolStripMenuItem,
+            this.jogoOnlineToolStripMenuItem,
             this.configToolStripMenuItem,
             this.creditosToolStripMenuItem,
             this.concluirJogadaToolStripMenuItem});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(943, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1362, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -248,6 +285,67 @@
             this.sairToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.sairToolStripMenuItem.Text = "Sair";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
+            // 
+            // jogoOnlineToolStripMenuItem
+            // 
+            this.jogoOnlineToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hostearPartidaToolStripMenuItem,
+            this.conectarNaPartidaToolStripMenuItem,
+            this.desconectarToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.requisitarNovaPartidaToolStripMenuItem,
+            this.requisitarJogoCarregadoToolStripMenuItem,
+            this.requisitarDadosDoTabuleiroToolStripMenuItem});
+            this.jogoOnlineToolStripMenuItem.Name = "jogoOnlineToolStripMenuItem";
+            this.jogoOnlineToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
+            this.jogoOnlineToolStripMenuItem.Text = "Jogo Online";
+            // 
+            // hostearPartidaToolStripMenuItem
+            // 
+            this.hostearPartidaToolStripMenuItem.Name = "hostearPartidaToolStripMenuItem";
+            this.hostearPartidaToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.hostearPartidaToolStripMenuItem.Text = "Hostear Partida";
+            this.hostearPartidaToolStripMenuItem.Click += new System.EventHandler(this.hostearPartidaToolStripMenuItem_Click);
+            // 
+            // conectarNaPartidaToolStripMenuItem
+            // 
+            this.conectarNaPartidaToolStripMenuItem.Name = "conectarNaPartidaToolStripMenuItem";
+            this.conectarNaPartidaToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.conectarNaPartidaToolStripMenuItem.Text = "Conectar Na Partida";
+            this.conectarNaPartidaToolStripMenuItem.Click += new System.EventHandler(this.conectarNaPartidaToolStripMenuItem_Click);
+            // 
+            // desconectarToolStripMenuItem
+            // 
+            this.desconectarToolStripMenuItem.Name = "desconectarToolStripMenuItem";
+            this.desconectarToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.desconectarToolStripMenuItem.Text = "Desconectar";
+            this.desconectarToolStripMenuItem.Click += new System.EventHandler(this.desconectarToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(230, 6);
+            // 
+            // requisitarNovaPartidaToolStripMenuItem
+            // 
+            this.requisitarNovaPartidaToolStripMenuItem.Name = "requisitarNovaPartidaToolStripMenuItem";
+            this.requisitarNovaPartidaToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.requisitarNovaPartidaToolStripMenuItem.Text = "Requisitar Nova Partida";
+            this.requisitarNovaPartidaToolStripMenuItem.Click += new System.EventHandler(this.requisitarNovaPartidaToolStripMenuItem_Click);
+            // 
+            // requisitarJogoCarregadoToolStripMenuItem
+            // 
+            this.requisitarJogoCarregadoToolStripMenuItem.Name = "requisitarJogoCarregadoToolStripMenuItem";
+            this.requisitarJogoCarregadoToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.requisitarJogoCarregadoToolStripMenuItem.Text = "Requisitar Jogo Carregado";
+            this.requisitarJogoCarregadoToolStripMenuItem.Click += new System.EventHandler(this.requisitarJogoCarregadoToolStripMenuItem_Click);
+            // 
+            // requisitarDadosDoTabuleiroToolStripMenuItem
+            // 
+            this.requisitarDadosDoTabuleiroToolStripMenuItem.Name = "requisitarDadosDoTabuleiroToolStripMenuItem";
+            this.requisitarDadosDoTabuleiroToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.requisitarDadosDoTabuleiroToolStripMenuItem.Text = "Requisitar Dados Do Tabuleiro";
+            this.requisitarDadosDoTabuleiroToolStripMenuItem.Click += new System.EventHandler(this.requisitarDadosDoTabuleiroToolStripMenuItem_Click);
             // 
             // configToolStripMenuItem
             // 
@@ -370,7 +468,7 @@
             // 
             this.labelDisplay1.AutoSize = true;
             this.labelDisplay1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDisplay1.Location = new System.Drawing.Point(12, 79);
+            this.labelDisplay1.Location = new System.Drawing.Point(7, 49);
             this.labelDisplay1.Name = "labelDisplay1";
             this.labelDisplay1.Size = new System.Drawing.Size(14, 13);
             this.labelDisplay1.TabIndex = 2;
@@ -380,7 +478,7 @@
             // 
             this.labelDisplayA.AutoSize = true;
             this.labelDisplayA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDisplayA.Location = new System.Drawing.Point(60, 34);
+            this.labelDisplayA.Location = new System.Drawing.Point(57, 3);
             this.labelDisplayA.Name = "labelDisplayA";
             this.labelDisplayA.Size = new System.Drawing.Size(15, 13);
             this.labelDisplayA.TabIndex = 3;
@@ -582,7 +680,7 @@
             // 
             this.labelDisplay2.AutoSize = true;
             this.labelDisplay2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDisplay2.Location = new System.Drawing.Point(12, 149);
+            this.labelDisplay2.Location = new System.Drawing.Point(7, 119);
             this.labelDisplay2.Name = "labelDisplay2";
             this.labelDisplay2.Size = new System.Drawing.Size(14, 13);
             this.labelDisplay2.TabIndex = 19;
@@ -592,7 +690,7 @@
             // 
             this.labelDisplayB.AutoSize = true;
             this.labelDisplayB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDisplayB.Location = new System.Drawing.Point(130, 34);
+            this.labelDisplayB.Location = new System.Drawing.Point(127, 3);
             this.labelDisplayB.Name = "labelDisplayB";
             this.labelDisplayB.Size = new System.Drawing.Size(15, 13);
             this.labelDisplayB.TabIndex = 20;
@@ -1274,7 +1372,7 @@
             // 
             this.labelDisplay3.AutoSize = true;
             this.labelDisplay3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDisplay3.Location = new System.Drawing.Point(12, 219);
+            this.labelDisplay3.Location = new System.Drawing.Point(7, 189);
             this.labelDisplay3.Name = "labelDisplay3";
             this.labelDisplay3.Size = new System.Drawing.Size(14, 13);
             this.labelDisplay3.TabIndex = 69;
@@ -1284,7 +1382,7 @@
             // 
             this.labelDisplayC.AutoSize = true;
             this.labelDisplayC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDisplayC.Location = new System.Drawing.Point(200, 34);
+            this.labelDisplayC.Location = new System.Drawing.Point(197, 3);
             this.labelDisplayC.Name = "labelDisplayC";
             this.labelDisplayC.Size = new System.Drawing.Size(15, 13);
             this.labelDisplayC.TabIndex = 70;
@@ -1294,7 +1392,7 @@
             // 
             this.labelDisplay4.AutoSize = true;
             this.labelDisplay4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDisplay4.Location = new System.Drawing.Point(12, 289);
+            this.labelDisplay4.Location = new System.Drawing.Point(7, 259);
             this.labelDisplay4.Name = "labelDisplay4";
             this.labelDisplay4.Size = new System.Drawing.Size(14, 13);
             this.labelDisplay4.TabIndex = 71;
@@ -1304,7 +1402,7 @@
             // 
             this.labelDisplayD.AutoSize = true;
             this.labelDisplayD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDisplayD.Location = new System.Drawing.Point(270, 34);
+            this.labelDisplayD.Location = new System.Drawing.Point(267, 3);
             this.labelDisplayD.Name = "labelDisplayD";
             this.labelDisplayD.Size = new System.Drawing.Size(16, 13);
             this.labelDisplayD.TabIndex = 72;
@@ -1314,7 +1412,7 @@
             // 
             this.labelDisplay5.AutoSize = true;
             this.labelDisplay5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDisplay5.Location = new System.Drawing.Point(12, 359);
+            this.labelDisplay5.Location = new System.Drawing.Point(7, 329);
             this.labelDisplay5.Name = "labelDisplay5";
             this.labelDisplay5.Size = new System.Drawing.Size(14, 13);
             this.labelDisplay5.TabIndex = 73;
@@ -1324,7 +1422,7 @@
             // 
             this.labelDisplayE.AutoSize = true;
             this.labelDisplayE.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDisplayE.Location = new System.Drawing.Point(340, 34);
+            this.labelDisplayE.Location = new System.Drawing.Point(337, 3);
             this.labelDisplayE.Name = "labelDisplayE";
             this.labelDisplayE.Size = new System.Drawing.Size(15, 13);
             this.labelDisplayE.TabIndex = 74;
@@ -1334,7 +1432,7 @@
             // 
             this.labelDisplay6.AutoSize = true;
             this.labelDisplay6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDisplay6.Location = new System.Drawing.Point(12, 429);
+            this.labelDisplay6.Location = new System.Drawing.Point(7, 399);
             this.labelDisplay6.Name = "labelDisplay6";
             this.labelDisplay6.Size = new System.Drawing.Size(14, 13);
             this.labelDisplay6.TabIndex = 75;
@@ -1344,7 +1442,7 @@
             // 
             this.labelDisplayF.AutoSize = true;
             this.labelDisplayF.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDisplayF.Location = new System.Drawing.Point(410, 34);
+            this.labelDisplayF.Location = new System.Drawing.Point(407, 3);
             this.labelDisplayF.Name = "labelDisplayF";
             this.labelDisplayF.Size = new System.Drawing.Size(14, 13);
             this.labelDisplayF.TabIndex = 76;
@@ -1354,7 +1452,7 @@
             // 
             this.labelDisplay7.AutoSize = true;
             this.labelDisplay7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDisplay7.Location = new System.Drawing.Point(12, 499);
+            this.labelDisplay7.Location = new System.Drawing.Point(7, 469);
             this.labelDisplay7.Name = "labelDisplay7";
             this.labelDisplay7.Size = new System.Drawing.Size(14, 13);
             this.labelDisplay7.TabIndex = 77;
@@ -1364,7 +1462,7 @@
             // 
             this.labelDisplayG.AutoSize = true;
             this.labelDisplayG.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDisplayG.Location = new System.Drawing.Point(480, 34);
+            this.labelDisplayG.Location = new System.Drawing.Point(477, 3);
             this.labelDisplayG.Name = "labelDisplayG";
             this.labelDisplayG.Size = new System.Drawing.Size(16, 13);
             this.labelDisplayG.TabIndex = 78;
@@ -1374,7 +1472,7 @@
             // 
             this.labelDisplay8.AutoSize = true;
             this.labelDisplay8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDisplay8.Location = new System.Drawing.Point(12, 569);
+            this.labelDisplay8.Location = new System.Drawing.Point(7, 539);
             this.labelDisplay8.Name = "labelDisplay8";
             this.labelDisplay8.Size = new System.Drawing.Size(14, 13);
             this.labelDisplay8.TabIndex = 79;
@@ -1384,7 +1482,7 @@
             // 
             this.labelDisplayH.AutoSize = true;
             this.labelDisplayH.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDisplayH.Location = new System.Drawing.Point(550, 34);
+            this.labelDisplayH.Location = new System.Drawing.Point(547, 3);
             this.labelDisplayH.Name = "labelDisplayH";
             this.labelDisplayH.Size = new System.Drawing.Size(16, 13);
             this.labelDisplayH.TabIndex = 80;
@@ -1400,14 +1498,14 @@
             this.buttonConcluirJogada.UseVisualStyleBackColor = true;
             this.buttonConcluirJogada.Click += new System.EventHandler(this.buttonConcluirJogada_Click);
             // 
-            // labeltraduz002
+            // labelTraduz002
             // 
-            this.labeltraduz002.AutoSize = true;
-            this.labeltraduz002.Location = new System.Drawing.Point(105, 8);
-            this.labeltraduz002.Name = "labeltraduz002";
-            this.labeltraduz002.Size = new System.Drawing.Size(48, 13);
-            this.labeltraduz002.TabIndex = 82;
-            this.labeltraduz002.Text = "Jogador:";
+            this.labelTraduz002.AutoSize = true;
+            this.labelTraduz002.Location = new System.Drawing.Point(105, 8);
+            this.labelTraduz002.Name = "labelTraduz002";
+            this.labelTraduz002.Size = new System.Drawing.Size(48, 13);
+            this.labelTraduz002.TabIndex = 82;
+            this.labelTraduz002.Text = "Jogador:";
             // 
             // labelPlayerColor
             // 
@@ -1419,13 +1517,16 @@
             this.labelPlayerColor.TabIndex = 83;
             this.labelPlayerColor.Text = "Cor do Jogador";
             // 
-            // textBoxLog
+            // textBoxChat
             // 
-            this.textBoxLog.Location = new System.Drawing.Point(3, 92);
-            this.textBoxLog.Multiline = true;
-            this.textBoxLog.Name = "textBoxLog";
-            this.textBoxLog.Size = new System.Drawing.Size(336, 468);
-            this.textBoxLog.TabIndex = 91;
+            this.textBoxChat.BackColor = System.Drawing.Color.White;
+            this.textBoxChat.Location = new System.Drawing.Point(0, 22);
+            this.textBoxChat.Multiline = true;
+            this.textBoxChat.Name = "textBoxChat";
+            this.textBoxChat.ReadOnly = true;
+            this.textBoxChat.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxChat.Size = new System.Drawing.Size(344, 443);
+            this.textBoxChat.TabIndex = 91;
             // 
             // comboBoxPeao
             // 
@@ -1436,14 +1537,14 @@
             this.comboBoxPeao.TabIndex = 92;
             this.comboBoxPeao.SelectedIndexChanged += new System.EventHandler(this.comboBoxPeao_SelectedIndexChanged);
             // 
-            // labeltraduz001
+            // labelTraduz001
             // 
-            this.labeltraduz001.AutoSize = true;
-            this.labeltraduz001.Location = new System.Drawing.Point(3, 29);
-            this.labeltraduz001.Name = "labeltraduz001";
-            this.labeltraduz001.Size = new System.Drawing.Size(157, 13);
-            this.labeltraduz001.TabIndex = 93;
-            this.labeltraduz001.Text = "Escolha no que o peão vai virar";
+            this.labelTraduz001.AutoSize = true;
+            this.labelTraduz001.Location = new System.Drawing.Point(0, 30);
+            this.labelTraduz001.Name = "labelTraduz001";
+            this.labelTraduz001.Size = new System.Drawing.Size(157, 13);
+            this.labelTraduz001.TabIndex = 93;
+            this.labelTraduz001.Text = "Escolha no que o peão vai virar";
             // 
             // button2H
             // 
@@ -1639,7 +1740,7 @@
             this.panelTabuleiro.Controls.Add(this.button6C);
             this.panelTabuleiro.Controls.Add(this.button6A);
             this.panelTabuleiro.Controls.Add(this.button6B);
-            this.panelTabuleiro.Location = new System.Drawing.Point(30, 50);
+            this.panelTabuleiro.Location = new System.Drawing.Point(27, 19);
             this.panelTabuleiro.Name = "panelTabuleiro";
             this.panelTabuleiro.Size = new System.Drawing.Size(560, 560);
             this.panelTabuleiro.TabIndex = 95;
@@ -1691,26 +1792,15 @@
             // 
             // panelJogoNormal
             // 
-            this.panelJogoNormal.Controls.Add(this.labelTraduz003);
             this.panelJogoNormal.Controls.Add(this.buttonConcluirJogada);
-            this.panelJogoNormal.Controls.Add(this.labeltraduz002);
-            this.panelJogoNormal.Controls.Add(this.textBoxLog);
+            this.panelJogoNormal.Controls.Add(this.labelTraduz002);
             this.panelJogoNormal.Controls.Add(this.labelPlayerColor);
-            this.panelJogoNormal.Controls.Add(this.labeltraduz001);
+            this.panelJogoNormal.Controls.Add(this.labelTraduz001);
             this.panelJogoNormal.Controls.Add(this.comboBoxPeao);
-            this.panelJogoNormal.Location = new System.Drawing.Point(596, 50);
+            this.panelJogoNormal.Location = new System.Drawing.Point(596, 49);
             this.panelJogoNormal.Name = "panelJogoNormal";
-            this.panelJogoNormal.Size = new System.Drawing.Size(342, 560);
+            this.panelJogoNormal.Size = new System.Drawing.Size(342, 70);
             this.panelJogoNormal.TabIndex = 96;
-            // 
-            // labelTraduz003
-            // 
-            this.labelTraduz003.AutoSize = true;
-            this.labelTraduz003.Location = new System.Drawing.Point(3, 76);
-            this.labelTraduz003.Name = "labelTraduz003";
-            this.labelTraduz003.Size = new System.Drawing.Size(32, 13);
-            this.labelTraduz003.TabIndex = 94;
-            this.labelTraduz003.Text = "LOG:";
             // 
             // panelModoEditar
             // 
@@ -1719,9 +1809,9 @@
             this.panelModoEditar.Controls.Add(this.groupBoxEditorGeral);
             this.panelModoEditar.Controls.Add(this.groupBoxEditorPessa);
             this.panelModoEditar.Controls.Add(this.groupBoxModoDeEdicao);
-            this.panelModoEditar.Location = new System.Drawing.Point(944, 50);
+            this.panelModoEditar.Location = new System.Drawing.Point(944, 49);
             this.panelModoEditar.Name = "panelModoEditar";
-            this.panelModoEditar.Size = new System.Drawing.Size(342, 560);
+            this.panelModoEditar.Size = new System.Drawing.Size(344, 322);
             this.panelModoEditar.TabIndex = 97;
             // 
             // labelTraduz012
@@ -1759,7 +1849,7 @@
             this.groupBoxEditorGeral.Controls.Add(this.labelTraduz010);
             this.groupBoxEditorGeral.Location = new System.Drawing.Point(9, 239);
             this.groupBoxEditorGeral.Name = "groupBoxEditorGeral";
-            this.groupBoxEditorGeral.Size = new System.Drawing.Size(333, 75);
+            this.groupBoxEditorGeral.Size = new System.Drawing.Size(335, 75);
             this.groupBoxEditorGeral.TabIndex = 17;
             this.groupBoxEditorGeral.TabStop = false;
             this.groupBoxEditorGeral.Text = "Geral:";
@@ -1828,7 +1918,7 @@
             this.groupBoxEditorPessa.Controls.Add(this.comboBoxDirecaoDoPeao);
             this.groupBoxEditorPessa.Location = new System.Drawing.Point(9, 76);
             this.groupBoxEditorPessa.Name = "groupBoxEditorPessa";
-            this.groupBoxEditorPessa.Size = new System.Drawing.Size(333, 157);
+            this.groupBoxEditorPessa.Size = new System.Drawing.Size(335, 157);
             this.groupBoxEditorPessa.TabIndex = 16;
             this.groupBoxEditorPessa.TabStop = false;
             this.groupBoxEditorPessa.Text = "Peça:";
@@ -1968,38 +2058,269 @@
             // 
             this.labelInfoRei.AutoSize = true;
             this.labelInfoRei.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelInfoRei.Location = new System.Drawing.Point(26, 613);
+            this.labelInfoRei.Location = new System.Drawing.Point(23, 582);
             this.labelInfoRei.Name = "labelInfoRei";
             this.labelInfoRei.Size = new System.Drawing.Size(108, 24);
             this.labelInfoRei.TabIndex = 18;
             this.labelInfoRei.Text = "labelInfoRei";
             this.labelInfoRei.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // panelTemTabuleiro
+            // 
+            this.panelTemTabuleiro.Controls.Add(this.panelTabuleiro);
+            this.panelTemTabuleiro.Controls.Add(this.labelInfoRei);
+            this.panelTemTabuleiro.Controls.Add(this.labelDisplayA);
+            this.panelTemTabuleiro.Controls.Add(this.labelDisplay1);
+            this.panelTemTabuleiro.Controls.Add(this.labelDisplay2);
+            this.panelTemTabuleiro.Controls.Add(this.labelDisplayB);
+            this.panelTemTabuleiro.Controls.Add(this.labelDisplay3);
+            this.panelTemTabuleiro.Controls.Add(this.labelDisplayH);
+            this.panelTemTabuleiro.Controls.Add(this.labelDisplayC);
+            this.panelTemTabuleiro.Controls.Add(this.labelDisplay8);
+            this.panelTemTabuleiro.Controls.Add(this.labelDisplay4);
+            this.panelTemTabuleiro.Controls.Add(this.labelDisplayG);
+            this.panelTemTabuleiro.Controls.Add(this.labelDisplayD);
+            this.panelTemTabuleiro.Controls.Add(this.labelDisplay7);
+            this.panelTemTabuleiro.Controls.Add(this.labelDisplay5);
+            this.panelTemTabuleiro.Controls.Add(this.labelDisplayF);
+            this.panelTemTabuleiro.Controls.Add(this.labelDisplayE);
+            this.panelTemTabuleiro.Controls.Add(this.labelDisplay6);
+            this.panelTemTabuleiro.Location = new System.Drawing.Point(0, 30);
+            this.panelTemTabuleiro.Name = "panelTemTabuleiro";
+            this.panelTemTabuleiro.Size = new System.Drawing.Size(590, 617);
+            this.panelTemTabuleiro.TabIndex = 95;
+            // 
+            // panelCHAT
+            // 
+            this.panelCHAT.Controls.Add(this.labelTtraduz020);
+            this.panelCHAT.Controls.Add(this.textBoxEnviaProChat);
+            this.panelCHAT.Controls.Add(this.textBoxChat);
+            this.panelCHAT.Location = new System.Drawing.Point(594, 122);
+            this.panelCHAT.Name = "panelCHAT";
+            this.panelCHAT.Size = new System.Drawing.Size(344, 487);
+            this.panelCHAT.TabIndex = 98;
+            // 
+            // labelTtraduz020
+            // 
+            this.labelTtraduz020.AutoSize = true;
+            this.labelTtraduz020.Location = new System.Drawing.Point(3, 6);
+            this.labelTtraduz020.Name = "labelTtraduz020";
+            this.labelTtraduz020.Size = new System.Drawing.Size(32, 13);
+            this.labelTtraduz020.TabIndex = 96;
+            this.labelTtraduz020.Text = "Chat:";
+            // 
+            // textBoxEnviaProChat
+            // 
+            this.textBoxEnviaProChat.Location = new System.Drawing.Point(0, 467);
+            this.textBoxEnviaProChat.Name = "textBoxEnviaProChat";
+            this.textBoxEnviaProChat.Size = new System.Drawing.Size(344, 20);
+            this.textBoxEnviaProChat.TabIndex = 95;
+            this.textBoxEnviaProChat.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxEnviaProChat_KeyDown);
+            // 
+            // panelHostearPartida
+            // 
+            this.panelHostearPartida.Controls.Add(this.panelComOsRadiosDaPartida);
+            this.panelHostearPartida.Controls.Add(this.labelTraduz016);
+            this.panelHostearPartida.Controls.Add(this.labelTraduz015);
+            this.panelHostearPartida.Controls.Add(this.buttonHostear);
+            this.panelHostearPartida.Controls.Add(this.numericUpDownHostDoor);
+            this.panelHostearPartida.Controls.Add(this.textBoxHostIP);
+            this.panelHostearPartida.Controls.Add(this.labelTraduz013);
+            this.panelHostearPartida.Location = new System.Drawing.Point(944, 377);
+            this.panelHostearPartida.Name = "panelHostearPartida";
+            this.panelHostearPartida.Size = new System.Drawing.Size(235, 101);
+            this.panelHostearPartida.TabIndex = 99;
+            // 
+            // panelComOsRadiosDaPartida
+            // 
+            this.panelComOsRadiosDaPartida.Controls.Add(this.radioButtonHostCarregarPartida);
+            this.panelComOsRadiosDaPartida.Controls.Add(this.radioButtonHostNovaPartida);
+            this.panelComOsRadiosDaPartida.Location = new System.Drawing.Point(5, 70);
+            this.panelComOsRadiosDaPartida.Name = "panelComOsRadiosDaPartida";
+            this.panelComOsRadiosDaPartida.Size = new System.Drawing.Size(226, 22);
+            this.panelComOsRadiosDaPartida.TabIndex = 8;
+            // 
+            // radioButtonHostCarregarPartida
+            // 
+            this.radioButtonHostCarregarPartida.AutoSize = true;
+            this.radioButtonHostCarregarPartida.Location = new System.Drawing.Point(112, 3);
+            this.radioButtonHostCarregarPartida.Name = "radioButtonHostCarregarPartida";
+            this.radioButtonHostCarregarPartida.Size = new System.Drawing.Size(101, 17);
+            this.radioButtonHostCarregarPartida.TabIndex = 7;
+            this.radioButtonHostCarregarPartida.Text = "Carregar Partida";
+            this.radioButtonHostCarregarPartida.UseVisualStyleBackColor = true;
+            this.radioButtonHostCarregarPartida.CheckedChanged += new System.EventHandler(this.radioButtonHostCarregarPartida_CheckedChanged);
+            // 
+            // radioButtonHostNovaPartida
+            // 
+            this.radioButtonHostNovaPartida.AutoSize = true;
+            this.radioButtonHostNovaPartida.Checked = true;
+            this.radioButtonHostNovaPartida.Location = new System.Drawing.Point(6, 3);
+            this.radioButtonHostNovaPartida.Name = "radioButtonHostNovaPartida";
+            this.radioButtonHostNovaPartida.Size = new System.Drawing.Size(87, 17);
+            this.radioButtonHostNovaPartida.TabIndex = 6;
+            this.radioButtonHostNovaPartida.TabStop = true;
+            this.radioButtonHostNovaPartida.Text = "Nova Partida";
+            this.radioButtonHostNovaPartida.UseVisualStyleBackColor = true;
+            this.radioButtonHostNovaPartida.CheckedChanged += new System.EventHandler(this.radioButtonHostNovaPartida_CheckedChanged);
+            // 
+            // labelTraduz016
+            // 
+            this.labelTraduz016.AutoSize = true;
+            this.labelTraduz016.Location = new System.Drawing.Point(6, 43);
+            this.labelTraduz016.Name = "labelTraduz016";
+            this.labelTraduz016.Size = new System.Drawing.Size(42, 13);
+            this.labelTraduz016.TabIndex = 5;
+            this.labelTraduz016.Text = "DOOR:";
+            // 
+            // labelTraduz015
+            // 
+            this.labelTraduz015.AutoSize = true;
+            this.labelTraduz015.Location = new System.Drawing.Point(6, 16);
+            this.labelTraduz015.Name = "labelTraduz015";
+            this.labelTraduz015.Size = new System.Drawing.Size(20, 13);
+            this.labelTraduz015.TabIndex = 4;
+            this.labelTraduz015.Text = "IP:";
+            // 
+            // buttonHostear
+            // 
+            this.buttonHostear.Location = new System.Drawing.Point(141, 41);
+            this.buttonHostear.Name = "buttonHostear";
+            this.buttonHostear.Size = new System.Drawing.Size(75, 23);
+            this.buttonHostear.TabIndex = 3;
+            this.buttonHostear.Text = "Hostear";
+            this.buttonHostear.UseVisualStyleBackColor = true;
+            this.buttonHostear.Click += new System.EventHandler(this.buttonHostear_Click);
+            // 
+            // numericUpDownHostDoor
+            // 
+            this.numericUpDownHostDoor.Location = new System.Drawing.Point(54, 41);
+            this.numericUpDownHostDoor.Maximum = new decimal(new int[] {
+            65565,
+            0,
+            0,
+            0});
+            this.numericUpDownHostDoor.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownHostDoor.Name = "numericUpDownHostDoor";
+            this.numericUpDownHostDoor.Size = new System.Drawing.Size(65, 20);
+            this.numericUpDownHostDoor.TabIndex = 2;
+            this.numericUpDownHostDoor.Value = new decimal(new int[] {
+            7777,
+            0,
+            0,
+            0});
+            // 
+            // textBoxHostIP
+            // 
+            this.textBoxHostIP.Location = new System.Drawing.Point(54, 13);
+            this.textBoxHostIP.Name = "textBoxHostIP";
+            this.textBoxHostIP.Size = new System.Drawing.Size(162, 20);
+            this.textBoxHostIP.TabIndex = 1;
+            // 
+            // labelTraduz013
+            // 
+            this.labelTraduz013.AutoSize = true;
+            this.labelTraduz013.Location = new System.Drawing.Point(0, 0);
+            this.labelTraduz013.Name = "labelTraduz013";
+            this.labelTraduz013.Size = new System.Drawing.Size(32, 13);
+            this.labelTraduz013.TabIndex = 0;
+            this.labelTraduz013.Text = "Host:";
+            // 
+            // panelConectar
+            // 
+            this.panelConectar.Controls.Add(this.labelTraduz014);
+            this.panelConectar.Controls.Add(this.labelTraduz017);
+            this.panelConectar.Controls.Add(this.labelTraduz018);
+            this.panelConectar.Controls.Add(this.textBoxClientIP);
+            this.panelConectar.Controls.Add(this.numericUpDownClientDoor);
+            this.panelConectar.Controls.Add(this.buttonConectar);
+            this.panelConectar.Location = new System.Drawing.Point(944, 484);
+            this.panelConectar.Name = "panelConectar";
+            this.panelConectar.Size = new System.Drawing.Size(235, 100);
+            this.panelConectar.TabIndex = 100;
+            // 
+            // labelTraduz014
+            // 
+            this.labelTraduz014.AutoSize = true;
+            this.labelTraduz014.Location = new System.Drawing.Point(0, 0);
+            this.labelTraduz014.Name = "labelTraduz014";
+            this.labelTraduz014.Size = new System.Drawing.Size(53, 13);
+            this.labelTraduz014.TabIndex = 0;
+            this.labelTraduz014.Text = "Conectar:";
+            // 
+            // labelTraduz017
+            // 
+            this.labelTraduz017.AutoSize = true;
+            this.labelTraduz017.Location = new System.Drawing.Point(6, 16);
+            this.labelTraduz017.Name = "labelTraduz017";
+            this.labelTraduz017.Size = new System.Drawing.Size(20, 13);
+            this.labelTraduz017.TabIndex = 4;
+            this.labelTraduz017.Text = "IP:";
+            // 
+            // labelTraduz018
+            // 
+            this.labelTraduz018.AutoSize = true;
+            this.labelTraduz018.Location = new System.Drawing.Point(6, 43);
+            this.labelTraduz018.Name = "labelTraduz018";
+            this.labelTraduz018.Size = new System.Drawing.Size(42, 13);
+            this.labelTraduz018.TabIndex = 5;
+            this.labelTraduz018.Text = "DOOR:";
+            // 
+            // textBoxClientIP
+            // 
+            this.textBoxClientIP.Location = new System.Drawing.Point(54, 13);
+            this.textBoxClientIP.Name = "textBoxClientIP";
+            this.textBoxClientIP.Size = new System.Drawing.Size(162, 20);
+            this.textBoxClientIP.TabIndex = 1;
+            // 
+            // numericUpDownClientDoor
+            // 
+            this.numericUpDownClientDoor.Location = new System.Drawing.Point(54, 41);
+            this.numericUpDownClientDoor.Maximum = new decimal(new int[] {
+            65565,
+            0,
+            0,
+            0});
+            this.numericUpDownClientDoor.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownClientDoor.Name = "numericUpDownClientDoor";
+            this.numericUpDownClientDoor.Size = new System.Drawing.Size(65, 20);
+            this.numericUpDownClientDoor.TabIndex = 2;
+            this.numericUpDownClientDoor.Value = new decimal(new int[] {
+            7777,
+            0,
+            0,
+            0});
+            // 
+            // buttonConectar
+            // 
+            this.buttonConectar.Location = new System.Drawing.Point(141, 41);
+            this.buttonConectar.Name = "buttonConectar";
+            this.buttonConectar.Size = new System.Drawing.Size(75, 23);
+            this.buttonConectar.TabIndex = 3;
+            this.buttonConectar.Text = "Conectar";
+            this.buttonConectar.UseVisualStyleBackColor = true;
+            this.buttonConectar.Click += new System.EventHandler(this.buttonConectar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(943, 644);
-            this.Controls.Add(this.labelInfoRei);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(1362, 741);
+            this.Controls.Add(this.panelConectar);
+            this.Controls.Add(this.panelHostearPartida);
+            this.Controls.Add(this.panelCHAT);
+            this.Controls.Add(this.panelTemTabuleiro);
             this.Controls.Add(this.panelModoEditar);
             this.Controls.Add(this.panelJogoNormal);
-            this.Controls.Add(this.panelTabuleiro);
-            this.Controls.Add(this.labelDisplayH);
-            this.Controls.Add(this.labelDisplay8);
-            this.Controls.Add(this.labelDisplayG);
-            this.Controls.Add(this.labelDisplay7);
-            this.Controls.Add(this.labelDisplayF);
-            this.Controls.Add(this.labelDisplay6);
-            this.Controls.Add(this.labelDisplayE);
-            this.Controls.Add(this.labelDisplay5);
-            this.Controls.Add(this.labelDisplayD);
-            this.Controls.Add(this.labelDisplay4);
-            this.Controls.Add(this.labelDisplayC);
-            this.Controls.Add(this.labelDisplay3);
-            this.Controls.Add(this.labelDisplayB);
-            this.Controls.Add(this.labelDisplay2);
-            this.Controls.Add(this.labelDisplayA);
-            this.Controls.Add(this.labelDisplay1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -2024,6 +2345,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEmqualRodadaAPessaFoiMexida)).EndInit();
             this.groupBoxModoDeEdicao.ResumeLayout(false);
             this.groupBoxModoDeEdicao.PerformLayout();
+            this.panelTemTabuleiro.ResumeLayout(false);
+            this.panelTemTabuleiro.PerformLayout();
+            this.panelCHAT.ResumeLayout(false);
+            this.panelCHAT.PerformLayout();
+            this.panelHostearPartida.ResumeLayout(false);
+            this.panelHostearPartida.PerformLayout();
+            this.panelComOsRadiosDaPartida.ResumeLayout(false);
+            this.panelComOsRadiosDaPartida.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHostDoor)).EndInit();
+            this.panelConectar.ResumeLayout(false);
+            this.panelConectar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownClientDoor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2031,12 +2364,35 @@
 
         #endregion
 
+        //botoes do menu
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem concluirJogadaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem novaPartidaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem corNosNomesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nomesImagensToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem autoConcluirJogadaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem descriçãoNoTabuleiroToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem infoDeDebugToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem testarTabuleiroDebugToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem salvarComoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem carregarParaJogarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem carregarParaEditarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem creditosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editarNovoJogoToolStripMenuItem;
+        //
+        // botoes do tabuleiro
+        private System.Windows.Forms.Panel panelTemTabuleiro;
+        private System.Windows.Forms.Panel panelTabuleiro;
         private System.Windows.Forms.Button button1A;
-        private System.Windows.Forms.Label labelDisplay1;
-        private System.Windows.Forms.Label labelDisplayA;
         private System.Windows.Forms.Button button1B;
         private System.Windows.Forms.Button button1C;
         private System.Windows.Forms.Button button1D;
@@ -2050,8 +2406,6 @@
         private System.Windows.Forms.Button button2E;
         private System.Windows.Forms.Button button2F;
         private System.Windows.Forms.Button button2G;
-        private System.Windows.Forms.Label labelDisplay2;
-        private System.Windows.Forms.Label labelDisplayB;
         private System.Windows.Forms.Button button3A;
         private System.Windows.Forms.Button button3B;
         private System.Windows.Forms.Button button3C;
@@ -2094,6 +2448,18 @@
         private System.Windows.Forms.Button button8E;
         private System.Windows.Forms.Button button8F;
         private System.Windows.Forms.Button button8G;
+        private System.Windows.Forms.Button button2H;
+        private System.Windows.Forms.Button button1H;
+        private System.Windows.Forms.Button button3H;
+        private System.Windows.Forms.Button button6H;
+        private System.Windows.Forms.Button button5H;
+        private System.Windows.Forms.Button button4H;
+        private System.Windows.Forms.Button button7H;
+        private System.Windows.Forms.Button button8H;
+        private System.Windows.Forms.Label labelDisplay1;
+        private System.Windows.Forms.Label labelDisplayA;
+        private System.Windows.Forms.Label labelDisplay2;
+        private System.Windows.Forms.Label labelDisplayB;
         private System.Windows.Forms.Label labelDisplay3;
         private System.Windows.Forms.Label labelDisplayC;
         private System.Windows.Forms.Label labelDisplay4;
@@ -2106,69 +2472,77 @@
         private System.Windows.Forms.Label labelDisplayG;
         private System.Windows.Forms.Label labelDisplay8;
         private System.Windows.Forms.Label labelDisplayH;
-        private System.Windows.Forms.ToolStripMenuItem concluirJogadaToolStripMenuItem;
-        private System.Windows.Forms.Button buttonConcluirJogada;
-        private System.Windows.Forms.Label labeltraduz002;
-        private System.Windows.Forms.Label labelPlayerColor;
-        private System.Windows.Forms.ToolStripMenuItem novaPartidaToolStripMenuItem;
-        private System.Windows.Forms.TextBox textBoxLog;
-        private System.Windows.Forms.ToolTip toolTipDescricaoDasCasas;
-        private System.Windows.Forms.ComboBox comboBoxPeao;
-        private System.Windows.Forms.Label labeltraduz001;
-        private System.Windows.Forms.ToolStripMenuItem configToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem corNosNomesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem;
-        private System.Windows.Forms.Button button2H;
-        private System.Windows.Forms.Button button1H;
-        private System.Windows.Forms.Button button3H;
-        private System.Windows.Forms.Button button6H;
-        private System.Windows.Forms.Button button5H;
-        private System.Windows.Forms.Button button4H;
-        private System.Windows.Forms.Button button7H;
-        private System.Windows.Forms.Button button8H;
-        private System.Windows.Forms.Panel panelTabuleiro;
-        private System.Windows.Forms.ToolStripMenuItem nomesImagensToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem autoConcluirJogadaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem descriçãoNoTabuleiroToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem infoDeDebugToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem salvarComoToolStripMenuItem;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.ToolStripMenuItem carregarParaJogarToolStripMenuItem;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label labelInfoRei;
+        //
+        // label traduzir
+        private System.Windows.Forms.Label labelTraduz001;
+        private System.Windows.Forms.Label labelTraduz002;
+        private System.Windows.Forms.Label labelTraduz004;
+        private System.Windows.Forms.Label labelTraduz005;
+        private System.Windows.Forms.Label labelTraduz006;
+        private System.Windows.Forms.Label labelTraduz007;
+        private System.Windows.Forms.Label labelTraduz008;
+        // n tem a 9
+        private System.Windows.Forms.Label labelTraduz010;
+        private System.Windows.Forms.Label labelTraduz011;
+        private System.Windows.Forms.Label labelTraduz012;
+        //
+        // JogoNormal
         private System.Windows.Forms.Panel panelJogoNormal;
+        private System.Windows.Forms.Button buttonConcluirJogada;
+        private System.Windows.Forms.Label labelPlayerColor;
+        private System.Windows.Forms.ComboBox comboBoxPeao;
+        //
+        // fora da janela
+        private System.Windows.Forms.ToolTip toolTipDescricaoDasCasas; 
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        //
+        // modo editor
         private System.Windows.Forms.Panel panelModoEditar;
         private System.Windows.Forms.GroupBox groupBoxModoDeEdicao;
         private System.Windows.Forms.RadioButton radioButton_Edit_Subistituir;
         private System.Windows.Forms.RadioButton radioButton_Edit_Selecionar;
         private System.Windows.Forms.ComboBox comboBoxPessaEscolhida;
-        private System.Windows.Forms.Label labelTraduz004;
-        private System.Windows.Forms.ToolStripMenuItem editarNovoJogoToolStripMenuItem;
-        private System.Windows.Forms.Label labelTraduz005;
         private System.Windows.Forms.ComboBox comboBoxAPessaJaFoiMovida;
-        private System.Windows.Forms.Label labelTraduz006;
         private System.Windows.Forms.NumericUpDown numericUpDownEmqualRodadaAPessaFoiMexida;
-        private System.Windows.Forms.Label labelTraduz008;
-        private System.Windows.Forms.Label labelTraduz007;
         private System.Windows.Forms.ComboBox comboBoxDirecaoDoPeao;
         private System.Windows.Forms.ComboBox comboBoxPeaoAndouDuasCasas;
-        private System.Windows.Forms.Label labelTraduz011;
-        private System.Windows.Forms.Label labelTraduz010;
         private System.Windows.Forms.NumericUpDown numericUpDownEmqualRodadaOplayerEstaJogando;
         private System.Windows.Forms.ComboBox comboBoxPlayerAtual;
-        private System.Windows.Forms.ToolStripMenuItem carregarParaEditarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem creditosToolStripMenuItem;
-        private System.Windows.Forms.Label labelTraduz003;
         private System.Windows.Forms.GroupBox groupBoxEditorGeral;
         private System.Windows.Forms.GroupBox groupBoxEditorPessa;
-        private System.Windows.Forms.Label labelInfoRei;
-        private System.Windows.Forms.ToolStripMenuItem testarTabuleiroDebugToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem5;
-        private System.Windows.Forms.Label labelTraduz012;
         private System.Windows.Forms.NumericUpDown numericUpDownInfoDebug;
+        // outros
+        private System.Windows.Forms.Panel panelCHAT;
+        private System.Windows.Forms.TextBox textBoxChat;
+        private System.Windows.Forms.TextBox textBoxEnviaProChat;
+        private System.Windows.Forms.ToolStripMenuItem jogoOnlineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hostearPartidaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem conectarNaPartidaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem desconectarToolStripMenuItem;
+        private System.Windows.Forms.Panel panelHostearPartida;
+        private System.Windows.Forms.Panel panelConectar;
+        private System.Windows.Forms.Label labelTraduz013;
+        private System.Windows.Forms.Label labelTraduz014;
+        private System.Windows.Forms.RadioButton radioButtonHostCarregarPartida;
+        private System.Windows.Forms.RadioButton radioButtonHostNovaPartida;
+        private System.Windows.Forms.Label labelTraduz016;
+        private System.Windows.Forms.Label labelTraduz015;
+        private System.Windows.Forms.Button buttonHostear;
+        private System.Windows.Forms.NumericUpDown numericUpDownHostDoor;
+        private System.Windows.Forms.TextBox textBoxHostIP;
+        private System.Windows.Forms.Label labelTraduz017;
+        private System.Windows.Forms.Label labelTraduz018;
+        private System.Windows.Forms.TextBox textBoxClientIP;
+        private System.Windows.Forms.NumericUpDown numericUpDownClientDoor;
+        private System.Windows.Forms.Button buttonConectar;
+        private System.Windows.Forms.ToolStripMenuItem requisitarNovaPartidaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem requisitarJogoCarregadoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem requisitarDadosDoTabuleiroToolStripMenuItem;
+        private System.Windows.Forms.Label labelTtraduz020;
+        private System.Windows.Forms.Panel panelComOsRadiosDaPartida;
     }
 }
 

@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
+//using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using System.Diagnostics;
+//using System.Diagnostics;
+//using System.Net;
+//using System.Net.Sockets;
+using System.Threading;
+using System.Reflection;
 
 namespace Xadrez
 {
     public partial class Form1 : Form
-
     {
 
         XadrezClass ImportandoXadrezClass = new XadrezClass();
+
+        CarregarVariaveis Carregar = new CarregarVariaveis();
 
         public bool TextoDasCasasColorido;
 
@@ -34,24 +39,51 @@ namespace Xadrez
         // carregar pra editar
         public bool CarregarPraEditar;
 
+        // carrega pro online
+        public bool CarregarProOnline;
+
+        // arrega jogo, e "requisita jogo carregado" 
+        public bool CarregarERequisitarJogoCarregado;
+
+        // usado dentro do radiobutton do online
+        public bool NaoFoiPossivelCarregarProOnline;
+
+        // chama as mensagem box
+        public bool HouveEmpateMessageBox;
+        public bool XequemateMessageBox;
+
+
+
         public Form1()
-        {           
+        {
+            // Na saida da aplicação fechar conexoes
+            Application.ApplicationExit += new EventHandler(AoSairDoPrograma);
             InitializeComponent();
+            ClientSize = new Size(943, 644);
         }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //
-            // desabilitendo caixa de log
-            textBoxLog.Hide();
-            labelTraduz003.Hide();
+            requisitarJogoCarregadoToolStripMenuItem.Enabled = false;
+            requisitarNovaPartidaToolStripMenuItem.Enabled = false;
+            requisitarDadosDoTabuleiroToolStripMenuItem.Enabled = false;
+
+            desconectarToolStripMenuItem.Enabled = false;
+            panelConectar.Hide();
+            panelHostearPartida.Hide();
+
+
+            panelConectar.Location = panelTemTabuleiro.Location;
+            panelHostearPartida.Location = panelTemTabuleiro.Location;
 
             //
-            Console.WriteLine("log: carregado Form1_Load");
+            // desabilitendo caixa de chat
+            panelCHAT.Hide();
 
             // coloca scroll no log
-            textBoxLog.ScrollBars = ScrollBars.Both;
-            textBoxLog.WordWrap = false;
+            textBoxChat.ScrollBars = ScrollBars.Both;
+            textBoxChat.WordWrap = false;
 
             labelInfoRei.Text = "";
             ImportandoXadrezClass.labelInfoRei = "";
@@ -84,7 +116,7 @@ namespace Xadrez
 
             //Testar Tabuleiro(Debug)
             ImportandoXadrezClass.TestarTabuleiroDebug = false;
-            oNOFFToolStripMenuItem5.Text = "Ativar Teste Do tabuleiro";
+            oNOFFToolStripMenuItem5.Text = "Ativar Teste Do Tabuleiro";
  
             ImportandoXadrezClass.DescricaoDosBotoesMetodo();
             DescricaoDosBotoes();
@@ -144,29 +176,25 @@ namespace Xadrez
             comboBoxPessaEscolhida.Items.Add(ImportandoXadrezClass.NomeREV);
             comboBoxPessaEscolhida.Items.Add(ImportandoXadrezClass.NomeRAV);
             comboBoxPessaEscolhida.SelectedItem = "Vazio";
-            //ImportandoXadrezClass.ModoEditor_PessaASerColocada = comboBoxPessaEscolhida.SelectedIndex;
 
             comboBoxAPessaJaFoiMovida.Items.Add("False");
             comboBoxAPessaJaFoiMovida.Items.Add("True");
             comboBoxAPessaJaFoiMovida.SelectedItem = "False";
-            //ImportandoXadrezClass.ModoEditor_APessaJaFoiMovida = comboBoxAPessaJaFoiMovida.SelectedIndex;
 
             comboBoxDirecaoDoPeao.Items.Add("Pra Cima");
             comboBoxDirecaoDoPeao.Items.Add("Pra Baixo");
             comboBoxDirecaoDoPeao.Items.Add("Pra Direita");
             comboBoxDirecaoDoPeao.Items.Add("Pra Esquerda");
             comboBoxDirecaoDoPeao.SelectedItem = "Pra Cima";
-            //ImportandoXadrezClass.ModoEditor_DirecaoDoPeao = comboBoxDirecaoDoPeao.SelectedIndex;
 
             comboBoxPeaoAndouDuasCasas.Items.Add("False");
             comboBoxPeaoAndouDuasCasas.Items.Add("True");
             comboBoxPeaoAndouDuasCasas.SelectedItem = "False";
-            //ImportandoXadrezClass.ModoEditor_PeaoAndouDuasCasas = comboBoxPeaoAndouDuasCasas.SelectedIndex;
 
             comboBoxPlayerAtual.Items.Add("Player Azul");
             comboBoxPlayerAtual.Items.Add("Player Verde");
             comboBoxPlayerAtual.SelectedItem = "Player Azul";
-            //ImportandoXadrezClass.ModoEditor_Player = comboBoxPlayerAtual.SelectedIndex;
+
         }
 
         #region Casas Do Tabuleiro Click
@@ -627,23 +655,75 @@ namespace Xadrez
         private void buttonConcluirJogada_Click(object sender, EventArgs e)
         {
             ImportandoXadrezClass.ConcluirJogada();
+
             DarClickNoBotaoInfo();
+
+            if (ImportandoXadrezClass.TaNoOnline == true)
+            {
+                //EnviaXequeMateOuEmpate();
+
+                if (ImportandoXadrezClass.SePodeEnviarOsDadosProOutroLado == true)
+                {
+                    EnviaOsDadosProOutroPlayer();
+                    EnviaXequeMateOuEmpate();
+                }
+                else
+                {
+                    if (ImportandoXadrezClass.Player == ImportandoXadrezClass.PlayerDoUsuario)
+                    {
+                        EnviaAsinformacoesDoDisplayDeJogada();
+                    }                  
+                }
+             
+                //EnviaXequeMateOuEmpate();
+            }
+            ChamaAsMessageBoxXequeMateEEmpate();
         }
 
         private void concluirJogadaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ImportandoXadrezClass.ConcluirJogada();
+
             DarClickNoBotaoInfo();
+
+            if (ImportandoXadrezClass.TaNoOnline == true)
+            {
+                //EnviaXequeMateOuEmpate();
+
+                if (ImportandoXadrezClass.SePodeEnviarOsDadosProOutroLado == true)
+                {
+                    EnviaOsDadosProOutroPlayer();
+                    EnviaXequeMateOuEmpate();
+                }
+                else
+                {
+                    if (ImportandoXadrezClass.Player == ImportandoXadrezClass.PlayerDoUsuario)
+                    {
+                        EnviaAsinformacoesDoDisplayDeJogada();
+                    }
+                }
+
+                //EnviaXequeMateOuEmpate();
+            }
+            ChamaAsMessageBoxXequeMateEEmpate();
         }
 
         private void novaPartidaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ImportandoXadrezClass.IniciandoNovaPartida();
-            textBoxLog.Text = "Iniciando novo jogo";
+            //textBoxChat.Text = "Iniciando novo jogo";
             ImportandoXadrezClass.Log = "";
             DarClickNoBotaoInfo();
+            //
             panelJogoNormal.Show();
             panelModoEditar.Hide();
+            panelTemTabuleiro.Show();
+            panelHostearPartida.Hide();
+            panelConectar.Hide();
+            panelCHAT.Hide();
+
+            concluirJogadaToolStripMenuItem.Enabled = true;
+            salvarComoToolStripMenuItem.Enabled = true;
 
             ImportandoXadrezClass.BotaoBloqueado = false;
         }
@@ -656,8 +736,31 @@ namespace Xadrez
         // informações ao clicar em uma casa no tabuleiro
         public void DarClickNaCasaDoTabuleiroInfo(int ID_DA_CASA)
         {
-
             DarClickNoBotaoInfo();
+
+            if (ImportandoXadrezClass.TaNoOnline == true)
+            {
+
+                //EnviaXequeMateOuEmpate();
+
+                if (ImportandoXadrezClass.SePodeEnviarOsDadosProOutroLado == true)
+                {
+                    EnviaOsDadosProOutroPlayer();
+                    EnviaXequeMateOuEmpate();
+                }
+                else
+                {
+                    if (ImportandoXadrezClass.Player == ImportandoXadrezClass.PlayerDoUsuario)
+                    {
+                        EnviaAsinformacoesDoDisplayDeJogada();
+                    }
+                }
+
+                //EnviaXequeMateOuEmpate();
+            }
+
+            ChamaAsMessageBoxXequeMateEEmpate();
+
 
             //Console.WriteLine("Log: Cliquei no botão: " + ID_DA_CASA);
             //Console.WriteLine("Log: CasaEstaOcupada[{0}]: {1}", ID_DA_CASA, Convert.ToString(ImportandoXadrezClass.CasaEstaOcupada[ID_DA_CASA]));
@@ -722,39 +825,23 @@ namespace Xadrez
                 SemImagensNasCasas();
             }
 
-            textBoxLog.Text = textBoxLog.Text + Environment.NewLine + ImportandoXadrezClass.Log;
+            //textBoxLog.Text = textBoxLog.Text + Environment.NewLine + ImportandoXadrezClass.Log;
             labelInfoRei.Text = ImportandoXadrezClass.labelInfoRei;
             labelInfoRei.ForeColor = ImportandoXadrezClass.labelInfoReiColor;
 
             // mesagem para Xequemate
             if (ImportandoXadrezClass.mesagemBoxXequeMate == true)
             {
-                string Vencedor = "";
-
-                if (ImportandoXadrezClass.Player == 1)
-                {
-                    Vencedor = ImportandoXadrezClass.NomeAZUL;
-                }
-                if (ImportandoXadrezClass.Player == 2)
-                {
-                    Vencedor = ImportandoXadrezClass.NomeVERDE;
-                }
-
-                MessageBox.Show("Fim De Jogo, Jogador "+ Vencedor +  " Venceu", "Fim De Jogo");
-
+                XequemateMessageBox = true;
                 ImportandoXadrezClass.mesagemBoxXequeMate = false;
-
-                //Console.WriteLine("IdDaCasaDaPessaQueAtacaOReiRival: " + ImportandoXadrezClass.IdDaCasaDaPessaQueAtacaOReiRival);
             }
 
             // mesagem de empate
             if (ImportandoXadrezClass.mesagemBoxEmpate == true)
             {
-                MessageBox.Show("O Jogo Empatou", "Fim De Jogo");
-                ImportandoXadrezClass.mesagemBoxEmpate = false;
+                HouveEmpateMessageBox = true;
+                ImportandoXadrezClass.mesagemBoxEmpate = false;      
             }
-
-
 
             if (VerInfoDeDebug == true)
             {
@@ -1633,6 +1720,7 @@ namespace Xadrez
         {
             CarregarPraJogar = true;
             openFileDialog1.ShowDialog();
+            CarregarPraJogar = false;
         }
 
         // apertar ok do ja janela de abrir arquivo
@@ -1662,11 +1750,11 @@ namespace Xadrez
 
                     if (PartesEmBytes[ide2] == 01)
                     {
-                        ImportandoXadrezClass.CasaEstaOcupada[i] = true;
+                        Carregar.CasaEstaOcupada[i] = true;
                     }
                     else
                     {
-                        ImportandoXadrezClass.CasaEstaOcupada[i] = false;
+                        Carregar.CasaEstaOcupada[i] = false;
                     }
 
                 }
@@ -1676,7 +1764,7 @@ namespace Xadrez
                 for (int i = 0; i < 65; i++)
                 {
                     int ide2 = i + 71;
-                    ImportandoXadrezClass.CorDaPessa[i] = PartesEmBytes[ide2];
+                    Carregar.CorDaPessa[i] = PartesEmBytes[ide2];
                 }
 
                 //139
@@ -1684,7 +1772,7 @@ namespace Xadrez
                 for (int i = 0; i < 65; i++)
                 {
                     int ide2 = i + 139;
-                    ImportandoXadrezClass.Pessa[i] = PartesEmBytes[ide2];
+                    Carregar.Pessa[i] = PartesEmBytes[ide2];
                 }
 
                 //207
@@ -1692,7 +1780,7 @@ namespace Xadrez
                 for (int i = 0; i < 65; i++)
                 {
                     int ide2 = i + 207;
-                    ImportandoXadrezClass.DirecaoDoPeao[i] = PartesEmBytes[ide2];
+                    Carregar.DirecaoDoPeao[i] = PartesEmBytes[ide2];
                 }
 
                 //275
@@ -1703,11 +1791,11 @@ namespace Xadrez
 
                     if (PartesEmBytes[ide2] == 01)
                     {
-                        ImportandoXadrezClass.APessaJaFoiMovida[i] = true;
+                        Carregar.APessaJaFoiMovida[i] = true;
                     }
                     else
                     {
-                        ImportandoXadrezClass.APessaJaFoiMovida[i] = false;
+                        Carregar.APessaJaFoiMovida[i] = false;
                     }
                 }
                 //343
@@ -1718,11 +1806,11 @@ namespace Xadrez
 
                     if (PartesEmBytes[ide2] == 01)
                     {
-                        ImportandoXadrezClass.PeaoAndouDuasCasas[i] = true;
+                        Carregar.PeaoAndouDuasCasas[i] = true;
                     }
                     else
                     {
-                        ImportandoXadrezClass.PeaoAndouDuasCasas[i] = false;
+                        Carregar.PeaoAndouDuasCasas[i] = false;
                     }
                 }
 
@@ -1734,7 +1822,7 @@ namespace Xadrez
                 {
                     agrega += 4;
 
-                    ImportandoXadrezClass.EmqualRodadaAPessaFoiMexida[i] =
+                    Carregar.EmqualRodadaAPessaFoiMexida[i] =
                         Convert.ToUInt32(
                             Convert.ToString(PartesEmBytes[i + 411 + agrega - 4]) +
                             Convert.ToString(PartesEmBytes[i + 411 + agrega - 3]) +
@@ -1746,22 +1834,13 @@ namespace Xadrez
 
                 //739
                 //Player
-                ImportandoXadrezClass.Player = PartesEmBytes[739];
-
-                if (PartesEmBytes[739] == 01)
-                {
-                    ImportandoXadrezClass.RivalDoPlayer = 2;
-                }
-                else
-                {
-                    ImportandoXadrezClass.RivalDoPlayer = 1;
-                }
+                Carregar.Player = PartesEmBytes[739];
 
                 //Console.WriteLine("carregando, Player: " + ImportandoXadrezClass.Player);
                 //743
                 //EmqualRodadaOplayerEstaJogando
 
-                ImportandoXadrezClass.EmqualRodadaOplayerEstaJogando =
+                Carregar.EmqualRodadaOplayerEstaJogando =
                     Convert.ToUInt32(
                         Convert.ToString(PartesEmBytes[743]) +
                         Convert.ToString(PartesEmBytes[744]) +
@@ -1774,7 +1853,7 @@ namespace Xadrez
 
                 //751
                 //nada
-       
+
                 //755
                 //ReiEmXeque
 
@@ -1790,71 +1869,99 @@ namespace Xadrez
                 }
                 */
 
+                ImportandoXadrezClass.ModoEditor_TemCasaSelecionada = false;
 
-                // setando oq n foi setado
-                ImportandoXadrezClass.labelInfoRei = "";
-                ImportandoXadrezClass.BotaoBloqueado = false;
-                ImportandoXadrezClass.CasaDoPeaoAserRemovidoNoEnPassantADireitaOuACima = 64;
-                ImportandoXadrezClass.CasaDoPeaoAserRemovidoNoEnPassantAEsquerdaOuABaixo = 64;
-                ImportandoXadrezClass.CasaDoRoque[0] = 64;
-                ImportandoXadrezClass.CasaDoRoque[1] = 64;
-                ImportandoXadrezClass.CasaDoRoque[2] = 64;
-                ImportandoXadrezClass.CasaDoRoque[3] = 64;
-                ImportandoXadrezClass.CasaDoRoqueOndeATorreVai[0] = 64;
-                ImportandoXadrezClass.CasaDoRoqueOndeATorreVai[1] = 64;
-                ImportandoXadrezClass.CasaDoRoqueOndeATorreVai[2] = 64;
-                ImportandoXadrezClass.CasaDoRoqueOndeATorreVai[3] = 64;
-                ImportandoXadrezClass.CasaDoRoqueOndeATorreTava[0] = 64;
-                ImportandoXadrezClass.CasaDoRoqueOndeATorreTava[1] = 64;
-                ImportandoXadrezClass.CasaDoRoqueOndeATorreTava[2] = 64;
-                ImportandoXadrezClass.CasaDoRoqueOndeATorreTava[3] = 64;
-                ImportandoXadrezClass.CasaOndeEstaOReiDoPlayer = 64;
-                ImportandoXadrezClass.CasaOndeEstaOReiDoRival = 64;
-                ImportandoXadrezClass.CasaQueClicareiParaEnPassantADireitaOuACima = 64;
-                ImportandoXadrezClass.CasaQueClicareiParaEnPassantAEsquerdaOuABaixo = 64;
-                ImportandoXadrezClass.XequeMate = false;
-                ImportandoXadrezClass.HouveEmpate = false;
-                ImportandoXadrezClass.ColoqueiAPessaEmUmaCasa = false;
-                ImportandoXadrezClass.ColoqueiAPessaEmUmaCasa_TabuleiroID = 64;
-                ImportandoXadrezClass.EstoufazendoUmEnPassantADireitaOuACima = false;
-                ImportandoXadrezClass.EstoufazendoUmEnPassantAEsquerdaOuABaixo = false;
-                ImportandoXadrezClass.EstouFazendoUmRoque = false;
-                ImportandoXadrezClass.mesagemBoxXequeMate = false;
-                for (int i = 0; i < 65; i++)
+                if (CarregarPraJogar == true
+                    || CarregarPraEditar == true
+                    || CarregarProOnline == true)
                 {
-                    ImportandoXadrezClass.NaoPodeClicarNesseBotao[i] = false;
-                }
-                ImportandoXadrezClass.OPeaoAndouDuasCasas = false;
-                ImportandoXadrezClass.ReiRivalFoiColocadoEmXequeMate = false;
-                ImportandoXadrezClass.TemCasaSelecionada = false;
+                    for (int id = 0; id < 65; id++)
+                    {
+                        ImportandoXadrezClass.CasaEstaOcupada[id] = Carregar.CasaEstaOcupada[id];
+                        ImportandoXadrezClass.CorDaPessa[id] = Carregar.CorDaPessa[id];
+                        ImportandoXadrezClass.Pessa[id] = Carregar.Pessa[id];
+                        ImportandoXadrezClass.DirecaoDoPeao[id] = Carregar.DirecaoDoPeao[id];
+                        ImportandoXadrezClass.APessaJaFoiMovida[id] = Carregar.APessaJaFoiMovida[id];
+                        ImportandoXadrezClass.EmqualRodadaAPessaFoiMexida[id] = Carregar.EmqualRodadaAPessaFoiMexida[id];
+                        ImportandoXadrezClass.PeaoAndouDuasCasas[id] = Carregar.PeaoAndouDuasCasas[id];
+                    }
+
+                    ImportandoXadrezClass.Player = Carregar.Player;
+                    ImportandoXadrezClass.EmqualRodadaOplayerEstaJogando = Carregar.EmqualRodadaOplayerEstaJogando;
 
 
-                ImportandoXadrezClass.Log = "Jogo carregado com sucesso";
+                    // setando oq n foi setado
+                    ImportandoXadrezClass.labelInfoRei = "";
+                    ImportandoXadrezClass.BotaoBloqueado = false;
+                    ImportandoXadrezClass.CasaDoPeaoAserRemovidoNoEnPassantADireitaOuACima = 64;
+                    ImportandoXadrezClass.CasaDoPeaoAserRemovidoNoEnPassantAEsquerdaOuABaixo = 64;
+                    ImportandoXadrezClass.CasaDoRoque[0] = 64;
+                    ImportandoXadrezClass.CasaDoRoque[1] = 64;
+                    ImportandoXadrezClass.CasaDoRoque[2] = 64;
+                    ImportandoXadrezClass.CasaDoRoque[3] = 64;
+                    ImportandoXadrezClass.CasaDoRoqueOndeATorreVai[0] = 64;
+                    ImportandoXadrezClass.CasaDoRoqueOndeATorreVai[1] = 64;
+                    ImportandoXadrezClass.CasaDoRoqueOndeATorreVai[2] = 64;
+                    ImportandoXadrezClass.CasaDoRoqueOndeATorreVai[3] = 64;
+                    ImportandoXadrezClass.CasaDoRoqueOndeATorreTava[0] = 64;
+                    ImportandoXadrezClass.CasaDoRoqueOndeATorreTava[1] = 64;
+                    ImportandoXadrezClass.CasaDoRoqueOndeATorreTava[2] = 64;
+                    ImportandoXadrezClass.CasaDoRoqueOndeATorreTava[3] = 64;
+                    ImportandoXadrezClass.CasaOndeEstaOReiDoPlayer = 64;
+                    ImportandoXadrezClass.CasaOndeEstaOReiDoRival = 64;
+                    ImportandoXadrezClass.CasaQueClicareiParaEnPassantADireitaOuACima = 64;
+                    ImportandoXadrezClass.CasaQueClicareiParaEnPassantAEsquerdaOuABaixo = 64;
+                    ImportandoXadrezClass.XequeMate = false;
+                    ImportandoXadrezClass.HouveEmpate = false;
+                    ImportandoXadrezClass.ColoqueiAPessaEmUmaCasa = false;
+                    ImportandoXadrezClass.ColoqueiAPessaEmUmaCasa_TabuleiroID = 64;
+                    ImportandoXadrezClass.EstoufazendoUmEnPassantADireitaOuACima = false;
+                    ImportandoXadrezClass.EstoufazendoUmEnPassantAEsquerdaOuABaixo = false;
+                    ImportandoXadrezClass.EstouFazendoUmRoque = false;
+                    ImportandoXadrezClass.mesagemBoxXequeMate = false;
+                    for (int i = 0; i < 65; i++)
+                    {
+                        ImportandoXadrezClass.NaoPodeClicarNesseBotao[i] = false;
+                    }
+                    ImportandoXadrezClass.OPeaoAndouDuasCasas = false;
+                    ImportandoXadrezClass.ReiRivalFoiColocadoEmXequeMate = false;
+                    ImportandoXadrezClass.TemCasaSelecionada = false;
 
-                textBoxLog.Text = "Carregado Jogo";
-                //ImportandoXadrezClass.Log = "";
 
-                // //
+                    ImportandoXadrezClass.Log = "Jogo carregado com sucesso";
+
+                    //textBoxLog.Text = "Carregado Jogo";
+                    //ImportandoXadrezClass.Log = "";
+
+                    // //
+
+                    ImportandoXadrezClass.PlayerDoUsuario = PartesEmBytes[739];
+
+                    if (PartesEmBytes[739] == 01)
+                    {
+                        ImportandoXadrezClass.RivalDoPlayer = 2;
+                    }
+                    else
+                    {
+                        ImportandoXadrezClass.RivalDoPlayer = 1;
+                    }
 
 
-                // faz backup para ser usado na testagem do Xeque-mate
-                // faz backup dos casas/peças
-                for (int id = 0; id < 65; id++)
-                {
-                    ImportandoXadrezClass.Backup_CasaEstaOcupada[id] = ImportandoXadrezClass.CasaEstaOcupada[id];
-                    ImportandoXadrezClass.Backup_CorDaPessa[id] = ImportandoXadrezClass.CorDaPessa[id];
-                    ImportandoXadrezClass.Backup_Pessa[id] = ImportandoXadrezClass.Pessa[id];
-                    ImportandoXadrezClass.Backup_DirecaoDoPeao[id] = ImportandoXadrezClass.DirecaoDoPeao[id];
-                    ImportandoXadrezClass.Backup_APessaJaFoiMovida[id] = ImportandoXadrezClass.APessaJaFoiMovida[id];
-                    ImportandoXadrezClass.Backup_EmqualRodadaAPessaFoiMexida[id] = ImportandoXadrezClass.EmqualRodadaAPessaFoiMexida[id];
-                    ImportandoXadrezClass.Backup_PeaoAndouDuasCasas[id] = ImportandoXadrezClass.PeaoAndouDuasCasas[id];
-                }
+                    // faz backup para ser usado na testagem do Xeque-mate
+                    // faz backup dos casas/peças
+                    for (int id = 0; id < 65; id++)
+                    {
+                        ImportandoXadrezClass.Backup_CasaEstaOcupada[id] = ImportandoXadrezClass.CasaEstaOcupada[id];
+                        ImportandoXadrezClass.Backup_CorDaPessa[id] = ImportandoXadrezClass.CorDaPessa[id];
+                        ImportandoXadrezClass.Backup_Pessa[id] = ImportandoXadrezClass.Pessa[id];
+                        ImportandoXadrezClass.Backup_DirecaoDoPeao[id] = ImportandoXadrezClass.DirecaoDoPeao[id];
+                        ImportandoXadrezClass.Backup_APessaJaFoiMovida[id] = ImportandoXadrezClass.APessaJaFoiMovida[id];
+                        ImportandoXadrezClass.Backup_EmqualRodadaAPessaFoiMexida[id] = ImportandoXadrezClass.EmqualRodadaAPessaFoiMexida[id];
+                        ImportandoXadrezClass.Backup_PeaoAndouDuasCasas[id] = ImportandoXadrezClass.PeaoAndouDuasCasas[id];
+                    }
 
-                //ImportandoXadrezClass.IdentificandoOndeEstaoOsReis();
 
-               // if (ImportandoXadrezClass.ReiEmXeque == true){
 
-     
                     if (ImportandoXadrezClass.Player == 1)
                     {
                         ImportandoXadrezClass.Player = 2;
@@ -1877,30 +1984,43 @@ namespace Xadrez
                         ImportandoXadrezClass.RivalDoPlayer = 1;
                     }
 
+                }
 
-                //}
-
-                // gambiarra
-                //ImportandoXadrezClass.ReiEmXeque = false;
-
-                // //
 
                 if (CarregarPraJogar == true)
                 {
+                    panelHostearPartida.Hide();
+                    panelConectar.Hide();
+                    panelCHAT.Hide();
+                    panelTemTabuleiro.Show();
+                    salvarComoToolStripMenuItem.Enabled = true;
+                    //
+
                     panelJogoNormal.Show();
                     panelModoEditar.Hide();
                     ImportandoXadrezClass.ModoEditor = false;
                     ImportandoXadrezClass.ModoEditor_TemCasaSelecionada = false;
 
+
+                    concluirJogadaToolStripMenuItem.Enabled = true;
                 }
 
                 if (CarregarPraEditar == true)
                 {
+                    panelHostearPartida.Hide();
+                    panelConectar.Hide();
+                    panelCHAT.Hide();
+                    panelTemTabuleiro.Show();
+                    salvarComoToolStripMenuItem.Enabled = true;
+                    //
+
+
                     panelJogoNormal.Hide();
                     panelModoEditar.Show();
                     ImportandoXadrezClass.ModoEditor = true;
                     ImportandoXadrezClass.ModoEditor_TemCasaSelecionada = false;
 
+                    concluirJogadaToolStripMenuItem.Enabled = false;
 
                     if (ImportandoXadrezClass.Player == 1)
                     {
@@ -1948,6 +2068,29 @@ namespace Xadrez
 
                 }
 
+                if (CarregarProOnline == true)
+                {
+                    NaoFoiPossivelCarregarProOnline = false;
+
+                    ImportandoXadrezClass.PlayerDoUsuario = 3;
+
+                }
+
+                if (CarregarERequisitarJogoCarregado == true)
+                {
+                    if (ClientEstaConectadoComHost == true)
+                    {
+                        string Oqvaiserenviado = "R2A Jogador Azul requisita Jogo Carregado";
+                        EnviaDados(Oqvaiserenviado);
+                    }
+                    if (ClientEstaConectado == true)
+                    {
+                        string Oqvaiserenviado = "R2V Jogador Verde requisita Jogo Carregado";
+                        EnviaDados(Oqvaiserenviado);
+                    }
+                }
+
+
                 // atualiza oq é mostrado no tabuleiro
                 ImportandoXadrezClass.NomeDosBotoesPeloValorDaPessa();
                 DarClickNoBotaoInfo();
@@ -1957,12 +2100,14 @@ namespace Xadrez
             }
             else
             {
-                MessageBox.Show("Erro: o arquivo não é do tipo adeguando ou esta conrompido");
+                MessageBox.Show("Erro: o arquivo não é do tipo adeguando ou esta conrompido", "Erro");
             }
 
             LerArquivo.Close();
             CarregarPraJogar = false;
             CarregarPraEditar = false;
+            CarregarProOnline = false;
+            CarregarERequisitarJogoCarregado = false;
 
         }
 
@@ -2963,11 +3108,18 @@ namespace Xadrez
         private void editarNovoJogoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ImportandoXadrezClass.EditarNovoJogo();
-            textBoxLog.Text = "";
+            //textBoxChat.Text = "";
             ImportandoXadrezClass.Log = "";
             DarClickNoBotaoInfo();
+            //
+            panelHostearPartida.Hide();
+            panelConectar.Hide();
+            panelCHAT.Hide();
             panelJogoNormal.Hide();
             panelModoEditar.Show();
+            panelTemTabuleiro.Show();
+            salvarComoToolStripMenuItem.Enabled = true;
+            concluirJogadaToolStripMenuItem.Enabled = false;
 
             comboBoxAPessaJaFoiMovida.Enabled = false;
             comboBoxDirecaoDoPeao.Enabled = false;
@@ -3231,6 +3383,7 @@ namespace Xadrez
         {
             CarregarPraEditar = true;
             openFileDialog1.ShowDialog();
+            CarregarPraEditar = false;
         }
 
         // "botao" superior informa os creditos
@@ -3238,7 +3391,7 @@ namespace Xadrez
         {
             // info Environment.NewLine coloca nova linha
 
-            MessageBox.Show("Xadrez By Jaderlink" + Environment.NewLine + "Site: jaderlink.blogspot.com", "Créditos:");
+            MessageBox.Show("Xadrez By Jaderlink" + Environment.NewLine + "Site: jaderlink.blogspot.com" + Environment.NewLine + "Versão: 2.0", "Créditos:");
            
         }
 
@@ -3254,7 +3407,7 @@ namespace Xadrez
                 DarClickNoBotaoInfo();
                 ImportandoXadrezClass.TemCasaSelecionada = false;
                 ImportandoXadrezClass.ColoqueiAPessaEmUmaCasa = false;
-                oNOFFToolStripMenuItem5.Text = "Ativar Teste Do tabuleiro";
+                oNOFFToolStripMenuItem5.Text = "Ativar Teste Do Tabuleiro";
                 ImportandoXadrezClass.TestarTabuleiroDebug = false;
             }
             else
@@ -3263,7 +3416,7 @@ namespace Xadrez
                 DarClickNoBotaoInfo();
                 ImportandoXadrezClass.TemCasaSelecionada = false;
                 ImportandoXadrezClass.ColoqueiAPessaEmUmaCasa = false;
-                oNOFFToolStripMenuItem5.Text = "Desativar Teste Do tabuleiro";
+                oNOFFToolStripMenuItem5.Text = "Desativar Teste Do Tabuleiro";
                 ImportandoXadrezClass.TestarTabuleiroDebug = true;
             }
         }
@@ -3273,5 +3426,426 @@ namespace Xadrez
             ImportandoXadrezClass.DescricaoDosBotoesDebugMetodo();
             toolTipDescricaoDasCasas.SetToolTip(numericUpDownInfoDebug, ImportandoXadrezClass.DescricaoDosBotoesDebug[Convert.ToInt32(numericUpDownInfoDebug.Value)]);
         }
+
+        // online opções
+
+        private void hostearPartidaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panelHostearPartida.Show();
+
+            panelConectar.Hide();
+            panelCHAT.Hide();
+            panelJogoNormal.Hide();
+            panelModoEditar.Hide();
+            panelTemTabuleiro.Hide();
+            salvarComoToolStripMenuItem.Enabled = false;
+            concluirJogadaToolStripMenuItem.Enabled = false;
+
+            // por padrão define como novo jogo
+            radioButtonHostNovaPartida.Checked = true;
+            radioButtonHostCarregarPartida.Checked = false;
+
+            ImportandoXadrezClass.IniciandoNovaPartida();
+            SetandoOQueNaoFoiSetado();
+            ImportandoXadrezClass.PlayerDoUsuario = 3;
+            DarClickNoBotaoInfo();
+
+        }
+
+        private void conectarNaPartidaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            panelConectar.Show();
+
+            panelHostearPartida.Hide();
+            panelCHAT.Hide();
+            panelJogoNormal.Hide();
+            panelModoEditar.Hide();
+            panelTemTabuleiro.Hide();
+            salvarComoToolStripMenuItem.Enabled = false;
+            concluirJogadaToolStripMenuItem.Enabled = false;
+
+            // tabuleiro em branco antes de se conectar
+
+            // n pode mexer no tabuleiro
+            ImportandoXadrezClass.PlayerDoUsuario = 3;
+            ImportandoXadrezClass.Player = 0;
+            ImportandoXadrezClass.EmqualRodadaOplayerEstaJogando = 0;
+
+            for (int id = 0; id < 65; id++)
+            {
+                ImportandoXadrezClass.NaoPodeClicarNesseBotao[id] = false;
+                ImportandoXadrezClass.EmqualRodadaAPessaFoiMexida[id] = 0;
+                ImportandoXadrezClass.PeaoAndouDuasCasas[id] = false;
+                ImportandoXadrezClass.Pessa[id] = 0;
+                ImportandoXadrezClass.CasaEstaOcupada[id] = false;
+                ImportandoXadrezClass.CorDaPessa[id] = 0;
+                ImportandoXadrezClass.DirecaoDoPeao[id] = 0;
+                ImportandoXadrezClass.APessaJaFoiMovida[id] = false;
+            }
+            ImportandoXadrezClass.NomeDosBotoesPeloValorDaPessa();
+            DarClickNoBotaoInfo();
+        }
+
+        private void desconectarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // desconecta jogo
+
+            try
+            {
+                Desconectar();
+                Fechahost();
+
+                novaPartidaToolStripMenuItem.Enabled = true;
+                carregarParaEditarToolStripMenuItem.Enabled = true;
+                carregarParaJogarToolStripMenuItem.Enabled = true;
+                editarNovoJogoToolStripMenuItem.Enabled = true;
+                hostearPartidaToolStripMenuItem.Enabled = true;
+                conectarNaPartidaToolStripMenuItem.Enabled = true;
+                desconectarToolStripMenuItem.Enabled = false;
+                textBoxEnviaProChat.Enabled = false;
+                requisitarJogoCarregadoToolStripMenuItem.Enabled = false;
+                requisitarNovaPartidaToolStripMenuItem.Enabled = false;
+                requisitarDadosDoTabuleiroToolStripMenuItem.Enabled = false;
+
+                testarTabuleiroDebugToolStripMenuItem.Enabled = true;
+
+                // n pode mexer no tabuleiro
+                ImportandoXadrezClass.PlayerDoUsuario = 3;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Erro:");
+            }
+       
+        }
+
+        private void buttonHostear_Click(object sender, EventArgs e)
+        {
+            IniciaHost();
+        }
+
+        private void buttonConectar_Click(object sender, EventArgs e)
+        {
+            Conectar();
+        }
+
+        private void radioButtonHostNovaPartida_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonHostNovaPartida.Checked == true)
+            {
+                ImportandoXadrezClass.IniciandoNovaPartida();
+                ImportandoXadrezClass.PlayerDoUsuario = 3;
+                DarClickNoBotaoInfo();
+            }
+        }
+
+        private void radioButtonHostCarregarPartida_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonHostCarregarPartida.Checked == true)
+            {
+                CarregarProOnline = true;
+                NaoFoiPossivelCarregarProOnline = true;
+                openFileDialog1.ShowDialog();
+                CarregarProOnline = false;
+
+                if (NaoFoiPossivelCarregarProOnline == true)
+                {
+                    radioButtonHostNovaPartida.Checked = true;
+                    radioButtonHostCarregarPartida.Checked = false;
+                }
+            }
+        }
+
+        private void textBoxEnviaProChat_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == (char)13)
+            {
+                EnviaAsMensagens();
+            }
+        }
+
+        private void requisitarNovaPartidaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ClientEstaConectadoComHost == true
+                || ClientEstaConectado == true)
+            {
+                if (MessageBox.Show("Você Realmente Deseja Requisitar Uma Nova Partida?", "Responda a pergunta:", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    if (ClientEstaConectadoComHost == true)
+                    {
+                        string Oqvaiserenviado = "R1A Jogador Azul requisita novo jogo";
+                        EnviaDados(Oqvaiserenviado);
+                    }
+                    if (ClientEstaConectado == true)
+                    {
+                        string Oqvaiserenviado = "R1V Jogador Verde requisita novo jogo";
+                        EnviaDados(Oqvaiserenviado);
+                    }
+                  
+                }
+
+            }
+        }
+
+        private void requisitarJogoCarregadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ClientEstaConectadoComHost == true
+                || ClientEstaConectado == true)
+            {
+                CarregarERequisitarJogoCarregado = true;
+                openFileDialog1.ShowDialog();
+                CarregarERequisitarJogoCarregado = false;
+            }
+
+        }
+
+        private void requisitarDadosDoTabuleiroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ClientEstaConectadoComHost == true
+                || ClientEstaConectado == true)
+            {
+                if (MessageBox.Show("Você Realmente Deseja Requisitar Os Dados Do Tabuleiro Do Outro Jogador?" + Environment.NewLine + 
+                    "Somente Faça isso caso os dois Jogadores Estejam incapacitados De Jogar.", "Responda a pergunta:", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    string PedeDados = "T Passa os dados ai";
+                    EnviaDados(PedeDados);
+                }
+            }
+        }
+
+        public void RecebeinfoDotabuleiroEAtualiza_o(string Conteudo)
+        {
+
+            List<byte> PartesEmBytes = new List<byte>();
+            foreach (var item in Conteudo)
+            {
+                PartesEmBytes.Add(Convert.ToByte(item));
+            }
+
+            // apartir daqui coloco as informações do arquivo nas variaveis
+
+            //CasaEstaOcupada
+            for (int i = 0; i < 65; i++)
+            {
+                int ide2 = i + 3;
+
+                if (PartesEmBytes[ide2] == 01)
+                {
+                    ImportandoXadrezClass.CasaEstaOcupada[i] = true;
+                }
+                else
+                {
+                    ImportandoXadrezClass.CasaEstaOcupada[i] = false;
+                }
+
+            }
+
+            // 71
+            // CorDaPessa
+            for (int i = 0; i < 65; i++)
+            {
+                int ide2 = i + 71;
+                ImportandoXadrezClass.CorDaPessa[i] = PartesEmBytes[ide2];
+            }
+
+            //139
+            //Pessa
+            for (int i = 0; i < 65; i++)
+            {
+                int ide2 = i + 139;
+                ImportandoXadrezClass.Pessa[i] = PartesEmBytes[ide2];
+            }
+
+            //207
+            //DirecaoDoPeao
+            for (int i = 0; i < 65; i++)
+            {
+                int ide2 = i + 207;
+                ImportandoXadrezClass.DirecaoDoPeao[i] = PartesEmBytes[ide2];
+            }
+
+            //275
+            //APessaJaFoiMovida
+            for (int i = 0; i < 65; i++)
+            {
+                int ide2 = i + 275;
+
+                if (PartesEmBytes[ide2] == 01)
+                {
+                    ImportandoXadrezClass.APessaJaFoiMovida[i] = true;
+                }
+                else
+                {
+                    ImportandoXadrezClass.APessaJaFoiMovida[i] = false;
+                }
+            }
+            //343
+            //PeaoAndouDuasCasas
+            for (int i = 0; i < 65; i++)
+            {
+                int ide2 = i + 343;
+
+                if (PartesEmBytes[ide2] == 01)
+                {
+                    ImportandoXadrezClass.PeaoAndouDuasCasas[i] = true;
+                }
+                else
+                {
+                    ImportandoXadrezClass.PeaoAndouDuasCasas[i] = false;
+                }
+            }
+
+            int agrega = 0;
+
+            //411
+            //EmqualRodadaAPessaFoiMexida
+            for (int i = 0; i < 65; i++)
+            {
+                agrega += 4;
+
+                ImportandoXadrezClass.EmqualRodadaAPessaFoiMexida[i] =
+                    Convert.ToUInt32(
+                        Convert.ToString(PartesEmBytes[i + 411 + agrega - 4]) +
+                        Convert.ToString(PartesEmBytes[i + 411 + agrega - 3]) +
+                        Convert.ToString(PartesEmBytes[i + 411 + agrega - 2]) +
+                        Convert.ToString(PartesEmBytes[i + 411 + agrega - 1]) +
+                        Convert.ToString(PartesEmBytes[i + 411 + agrega]));
+
+            }
+
+            //739
+            //Player
+            ImportandoXadrezClass.Player = PartesEmBytes[739];
+            if (PartesEmBytes[739] == 01)
+            {
+                ImportandoXadrezClass.RivalDoPlayer = 2;
+            }
+            else
+            {
+                ImportandoXadrezClass.RivalDoPlayer = 1;
+            }
+
+            //743
+            //EmqualRodadaOplayerEstaJogando
+
+            ImportandoXadrezClass.EmqualRodadaOplayerEstaJogando =
+                Convert.ToUInt32(
+                    Convert.ToString(PartesEmBytes[743]) +
+                    Convert.ToString(PartesEmBytes[744]) +
+                    Convert.ToString(PartesEmBytes[745]) +
+                    Convert.ToString(PartesEmBytes[746]) +
+                    Convert.ToString(PartesEmBytes[747]));
+
+            // fim
+
+        }
+
+        public void EnviaOsDadosProOutroPlayer()
+        {
+            ImportandoXadrezClass.SalvarJogo();
+            string Dadosdotabuleiro = "7 ";
+            for (int i = 0; i < ImportandoXadrezClass.Salvar.Count; i++)
+            {
+                Dadosdotabuleiro += ImportandoXadrezClass.Salvar[i];
+            }
+
+            EnviaDados(Dadosdotabuleiro);
+
+            ImportandoXadrezClass.SePodeEnviarOsDadosProOutroLado = false;
+        }
+
+        public void EnviaAsinformacoesDoDisplayDeJogada()
+        {
+            string DadosASeremEnviados = "5 ";
+            for (int i = 0; i < 65; i++)
+            {
+                DadosASeremEnviados += Convert.ToString(Convert.ToChar(ImportandoXadrezClass.IDDosStatusDeSelecao[i]));
+            }
+
+            EnviaDados(DadosASeremEnviados);
+        }
+
+        public void EnviaXequeMateOuEmpate()
+        {
+
+            if (HouveEmpateMessageBox == true)
+            {
+                Thread.Sleep(1);
+                string OqEnviar = "E cara o jogo empatou";
+                EnviaDados(OqEnviar);
+            }
+            if (XequemateMessageBox == true)
+            {
+                Thread.Sleep(1);
+                string OqEnviar = "X Perdeu playBoy";
+                EnviaDados(OqEnviar);
+            }
+            
+        }
+
+        public void ChamaAsMessageBoxXequeMateEEmpate()
+        {
+            if (XequemateMessageBox == true)
+            {
+                XequemateMessageBox = false;
+
+                string Vencedor = "";
+
+                if (ImportandoXadrezClass.Player == 1)
+                {
+                    Vencedor = ImportandoXadrezClass.NomeAZUL;
+                }
+                if (ImportandoXadrezClass.Player == 2)
+                {
+                    Vencedor = ImportandoXadrezClass.NomeVERDE;
+                }
+                Invoke(new MessageBoxDelegate(ShowMessage), "Fim De Jogo, Jogador " + Vencedor + " Venceu", "Fim De Jogo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            if (HouveEmpateMessageBox == true)
+            {
+                HouveEmpateMessageBox = false;
+                Invoke(new MessageBoxDelegate(ShowMessage), "O Jogo Empatou", "Fim De Jogo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+
+
+        }
+
+
+        // para as threads funcionarem
+        delegate void SetControlValueCallback(Control oControl, string propName, object propValue);
+
+        private void SetControlPropertyValue(Control oControl, string propName, object propValue)
+        {
+            if (oControl.InvokeRequired)
+            {
+                SetControlValueCallback d = new SetControlValueCallback(SetControlPropertyValue);
+                oControl.Invoke(d, new object[] { oControl, propName, propValue });
+            }
+            else
+            {
+                Type t = oControl.GetType();
+                PropertyInfo[] props = t.GetProperties();
+                foreach (PropertyInfo p in props)
+                {
+                    if (p.Name.ToUpper() == propName.ToUpper())
+                    {
+                        p.SetValue(oControl, propValue, null);
+                    }
+                }
+            }
+        }
+
+        delegate DialogResult MessageBoxDelegate(string Conteudo, string Titulo, MessageBoxButtons buttons, MessageBoxIcon icon);
+
+        private DialogResult ShowMessage(string Conteudo, string Titulo, MessageBoxButtons buttons, MessageBoxIcon icon)
+        {
+            return MessageBox.Show(this, Conteudo, Titulo, buttons, icon);
+        }
+
+      
     }
+
+
 }

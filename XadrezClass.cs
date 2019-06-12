@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 
 namespace Xadrez
 {
@@ -120,7 +121,7 @@ namespace Xadrez
         // informa q estou fazendo um roque
         public bool EstouFazendoUmRoque;
         // 0= cima 1 = baixo 2= direira 3 esquerda
-        public bool[] RoqueDirecao = new bool[4]; 
+        public bool[] RoqueDirecao = new bool[4];
 
 
         // informa se ja escolhi uma casa para colocar uma peça ja selecionada com precedência
@@ -425,11 +426,11 @@ namespace Xadrez
         // varivais usado no metodo de checar Xeque mate
 
         public bool ReiRivalNaoPodeSerSalvo;
- 
+
         // id da casa da peça q ataca o rei
         public int IdDaCasaDaPessaQueAtacaOReiRival;
 
-        public int IdDaCasaDoDefensor;
+        //public int IdDaCasaDoDefensor;
         public int IdDaPessaDoAtacante;
 
         public int CasasEntreOAtacanteEORei;
@@ -514,6 +515,36 @@ namespace Xadrez
         // string para a label labelInfoRei
         public string labelInfoRei;
         public Color labelInfoReiColor = Color.FromArgb(0, 0, 0);
+
+
+        // varivais para colocar o modo online
+
+        public bool TaNoOnline = false;
+
+        public bool SePodeEnviarOsDadosProOutroLado = false;
+
+        // host 1, client conectado 2, n permitido 0 ou 3;
+        public byte PlayerDoUsuario;
+
+
+        // para o outro player visualizar as jogadas do jogador q esta jogando
+        public byte[] IDDosStatusDeSelecao = new byte[65];
+        //_ComCelecPode
+        public byte[] IDDosStatusDeSelecao_ComCelecPode = new byte[65];
+        // descrição dos ids
+        // 00 nada
+        // 01 [selec]
+        // 02 [Aqui]
+        // 03 [Pode]
+        // 04 [Pode][Roque]
+        // 05 [Pode][En Pasant]
+        // 06 [Xeque]
+        // 07 [Xeque][Roque]
+        // 08 [Xeque][En Pasant]
+        // 09 [Aqui][Roque]
+        // 0A [Aqui][En Pasant]
+        // ==
+
 
 
 
@@ -763,147 +794,157 @@ namespace Xadrez
                     }
                     else
                     {
-                        if (HouveEmpate == true)
+                        if (Player == PlayerDoUsuario)
                         {
-                            Log = "Fim de jogo";
-                        }
-                        else
-                        {
-                            if (XequeMate == true)
+                            if (HouveEmpate == true)
                             {
-                                // aki faz ação caso tenha cheq mate no jogo
                                 Log = "Fim de jogo";
                             }
                             else
                             {
-                                // if pra verificar se posso ou n clicar nesse botao
-                                if (NaoPodeClicarNesseBotao[ID_DA_CASA] == true)
+                                if (XequeMate == true)
                                 {
-                                    Log = "vc n pode clicar aki";
+                                    // aki faz ação caso tenha cheq mate no jogo
+                                    Log = "Fim de jogo";
                                 }
-                                else // se false eu posso clicar nessa casa
+                                else
                                 {
-                                    //aki verifica se eu ja escolhi uma casa pra colocar a peça escolhida
-                                    if (ColoqueiAPessaEmUmaCasa == true)
+                                    // if pra verificar se posso ou n clicar nesse botao
+                                    if (NaoPodeClicarNesseBotao[ID_DA_CASA] == true)
                                     {
-                                        //aki checa se pode desselecionar essa casa 
-                                        if (ID_DA_CASA == ColoqueiAPessaEmUmaCasa_TabuleiroID)
-                                        {
-                                            ColoqueiAPessaEmUmaCasa = false;
-                                            ColoqueiAPessaEmUmaCasa_TabuleiroID = 64;
-                                            EstouFazendoUmRoque = false;
-                                            //CasaDoRoque = 64;
-                                            //CasaDoRoqueOndeATorreVai = 64;
-                                            //CasaDoRoqueOndeATorreTava = 64;
-
-                                            OPeaoAndouDuasCasas = false;
-
-                                            //EstoufazendoUmEnPassant = false;
-                                            EstoufazendoUmEnPassantADireitaOuACima = false;
-                                            EstoufazendoUmEnPassantAEsquerdaOuABaixo = false;
-
-                                            // NomeDosBotoesPeloValorDaPessa();
-
-                                            for (int id = 0; id < 65; id++)
-                                            {
-                                                NomesNosBotoesDotabuleiro[id] = NomesNosBotoesDotabuleiroComCelecPode[id];
-                                                CORESNASCASAS[id] = CORESNASCASAS_ComCelecPode[id];
-                                                ImagemNasCasasL2[id] = ImagemNasCasasL2_ComCelecPode[id];
-                                                DescricaoDosBotoesInfoMov[id] = DescricaoDosBotoesInfoMov_ComCelecPode[id];
-                                            }
-
-                                            // ao deselecionar a peça volta para o fator de peça "selecionada"
-                                            // colocar codigo aki
-
-                                            for (int id = 0; id < 65; id++)
-                                            {
-                                                NaoPodeClicarNesseBotao[id] = NaoPodeClicarNesseBotaoComInfoDaPessaSelecionada[id];
-                                            }
-                                            Log = "deselecionado lugar onde a peça ia ser colocada";
-
-                                        }
-
-                                        // colocar if para caso eu clicar na peça selecionada, quando ja estiver aparecendo aki.
-
-
-                                        if (ID_DA_CASA == Selecionado_TabuleiroID)
-                                        {
-                                            // aki ele vai desselecionar tudo
-                                            ColoqueiAPessaEmUmaCasa = false;
-                                            TemCasaSelecionada = false;
-                                            NomeDosBotoesPeloValorDaPessa();
-                                            for (int id = 0; id < 65; id++)
-                                            {
-                                                NaoPodeClicarNesseBotao[id] = false;
-                                            }
-
-                                            //Selecionado_TabuleiroID = 64;
-                                            Selecionado_CorDaPessaValor = 0;
-                                            Selecionado_PessaValor = 0;
-                                            ColoqueiAPessaEmUmaCasa_TabuleiroID = 64;
-
-                                            EstouFazendoUmRoque = false;
-                                            CasaDoRoque[0] = 64;
-                                            CasaDoRoque[1] = 64;
-                                            CasaDoRoque[2] = 64;
-                                            CasaDoRoque[3] = 64;
-                                            CasaDoRoqueOndeATorreVai[0] = 64;
-                                            CasaDoRoqueOndeATorreVai[1] = 64;
-                                            CasaDoRoqueOndeATorreVai[2] = 64;
-                                            CasaDoRoqueOndeATorreVai[3] = 64;
-                                            CasaDoRoqueOndeATorreTava[0] = 64;
-                                            CasaDoRoqueOndeATorreTava[1] = 64;
-                                            CasaDoRoqueOndeATorreTava[2] = 64;
-                                            CasaDoRoqueOndeATorreTava[3] = 64;
-
-                                            OPeaoAndouDuasCasas = false;
-                                            //EstoufazendoUmEnPassant = false;
-                                            EstoufazendoUmEnPassantADireitaOuACima = false;
-                                            EstoufazendoUmEnPassantAEsquerdaOuABaixo = false;
-                                            //CasaQueClicareiParaEnPassant = 64;
-                                            CasaQueClicareiParaEnPassantADireitaOuACima = 64;
-                                            CasaQueClicareiParaEnPassantAEsquerdaOuABaixo = 64;
-
-                                            Log = "deselecionado tudo";
-                                        }
+                                        Log = "vc n pode clicar aki";
                                     }
-                                    else
+                                    else // se false eu posso clicar nessa casa
                                     {
-                                        //aki verifica se ja foi selecionado uma casa com uma peça
-                                        if (TemCasaSelecionada == true)
+                                        //aki verifica se eu ja escolhi uma casa pra colocar a peça escolhida
+                                        if (ColoqueiAPessaEmUmaCasa == true)
                                         {
-                                            if (CorDaPessa[ID_DA_CASA] == Player
-                                                && ID_DA_CASA != Selecionado_TabuleiroID)
+                                            //aki checa se pode desselecionar essa casa 
+                                            if (ID_DA_CASA == ColoqueiAPessaEmUmaCasa_TabuleiroID)
                                             {
-                                                //aki faz a ação de selecionar uma casa 
-                                                //ChecarSeOReiFoiColocadoEmXeque();
-                                                NomeDosBotoesPeloValorDaPessa();
-                                                SelecionarCasaDoTabuleiro(ID_DA_CASA);
-                                            }
-                                            else
-                                            {
-                                                // aki faz a ação pos ter selecionado uma casa
-                                                OndeColocarPessaNaCasaDoTabuleiro(ID_DA_CASA);
+                                                ColoqueiAPessaEmUmaCasa = false;
+                                                ColoqueiAPessaEmUmaCasa_TabuleiroID = 64;
+                                                EstouFazendoUmRoque = false;
+                                                //CasaDoRoque = 64;
+                                                //CasaDoRoqueOndeATorreVai = 64;
+                                                //CasaDoRoqueOndeATorreTava = 64;
 
-                                                if (AutoConcluirJogada == true)
+                                                OPeaoAndouDuasCasas = false;
+
+                                                //EstoufazendoUmEnPassant = false;
+                                                EstoufazendoUmEnPassantADireitaOuACima = false;
+                                                EstoufazendoUmEnPassantAEsquerdaOuABaixo = false;
+
+                                                // NomeDosBotoesPeloValorDaPessa();
+
+                                                for (int id = 0; id < 65; id++)
                                                 {
-                                                    BotaoBloqueado = false;
-                                                    ConcluirJogada();
+                                                    NomesNosBotoesDotabuleiro[id] = NomesNosBotoesDotabuleiroComCelecPode[id];
+                                                    CORESNASCASAS[id] = CORESNASCASAS_ComCelecPode[id];
+                                                    ImagemNasCasasL2[id] = ImagemNasCasasL2_ComCelecPode[id];
+                                                    DescricaoDosBotoesInfoMov[id] = DescricaoDosBotoesInfoMov_ComCelecPode[id];
+                                                    IDDosStatusDeSelecao[id] = IDDosStatusDeSelecao_ComCelecPode[id];
                                                 }
 
+                                                // ao deselecionar a peça volta para o fator de peça "selecionada"
+                                                // colocar codigo aki
+
+                                                for (int id = 0; id < 65; id++)
+                                                {
+                                                    NaoPodeClicarNesseBotao[id] = NaoPodeClicarNesseBotaoComInfoDaPessaSelecionada[id];
+                                                }
+                                                Log = "deselecionado lugar onde a peça ia ser colocada";
+
+                                            }
+
+                                            // colocar if para caso eu clicar na peça selecionada, quando ja estiver aparecendo aki.
+
+
+                                            if (ID_DA_CASA == Selecionado_TabuleiroID)
+                                            {
+                                                // aki ele vai desselecionar tudo
+                                                ColoqueiAPessaEmUmaCasa = false;
+                                                TemCasaSelecionada = false;
+                                                NomeDosBotoesPeloValorDaPessa();
+                                                for (int id = 0; id < 65; id++)
+                                                {
+                                                    NaoPodeClicarNesseBotao[id] = false;
+                                                }
+
+                                                //Selecionado_TabuleiroID = 64;
+                                                Selecionado_CorDaPessaValor = 0;
+                                                Selecionado_PessaValor = 0;
+                                                ColoqueiAPessaEmUmaCasa_TabuleiroID = 64;
+
+                                                EstouFazendoUmRoque = false;
+                                                CasaDoRoque[0] = 64;
+                                                CasaDoRoque[1] = 64;
+                                                CasaDoRoque[2] = 64;
+                                                CasaDoRoque[3] = 64;
+                                                CasaDoRoqueOndeATorreVai[0] = 64;
+                                                CasaDoRoqueOndeATorreVai[1] = 64;
+                                                CasaDoRoqueOndeATorreVai[2] = 64;
+                                                CasaDoRoqueOndeATorreVai[3] = 64;
+                                                CasaDoRoqueOndeATorreTava[0] = 64;
+                                                CasaDoRoqueOndeATorreTava[1] = 64;
+                                                CasaDoRoqueOndeATorreTava[2] = 64;
+                                                CasaDoRoqueOndeATorreTava[3] = 64;
+
+                                                OPeaoAndouDuasCasas = false;
+                                                //EstoufazendoUmEnPassant = false;
+                                                EstoufazendoUmEnPassantADireitaOuACima = false;
+                                                EstoufazendoUmEnPassantAEsquerdaOuABaixo = false;
+                                                //CasaQueClicareiParaEnPassant = 64;
+                                                CasaQueClicareiParaEnPassantADireitaOuACima = 64;
+                                                CasaQueClicareiParaEnPassantAEsquerdaOuABaixo = 64;
+
+                                                Log = "deselecionado tudo";
                                             }
                                         }
                                         else
                                         {
-                                            //aki faz a ação de selecionar uma casa 
-                                            //ChecarSeOReiFoiColocadoEmXeque();
-                                            SelecionarCasaDoTabuleiro(ID_DA_CASA);
+                                            //aki verifica se ja foi selecionado uma casa com uma peça
+                                            if (TemCasaSelecionada == true)
+                                            {
+                                                if (CorDaPessa[ID_DA_CASA] == Player
+                                                    && ID_DA_CASA != Selecionado_TabuleiroID)
+                                                {
+                                                    //aki faz a ação de selecionar uma casa 
+                                                    //ChecarSeOReiFoiColocadoEmXeque();
+                                                    NomeDosBotoesPeloValorDaPessa();
+                                                    SelecionarCasaDoTabuleiro(ID_DA_CASA);
+                                                }
+                                                else
+                                                {
+                                                    // aki faz a ação pos ter selecionado uma casa
+                                                    OndeColocarPessaNaCasaDoTabuleiro(ID_DA_CASA);
+
+                                                    if (AutoConcluirJogada == true)
+                                                    {
+                                                        BotaoBloqueado = false;
+                                                        ConcluirJogada();
+                                                    }
+
+                                                }
+                                            }
+                                            else
+                                            {
+                                                //aki faz a ação de selecionar uma casa 
+                                                //ChecarSeOReiFoiColocadoEmXeque();
+                                                SelecionarCasaDoTabuleiro(ID_DA_CASA);
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
+                        else
+                        {
+                            // vc n pode jogar
+                        }
+
                     }
+
                 }
                 BotaoBloqueado = false;
             }
@@ -936,6 +977,7 @@ namespace Xadrez
                 DescricaoDosBotoesInfoMov[ID_DA_CASA] = NomeDESCRICAO_SELECIONADO;
                 CORESNASCASAS[ID_DA_CASA] = CORES_SELECIONADO;
                 ImagemNasCasasL2[ID_DA_CASA] = IMAGEM_SELECIONADO;
+                IDDosStatusDeSelecao[ID_DA_CASA] = 01;
 
 
                 // aki colocar chamada de metodo q vai definir onde eu terei permição para colocar a peça 
@@ -950,9 +992,10 @@ namespace Xadrez
                     ImagemNasCasasL2_ComCelecPode[id] = ImagemNasCasasL2[id];
                     NaoPodeClicarNesseBotaoComInfoDaPessaSelecionada[id] = NaoPodeClicarNesseBotao[id];
                     DescricaoDosBotoesInfoMov_ComCelecPode[id] = DescricaoDosBotoesInfoMov[id];
+                    IDDosStatusDeSelecao_ComCelecPode[id] = IDDosStatusDeSelecao[id];
                 }
 
-                Console.WriteLine(" peça selecionada com sucesso ID: " + ID_DA_CASA);
+                //Console.WriteLine(" peça selecionada com sucesso ID: " + ID_DA_CASA);
                 Log = "peça selecionada com sucesso ID: " + ID_DA_CASA;
 
                 // aki permite selecionar outras peças do player sem ter q deselecionar a selecionada antes
@@ -971,7 +1014,7 @@ namespace Xadrez
 
             else
             {
-                Console.WriteLine("vc n pode selecionar essa peça ID: " + ID_DA_CASA);
+                //Console.WriteLine("vc n pode selecionar essa peça ID: " + ID_DA_CASA);
                 Log = "vc n pode selecionar essa peça ID: " + ID_DA_CASA;
             }
         }
@@ -1026,7 +1069,7 @@ namespace Xadrez
                 }
 
 
-                Console.WriteLine("peça desselecionada ID: " + ID_DA_CASA);
+                //Console.WriteLine("peça desselecionada ID: " + ID_DA_CASA);
                 Log = "peça desselecionada ID: " + ID_DA_CASA;
 
 
@@ -1064,6 +1107,7 @@ namespace Xadrez
                     DescricaoDosBotoesInfoMov[Selecionado_TabuleiroID] = NomeDESCRICAO_SELECIONADO;
                     CORESNASCASAS[Selecionado_TabuleiroID] = CORES_SELECIONADO;
                     ImagemNasCasasL2[Selecionado_TabuleiroID] = IMAGEM_SELECIONADO;
+                    IDDosStatusDeSelecao[Selecionado_TabuleiroID] = 01;
 
                     if (CasaEstaOcupada[ID_DA_CASA] == true)
                     {
@@ -1076,6 +1120,7 @@ namespace Xadrez
                     DescricaoDosBotoesInfoMov[ID_DA_CASA] = NomeDESCRICAO_COLOCARAQUI;
                     CORESNASCASAS[ID_DA_CASA] = CORES_COLOCARAQUI;
                     ImagemNasCasasL2[ID_DA_CASA] = IMAGEM_COLOCARAQUI;
+                    IDDosStatusDeSelecao[ID_DA_CASA] = 02;
 
 
                     // aki colocar metodo para deixar somente essa casa clicavel;
@@ -1105,6 +1150,7 @@ namespace Xadrez
                                 DescricaoDosBotoesInfoMov[ID_DA_CASA] = NomeDESCRICAO_COLOCARAQUI + NomeEmBranco + NomeDESCRICAO_PODEROQUE;
                                 CORESNASCASAS[ID_DA_CASA] = CORES_PODEROQUE;
                                 ImagemNasCasasL2[ID_DA_CASA] = IMAGEM_PODEROQUEAKI;
+                                IDDosStatusDeSelecao[ID_DA_CASA] = 09;
                                 RoqueDirecao[i] = true;
                             }
                         }
@@ -1131,6 +1177,7 @@ namespace Xadrez
                             DescricaoDosBotoesInfoMov[ID_DA_CASA] = NomeDESCRICAO_COLOCARAQUI + NomeEmBranco + NomeDESCRICAO_PODEENPASSANT;
                             CORESNASCASAS[ID_DA_CASA] = CORES_PODEENPASSANT;
                             ImagemNasCasasL2[ID_DA_CASA] = IMAGEM_PODEENPASSANTAKI;
+                            IDDosStatusDeSelecao[ID_DA_CASA] = 0x0A;
                         }
 
                         // aki verifica se estou fazendo um en passant
@@ -1141,6 +1188,7 @@ namespace Xadrez
                             DescricaoDosBotoesInfoMov[ID_DA_CASA] = NomeDESCRICAO_COLOCARAQUI + NomeEmBranco + NomeDESCRICAO_PODEENPASSANT;
                             CORESNASCASAS[ID_DA_CASA] = CORES_PODEENPASSANT;
                             ImagemNasCasasL2[ID_DA_CASA] = IMAGEM_PODEENPASSANTAKI;
+                            IDDosStatusDeSelecao[ID_DA_CASA] = 0x0A;
                         }
 
 
@@ -1153,7 +1201,7 @@ namespace Xadrez
                 }
                 else { //se n, no pode fazer isso
                     Log = "vc n pode colocar a peça onde ela ja esta";
-                    Console.WriteLine("vc n pode colocar a peça onde ela ja esta");
+                    //Console.WriteLine("vc n pode colocar a peça onde ela ja esta");
                 }
 
 
@@ -1389,16 +1437,28 @@ namespace Xadrez
                                 {
                                     Player = 2;
                                     RivalDoPlayer = 1;
+                                    if (TaNoOnline == false)
+                                    {
+                                        PlayerDoUsuario = 2;
+                                    }
                                 }
                                 else
                                 {
                                     Player = 1;
                                     RivalDoPlayer = 2;
+                                    if (TaNoOnline == false)
+                                    {
+                                        PlayerDoUsuario = 1;
+                                    }
                                 }
 
                                 // o próxima a jogar vai jogar na próxima rodada:
-                                EmqualRodadaOplayerEstaJogando++;
 
+                                if (EmqualRodadaOplayerEstaJogando != 4294967295)
+                                {
+                                    EmqualRodadaOplayerEstaJogando++;
+                                }
+                                
                                 Log = "operação concluida com sucesso, agora é a vez do jogador: " + Player;
 
                                 // aki libera pra eu clicar em todos os botoes:
@@ -1415,6 +1475,12 @@ namespace Xadrez
                     NomeDosBotoesPeloValorDaPessa();
 
                     ReiFoiColocadoEmXeque = false;
+
+
+                    if (TaNoOnline == true)
+                    {
+                        SePodeEnviarOsDadosProOutroLado = true;
+                    }
                     
                 }
                 else
@@ -1426,8 +1492,7 @@ namespace Xadrez
                 BotaoBloqueado = false;
             }
         }
-
-        
+       
         // DefineOndePossoColocarCadaPessa
         public void DefineOndePossoColocarCadaPessa()
         {
@@ -1575,6 +1640,7 @@ namespace Xadrez
                             NaoPodeClicarNesseBotao[ID_DA_CASA] = true;
                             CORESNASCASAS[ID_DA_CASA] = CORES_NAOPODECOLOCAR;
                             ImagemNasCasasL2[ID_DA_CASA] = IMAGEM_NAOPODECOLOCAR;
+                            IDDosStatusDeSelecao[ID_DA_CASA] = 06;
                             DescricaoDosBotoesInfoMov[ID_DA_CASA] = NomeDESCRICAO_NAOPODECOLOCAR + NomeEmBranco + NomeDESCRICAO_PODECOLOCAR;
                             if (CasaEstaOcupada[ID_DA_CASA] == true)
                             {
@@ -1591,6 +1657,7 @@ namespace Xadrez
                             NaoPodeClicarNesseBotao[ID_DA_CASA] = false;
                             CORESNASCASAS[ID_DA_CASA] = CORES_PODECOLOCAR;
                             ImagemNasCasasL2[ID_DA_CASA] = IMAGEM_PODECOLOCAR;
+                            IDDosStatusDeSelecao[ID_DA_CASA] = 03;
                             DescricaoDosBotoesInfoMov[ID_DA_CASA] = NomeDESCRICAO_PODECOLOCAR;
                             if (CasaEstaOcupada[ID_DA_CASA] == true)
                             {
@@ -1614,6 +1681,7 @@ namespace Xadrez
                                 NaoPodeClicarNesseBotao[ID_DA_CASA] = true;
                                 CORESNASCASAS[ID_DA_CASA] = CORES_NAOPODECOLOCAR;
                                 ImagemNasCasasL2[ID_DA_CASA] = IMAGEM_NAOPODECOLOCAR;
+                                IDDosStatusDeSelecao[ID_DA_CASA] = 06;
                                 DescricaoDosBotoesInfoMov[ID_DA_CASA] = NomeDESCRICAO_NAOPODECOLOCAR + NomeEmBranco + NomeDESCRICAO_PODECOLOCAR;
                                 if (CasaEstaOcupada[ID_DA_CASA] == true)
                                 {
@@ -1630,6 +1698,7 @@ namespace Xadrez
                                 NaoPodeClicarNesseBotao[ID_DA_CASA] = false;
                                 CORESNASCASAS[ID_DA_CASA] = CORES_PODECOLOCAR;
                                 ImagemNasCasasL2[ID_DA_CASA] = IMAGEM_PODECOLOCAR;
+                                IDDosStatusDeSelecao[ID_DA_CASA] = 03;
                                 DescricaoDosBotoesInfoMov[ID_DA_CASA] = NomeDESCRICAO_PODECOLOCAR;
                                 if (CasaEstaOcupada[ID_DA_CASA] == true)
                                 {
@@ -1648,6 +1717,7 @@ namespace Xadrez
                             NaoPodeClicarNesseBotao[ID_DA_CASA] = false;
                             CORESNASCASAS[ID_DA_CASA] = CORES_PODECOLOCAR;
                             ImagemNasCasasL2[ID_DA_CASA] = IMAGEM_PODECOLOCAR;
+                            IDDosStatusDeSelecao[ID_DA_CASA] = 03;
                             DescricaoDosBotoesInfoMov[ID_DA_CASA] = NomeDESCRICAO_PODECOLOCAR;
                             if (CasaEstaOcupada[ID_DA_CASA] == true)
                             {
@@ -1790,6 +1860,7 @@ namespace Xadrez
             for (int id = 0; id < 65; id++)
             {
                 ImagemNasCasasL2[id] = IMAGEM_TRASPARENTE;
+                IDDosStatusDeSelecao[id] = 00;
                 DescricaoDosBotoesInfoMov[id] = "";
 
 
@@ -1799,6 +1870,7 @@ namespace Xadrez
                         DescricaoDosBotoesNomeDasPessas[id] = "";
                         CORESNASCASAS[id] = CORES_PRETO;
                         ImagemNasCasasL1[id] = IMAGEM_TRASPARENTE;
+                        //IDDosStatusDeSelecao[id] = 00;
                         break;
                     case 11:
                         NomesNosBotoesDotabuleiro[id] = NomeTA;
@@ -1877,6 +1949,7 @@ namespace Xadrez
                         DescricaoDosBotoesNomeDasPessas[id] = "???";
                         CORESNASCASAS[id] = CORES_PRETO;
                         ImagemNasCasasL1[id] = IMAGEM_TRASPARENTE;
+                        IDDosStatusDeSelecao[id] = 00;
                         break;
                 }
 
@@ -2304,6 +2377,24 @@ namespace Xadrez
             //Console.WriteLine("ReiFoiColocadoEmXeque: " + ReiFoiColocadoEmXeque);
             IDCDMQAPDRPF_Rival.Clear();
             ChecandoSeOReiEstaEmXeque = false;
+
+            labelInfoRei = "";
+            labelInfoReiColor = CORES_PRETO;
+
+            if (ReiFoiColocadoEmXeque == true)
+            {
+                if (Player == 1)
+                {
+                    labelInfoRei = "Jogador Azul Esta Em Xeque";
+                    labelInfoReiColor = CORES_AZUL;
+                }
+                else
+                {
+                    labelInfoRei = "Jogador Verde Esta Em Xeque";
+                    labelInfoReiColor = CORES_VERDE;
+                }
+            }
+
         }
 
 
@@ -2634,6 +2725,125 @@ namespace Xadrez
             }
 
         }
+
+        // //////////////////////
+
+
+
+        // para o online
+        public void RecebeinfoDeDisplayDotabuleiroEAtualiza_o(string Conteudo)
+        {
+            byte[] ConteudoEmBytes = Encoding.UTF8.GetBytes(Conteudo);
+
+            for (int i = 0; i < 64; i++)
+            {
+                switch (ConteudoEmBytes[i])
+                {
+                    case 0x0:
+                        ImagemNasCasasL2[i] = IMAGEM_TRASPARENTE;
+                        DescricaoDosBotoesInfoMov[i] = "";
+                        //CORESNASCASAS[i] = CORES_PRETO;
+                        NomesNosBotoesDotabuleiro[i] += ""; 
+                        break;
+                    case 0x1:
+                        ImagemNasCasasL2[i] = IMAGEM_SELECIONADO;
+                        DescricaoDosBotoesInfoMov[i] = NomeDESCRICAO_SELECIONADO;
+                        CORESNASCASAS[i] = CORES_SELECIONADO;
+                        if (NomesNosBotoesDotabuleiro[i] == "")
+                        {
+                            NomesNosBotoesDotabuleiro[i] = NomeSELECIONADO;
+                        }
+                        else
+                        {
+                            NomesNosBotoesDotabuleiro[i] += NomeEmBranco + NomeSELECIONADO;
+                        }
+                        break;
+                    case 0x2:
+                        ImagemNasCasasL2[i] = IMAGEM_COLOCARAQUI;
+                        DescricaoDosBotoesInfoMov[i] = NomeDESCRICAO_COLOCARAQUI;
+                        CORESNASCASAS[i] = CORES_COLOCARAQUI;
+                        if (NomesNosBotoesDotabuleiro[i] == "")
+                        {
+                            NomesNosBotoesDotabuleiro[i] = NomeCOLOCARAQUI;
+                        }
+                        else
+                        {
+                            NomesNosBotoesDotabuleiro[i] += NomeEmBranco + NomeCOLOCARAQUI;
+                        }
+                        break;
+                    case 0x3:
+                        ImagemNasCasasL2[i] = IMAGEM_PODECOLOCAR;
+                        DescricaoDosBotoesInfoMov[i] = NomeDESCRICAO_PODECOLOCAR;
+                        CORESNASCASAS[i] = CORES_PODECOLOCAR;
+                        if (NomesNosBotoesDotabuleiro[i] == "")
+                        {
+                            NomesNosBotoesDotabuleiro[i] = NomePODECOLOCAR;
+                        }
+                        else
+                        {
+                            NomesNosBotoesDotabuleiro[i] += NomeEmBranco + NomePODECOLOCAR;
+                        }
+                        break;
+                    case 0x4:
+                        ImagemNasCasasL2[i] = IMAGEM_PODEROQUE;
+                        DescricaoDosBotoesInfoMov[i] = NomeDESCRICAO_PODEROQUE;
+                        CORESNASCASAS[i] = CORES_PODEROQUE;
+                        NomesNosBotoesDotabuleiro[i] = NomePODECOLOCAR + NomeEmBranco + NomePODEROQUE;
+                        break;
+                    case 0x5:
+                        ImagemNasCasasL2[i] = IMAGEM_PODERENPASSANT;
+                        DescricaoDosBotoesInfoMov[i] = NomeDESCRICAO_PODEENPASSANT;
+                        CORESNASCASAS[i] = CORES_PODEENPASSANT;
+                        NomesNosBotoesDotabuleiro[i] = NomePODEENPASSANT;
+                        break;
+                    case 0x6:
+                        ImagemNasCasasL2[i] = IMAGEM_NAOPODECOLOCAR;
+                        DescricaoDosBotoesInfoMov[i] = NomeDESCRICAO_NAOPODECOLOCAR + NomeEmBranco + NomeDESCRICAO_PODECOLOCAR;
+                        CORESNASCASAS[i] = CORES_NAOPODECOLOCAR;
+                        if (NomesNosBotoesDotabuleiro[i] == "")
+                        {
+                            NomesNosBotoesDotabuleiro[i] = NomeNAOPODECOLOCAR;
+                        }
+                        else
+                        {
+                            NomesNosBotoesDotabuleiro[i] += NomeEmBranco + NomeNAOPODECOLOCAR;
+                        }
+                        break;
+                    case 0x7:
+                        ImagemNasCasasL2[i] = IMAGEM_NAOPODEROQUE;
+                        DescricaoDosBotoesInfoMov[i] = NomeDESCRICAO_NAOPODECOLOCAR + NomeEmBranco + NomeDESCRICAO_PODEROQUE;
+                        CORESNASCASAS[i] = CORES_NAOPODECOLOCAR;
+                        NomesNosBotoesDotabuleiro[i] = NomeNAOPODECOLOCAR + NomeEmBranco + NomePODEROQUE;           
+                        break;
+                    case 0x8:
+                        ImagemNasCasasL2[i] = IMAGEM_NAOPODERENPASSANT;
+                        DescricaoDosBotoesInfoMov[i] = NomeDESCRICAO_NAOPODECOLOCAR + NomeEmBranco + NomeDESCRICAO_PODEENPASSANT;
+                        CORESNASCASAS[i] = CORES_NAOPODECOLOCAR;
+                        NomesNosBotoesDotabuleiro[i] = NomeNAOPODECOLOCAR + NomeEmBranco + NomePODEENPASSANT;
+                        break;
+                    case 0x9:
+                        ImagemNasCasasL2[i] = IMAGEM_PODEROQUEAKI;
+                        NomesNosBotoesDotabuleiro[i] = NomeCOLOCARAQUI + NomeEmBranco + NomePODEROQUE;
+                        DescricaoDosBotoesInfoMov[i] = NomeDESCRICAO_COLOCARAQUI + NomeEmBranco + NomeDESCRICAO_PODEROQUE;
+                        CORESNASCASAS[i] = CORES_PODEROQUE;
+                        break;
+                    case 0xA:
+                        ImagemNasCasasL2[i] = IMAGEM_PODEENPASSANTAKI;
+                        NomesNosBotoesDotabuleiro[i] = NomeCOLOCARAQUI + NomeEmBranco + NomePODEENPASSANT;
+                        DescricaoDosBotoesInfoMov[i] = NomeDESCRICAO_COLOCARAQUI + NomeEmBranco + NomeDESCRICAO_PODEENPASSANT;
+                        CORESNASCASAS[i] = CORES_PODEENPASSANT;
+                        break;
+                    default:
+                        ImagemNasCasasL2[i] = IMAGEM_TRASPARENTE;
+                        DescricaoDosBotoesInfoMov[i] = "";
+                        //CORESNASCASAS[i] = CORES_PRETO;
+                        NomesNosBotoesDotabuleiro[i] += "";
+                        break;
+                }
+            }
+        }
+
+
 
 
 

@@ -46,6 +46,7 @@ namespace Xadrez
                                 DescricaoDosBotoesInfoMov[ParaTodasAsDirecoesDaPessa[1]] = NomeDESCRICAO_NAOPODECOLOCAR + NomeEmBranco + NomeDESCRICAO_PODEROQUE;
                                 CORESNASCASAS[ParaTodasAsDirecoesDaPessa[1]] = CORES_NAOPODECOLOCAR;
                                 ImagemNasCasasL2[ParaTodasAsDirecoesDaPessa[1]] = IMAGEM_NAOPODEROQUE;
+                                IDDosStatusDeSelecao[ParaTodasAsDirecoesDaPessa[1]] = 07;
                                 CasaDoRoqueOndeATorreVai[Direcao] = Convert.ToByte(ParaTodasAsDirecoesDaPessa[0]);
                                 CasaDoRoqueOndeATorreTava[Direcao] = Convert.ToByte(ParaTodasAsDirecoesDaPessa[2]);
                                 CasaDoRoque[Direcao] = Convert.ToByte(ParaTodasAsDirecoesDaPessa[1]);
@@ -58,6 +59,7 @@ namespace Xadrez
                                 DescricaoDosBotoesInfoMov[ParaTodasAsDirecoesDaPessa[1]] = NomeDESCRICAO_PODEROQUE;
                                 CORESNASCASAS[ParaTodasAsDirecoesDaPessa[1]] = CORES_PODEROQUE;
                                 ImagemNasCasasL2[ParaTodasAsDirecoesDaPessa[1]] = IMAGEM_PODEROQUE;
+                                IDDosStatusDeSelecao[ParaTodasAsDirecoesDaPessa[1]] = 04;
                                 CasaDoRoqueOndeATorreVai[Direcao] = Convert.ToByte(ParaTodasAsDirecoesDaPessa[0]);
                                 CasaDoRoqueOndeATorreTava[Direcao] = Convert.ToByte(ParaTodasAsDirecoesDaPessa[2]);
                                 CasaDoRoque[Direcao] = Convert.ToByte(ParaTodasAsDirecoesDaPessa[1]);
@@ -88,6 +90,7 @@ namespace Xadrez
                                 DescricaoDosBotoesInfoMov[ParaTodasAsDirecoesDaPessa[1]] = NomeDESCRICAO_NAOPODECOLOCAR + NomeEmBranco + NomeDESCRICAO_PODEROQUE;
                                 CORESNASCASAS[ParaTodasAsDirecoesDaPessa[1]] = CORES_NAOPODECOLOCAR;
                                 ImagemNasCasasL2[ParaTodasAsDirecoesDaPessa[1]] = IMAGEM_NAOPODEROQUE;
+                                IDDosStatusDeSelecao[ParaTodasAsDirecoesDaPessa[1]] = 07;
                                 CasaDoRoqueOndeATorreVai[Direcao] = Convert.ToByte(ParaTodasAsDirecoesDaPessa[0]);
                                 CasaDoRoqueOndeATorreTava[Direcao] = Convert.ToByte(ParaTodasAsDirecoesDaPessa[3]);
                                 CasaDoRoque[Direcao] = Convert.ToByte(ParaTodasAsDirecoesDaPessa[1]);
@@ -100,6 +103,7 @@ namespace Xadrez
                                 DescricaoDosBotoesInfoMov[ParaTodasAsDirecoesDaPessa[1]] = NomeDESCRICAO_PODEROQUE;
                                 CORESNASCASAS[ParaTodasAsDirecoesDaPessa[1]] = CORES_PODEROQUE;
                                 ImagemNasCasasL2[ParaTodasAsDirecoesDaPessa[1]] = IMAGEM_PODEROQUE;
+                                IDDosStatusDeSelecao[ParaTodasAsDirecoesDaPessa[1]] = 04;
                                 CasaDoRoqueOndeATorreVai[Direcao] = Convert.ToByte(ParaTodasAsDirecoesDaPessa[0]);
                                 CasaDoRoqueOndeATorreTava[Direcao] = Convert.ToByte(ParaTodasAsDirecoesDaPessa[3]);
                                 CasaDoRoque[Direcao] = Convert.ToByte(ParaTodasAsDirecoesDaPessa[1]);
@@ -130,7 +134,9 @@ namespace Xadrez
                 ReiPlayerDiagonalEsquerdaBaixo[i] = 64;
             }
 
+            //IdentificandoOndeEstaoOsReis();
             DefineAsColunasLinhasDiagonais(Selecionado_TabuleiroID);
+            //DefineAsColunasLinhasDiagonais(CasaOndeEstaOReiDoPlayer);
 
             for (int i = 0; i < 7; i++)
             {
@@ -165,11 +171,13 @@ namespace Xadrez
             LocaisOndeNaoPossoColocarOReiCasas(ReiPlayerLinhaEsquerda[1], true, 2);
             LocaisOndeNaoPossoColocarOReiCasas(ReiPlayerLinhaDireita[1], true, 3);
 
-        }
+        } 
 
         public void LocaisOndeNaoPossoColocarOReiCasas(int ID_DA_CASA_ONDE_VAI_O_REI, bool Roque, byte Direcao)
         {
-            
+            if (ID_DA_CASA_ONDE_VAI_O_REI != 64)
+            {
+
             for (int i = 0; i < 7; i++)
             {
                 CPOPCOR_LinhaEsquerda[i] = 64;
@@ -200,32 +208,33 @@ namespace Xadrez
             }
             CPOPCOR_CavaloJogadas[7] = CavaloJogadas[7];
 
-            if (ID_DA_CASA_ONDE_VAI_O_REI != 64)
-            {
-
-                if (Roque == true)
+                if (ID_DA_CASA_ONDE_VAI_O_REI != 64)
                 {
-                    if (Player == 1)
-                    {
-                        LocaisOndeNaoPossoColocarOReiCasasRoqueSeparandoPlayers(11, 12, 13, 14, 15, 16, 21, 22, 23, 24, 25, 26, ID_DA_CASA_ONDE_VAI_O_REI, Direcao);
-                    }
-                    if (Player == 2)
-                    {
-                        LocaisOndeNaoPossoColocarOReiCasasRoqueSeparandoPlayers(21, 22, 23, 24, 25, 26, 11, 12, 13, 14, 15, 16, ID_DA_CASA_ONDE_VAI_O_REI, Direcao);
-                    }
-                }
-                else
-                {
-                    if (Player == 1)
-                    {
-                        LocaisOndeNaoPossoColocarOReiCasasSeparendoPlayers(11, 12, 13, 14, 15, 16, 21, 22, 23, 24, 25, 26, ID_DA_CASA_ONDE_VAI_O_REI, Direcao);
-                    }
-                    if (Player == 2)
-                    {
-                        LocaisOndeNaoPossoColocarOReiCasasSeparendoPlayers(21, 22, 23, 24, 25, 26, 11, 12, 13, 14, 15, 16, ID_DA_CASA_ONDE_VAI_O_REI, Direcao);
-                    }
-                }
 
+                    if (Roque == true)
+                    {
+                        if (Player == 1)
+                        {
+                            LocaisOndeNaoPossoColocarOReiCasasRoqueSeparandoPlayers(11, 12, 13, 14, 15, 16, 21, 22, 23, 24, 25, 26, ID_DA_CASA_ONDE_VAI_O_REI, Direcao);
+                        }
+                        if (Player == 2)
+                        {
+                            LocaisOndeNaoPossoColocarOReiCasasRoqueSeparandoPlayers(21, 22, 23, 24, 25, 26, 11, 12, 13, 14, 15, 16, ID_DA_CASA_ONDE_VAI_O_REI, Direcao);
+                        }
+                    }
+                    else
+                    {
+                        if (Player == 1)
+                        {
+                            LocaisOndeNaoPossoColocarOReiCasasSeparendoPlayers(11, 12, 13, 14, 15, 16, 21, 22, 23, 24, 25, 26, ID_DA_CASA_ONDE_VAI_O_REI, Direcao);
+                        }
+                        if (Player == 2)
+                        {
+                            LocaisOndeNaoPossoColocarOReiCasasSeparendoPlayers(21, 22, 23, 24, 25, 26, 11, 12, 13, 14, 15, 16, ID_DA_CASA_ONDE_VAI_O_REI, Direcao);
+                        }
+                    }
+
+                }
             }
         }
 
@@ -491,21 +500,21 @@ namespace Xadrez
                 {
                     case 0:
                     case 1:
-                        ChecandoPessaQuePodeAtacarReiDoPlayer(i, 0, RivalTorre, RivalRainha, ID_DA_CASA_ONDE_VAI_O_REI, true); //direita
-                        ChecandoPessaQuePodeAtacarReiDoPlayer(i, 1, RivalTorre, RivalRainha, ID_DA_CASA_ONDE_VAI_O_REI, true); //esquerda
+                        ChecandoPessaQuePodeAtacarReiDoPlayer(i, 0, RivalTorre, RivalRainha, ID_DA_CASA_ONDE_VAI_O_REI, false); //direita
+                        ChecandoPessaQuePodeAtacarReiDoPlayer(i, 1, RivalTorre, RivalRainha, ID_DA_CASA_ONDE_VAI_O_REI, false); //esquerda
                         break;
                     case 2:
                     case 3:
-                        ChecandoPessaQuePodeAtacarReiDoPlayer(i, 2, RivalTorre, RivalRainha, ID_DA_CASA_ONDE_VAI_O_REI, true); // baixo
-                        ChecandoPessaQuePodeAtacarReiDoPlayer(i, 3, RivalTorre, RivalRainha, ID_DA_CASA_ONDE_VAI_O_REI, true); // cima
+                        ChecandoPessaQuePodeAtacarReiDoPlayer(i, 2, RivalTorre, RivalRainha, ID_DA_CASA_ONDE_VAI_O_REI, false); // baixo
+                        ChecandoPessaQuePodeAtacarReiDoPlayer(i, 3, RivalTorre, RivalRainha, ID_DA_CASA_ONDE_VAI_O_REI, false); // cima
                         break;
                 }
 
                 // diagonais
-                ChecandoPessaQuePodeAtacarReiDoPlayer(i, 4, RivalBispo, RivalRainha, ID_DA_CASA_ONDE_VAI_O_REI, true); // 
-                ChecandoPessaQuePodeAtacarReiDoPlayer(i, 5, RivalBispo, RivalRainha, ID_DA_CASA_ONDE_VAI_O_REI, true); //
-                ChecandoPessaQuePodeAtacarReiDoPlayer(i, 6, RivalBispo, RivalRainha, ID_DA_CASA_ONDE_VAI_O_REI, true); //
-                ChecandoPessaQuePodeAtacarReiDoPlayer(i, 7, RivalBispo, RivalRainha, ID_DA_CASA_ONDE_VAI_O_REI, true); //
+                ChecandoPessaQuePodeAtacarReiDoPlayer(i, 4, RivalBispo, RivalRainha, ID_DA_CASA_ONDE_VAI_O_REI, false); // 
+                ChecandoPessaQuePodeAtacarReiDoPlayer(i, 5, RivalBispo, RivalRainha, ID_DA_CASA_ONDE_VAI_O_REI, false); //
+                ChecandoPessaQuePodeAtacarReiDoPlayer(i, 6, RivalBispo, RivalRainha, ID_DA_CASA_ONDE_VAI_O_REI, false); //
+                ChecandoPessaQuePodeAtacarReiDoPlayer(i, 7, RivalBispo, RivalRainha, ID_DA_CASA_ONDE_VAI_O_REI, false); //
 
             }
 
@@ -881,210 +890,216 @@ namespace Xadrez
 
         public void ChecandoPessaQuePodeAtacarReiDoPlayer(int i, byte DirecaoDeAnalise, byte IdPessaTorreBispoDoPlayerRival, byte IdPessaRainhaDoPlayerRival, int ID_DA_CASA, bool MultiCasas)
         {
-            int[] Direcao = new int[7];
-            int[] ContraDirecao = new int[7];
-
-            switch (DirecaoDeAnalise)
-            {
-                case 0:
-                    Direcao = CPOPCOR_LinhaDireita;
-                    break;
-                case 1:
-                    Direcao = CPOPCOR_LinhaEsquerda;
-                    break;
-                case 2:
-                    Direcao = CPOPCOR_ColunaBaixo;
-                    break;
-                case 3:
-                    Direcao = CPOPCOR_ColunaCima;
-                    break;
-                case 4:
-                    Direcao = CPOPCOR_DiagonalDireitaBaixo;
-                    break;
-                case 5:
-                    Direcao = CPOPCOR_DiagonalDireitaCima;
-                    break;
-                case 6:
-                    Direcao = CPOPCOR_DiagonalEsquerdaBaixo;
-                    break;
-                case 7:
-                    Direcao = CPOPCOR_DiagonalEsquerdaCima;
-                    break;
-            }
-
-            if (CasaEstaOcupada[Direcao[i]] == true)
+            if (ID_DA_CASA != 64)
             {
 
-                if (Pessa[Direcao[i]] == IdPessaTorreBispoDoPlayerRival
-                    || Pessa[Direcao[i]] == IdPessaRainhaDoPlayerRival)
+
+
+                int[] Direcao = new int[7];
+                int[] ContraDirecao = new int[7];
+
+                switch (DirecaoDeAnalise)
+                {
+                    case 0:
+                        Direcao = CPOPCOR_LinhaDireita;
+                        break;
+                    case 1:
+                        Direcao = CPOPCOR_LinhaEsquerda;
+                        break;
+                    case 2:
+                        Direcao = CPOPCOR_ColunaBaixo;
+                        break;
+                    case 3:
+                        Direcao = CPOPCOR_ColunaCima;
+                        break;
+                    case 4:
+                        Direcao = CPOPCOR_DiagonalDireitaBaixo;
+                        break;
+                    case 5:
+                        Direcao = CPOPCOR_DiagonalDireitaCima;
+                        break;
+                    case 6:
+                        Direcao = CPOPCOR_DiagonalEsquerdaBaixo;
+                        break;
+                    case 7:
+                        Direcao = CPOPCOR_DiagonalEsquerdaCima;
+                        break;
+                }
+
+                if (CasaEstaOcupada[Direcao[i]] == true)
                 {
 
-                    DefineAsColunasLinhasDiagonais(Direcao[i]);
-
-                    switch (DirecaoDeAnalise)
+                    if (Pessa[Direcao[i]] == IdPessaTorreBispoDoPlayerRival
+                        || Pessa[Direcao[i]] == IdPessaRainhaDoPlayerRival)
                     {
-                        case 1:
-                            ContraDirecao = LinhaAdireitaDaPessa;
-                            break;
-                        case 0:
-                            ContraDirecao = LinhaAesquerdaDaPessa;
-                            break;
-                        case 3:
-                            ContraDirecao = ColunaAbaixoDaPessa;
-                            break;
-                        case 2:
-                            ContraDirecao = ColunaAcimaDaPessa;
-                            break;
-                        case 7:
-                            ContraDirecao = DiagonalDireitaBaixoDaPessa;
-                            break;
-                        case 6:
-                            ContraDirecao = DiagonalDireitaCimaDaPessa;
-                            break;
-                        case 5:
-                            ContraDirecao = DiagonalEsquerdaBaixoDaPessa;
-                            break;
-                        case 4:
-                            ContraDirecao = DiagonalEsquerdaCimaDaPessa;
-                            break;
-                    }
 
+                        DefineAsColunasLinhasDiagonais(Direcao[i]);
 
-                    if (ContraDirecao[0] == ID_DA_CASA)
-                    {
-                        if (CorDaPessa[ID_DA_CASA] == RivalDoPlayer
-                            || CorDaPessa[ID_DA_CASA] == Player)
+                        switch (DirecaoDeAnalise)
                         {
-                            DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
+                            case 1:
+                                ContraDirecao = LinhaAdireitaDaPessa;
+                                break;
+                            case 0:
+                                ContraDirecao = LinhaAesquerdaDaPessa;
+                                break;
+                            case 3:
+                                ContraDirecao = ColunaAbaixoDaPessa;
+                                break;
+                            case 2:
+                                ContraDirecao = ColunaAcimaDaPessa;
+                                break;
+                            case 7:
+                                ContraDirecao = DiagonalDireitaBaixoDaPessa;
+                                break;
+                            case 6:
+                                ContraDirecao = DiagonalDireitaCimaDaPessa;
+                                break;
+                            case 5:
+                                ContraDirecao = DiagonalEsquerdaBaixoDaPessa;
+                                break;
+                            case 4:
+                                ContraDirecao = DiagonalEsquerdaCimaDaPessa;
+                                break;
                         }
-                        else
+
+
+                        if (ContraDirecao[0] == ID_DA_CASA)
                         {
-                            DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
-                            if (MultiCasas == true)
+                            if (CorDaPessa[ID_DA_CASA] == RivalDoPlayer
+                                || CorDaPessa[ID_DA_CASA] == Player)
                             {
-                                DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[1]);
-                                DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[2]);
-                                DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[3]);
+                                DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
                             }
-                           
-                        }
-                    }
-
-                    if (CasaEstaOcupada[ContraDirecao[0]] == false
-                        && ContraDirecao[1] == ID_DA_CASA)
-                    {
-                        if (CorDaPessa[ID_DA_CASA] == RivalDoPlayer
-                            || CorDaPessa[ID_DA_CASA] == Player)
-                        {
-                            DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
-                        }
-                        else
-                        {
-
-                            DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
-                            if (MultiCasas == true)
+                            else
                             {
-                                DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[2]);               
-                                DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[3]); 
-                                DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[4]);
+                                DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
+                                if (MultiCasas == true)
+                                {
+                                    DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[1]);
+                                    DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[2]);
+                                    DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[3]);
+                                }
+
                             }
                         }
-                    }
-                    if (CasaEstaOcupada[ContraDirecao[0]] == false
-                        && CasaEstaOcupada[ContraDirecao[1]] == false
-                        && ContraDirecao[2] == ID_DA_CASA)
-                    {
-                        if (CorDaPessa[ID_DA_CASA] == RivalDoPlayer
-                            || CorDaPessa[ID_DA_CASA] == Player)
-                        {
-                            DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
-                        }
-                        else
-                        {
-                            DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
-                            if (MultiCasas == true)
-                            {
-                                DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[3]);            
-                                DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[4]);
-                                DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[5]);
-                            }
-                        }
-                    }
-                    if (CasaEstaOcupada[ContraDirecao[0]] == false
-                        && CasaEstaOcupada[ContraDirecao[1]] == false
-                        && CasaEstaOcupada[ContraDirecao[2]] == false
-                        && ContraDirecao[3] == ID_DA_CASA)
-                    {
-                        if (CorDaPessa[ID_DA_CASA] == RivalDoPlayer
-                            || CorDaPessa[ID_DA_CASA] == Player)
-                        {
-                            DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
-                        }
-                        else
-                        {
 
-                            DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
-                            if (MultiCasas == true)
-                            {
-                                DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[4]);
-                                DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[5]);
-                                DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[6]);
-                            }
-                        }
-                    }
-                    if (CasaEstaOcupada[ContraDirecao[0]] == false
-                        && CasaEstaOcupada[ContraDirecao[1]] == false
-                        && CasaEstaOcupada[ContraDirecao[2]] == false
-                        && CasaEstaOcupada[ContraDirecao[3]] == false
-                        && ContraDirecao[4] == ID_DA_CASA)
-                    {
-                        if (CorDaPessa[ID_DA_CASA] == RivalDoPlayer
-                            || CorDaPessa[ID_DA_CASA] == Player)
+                        if (CasaEstaOcupada[ContraDirecao[0]] == false
+                            && ContraDirecao[1] == ID_DA_CASA)
                         {
-                            DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
-                        }
-                        else
-                        {
-                            DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
-                            if (MultiCasas == true)
+                            if (CorDaPessa[ID_DA_CASA] == RivalDoPlayer
+                                || CorDaPessa[ID_DA_CASA] == Player)
                             {
-                                DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[5]);
-                                DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[6]);
+                                DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
                             }
+                            else
+                            {
 
-                        }
-                    }
-                    if (CasaEstaOcupada[ContraDirecao[0]] == false
-                        && CasaEstaOcupada[ContraDirecao[1]] == false
-                        && CasaEstaOcupada[ContraDirecao[2]] == false
-                        && CasaEstaOcupada[ContraDirecao[3]] == false
-                        && CasaEstaOcupada[ContraDirecao[4]] == false
-                        && ContraDirecao[5] == ID_DA_CASA)
-                    {
-                        if(CorDaPessa[ID_DA_CASA] == RivalDoPlayer
-                            || CorDaPessa[ID_DA_CASA] == Player)
-                        {
-                            DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
-                        }
-                        else
-                        {
-                            DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
-
-                            if (MultiCasas == true)
-                            {
-                                DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[6]);
+                                DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
+                                if (MultiCasas == true)
+                                {
+                                    DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[2]);
+                                    DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[3]);
+                                    DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[4]);
+                                }
                             }
                         }
-                    }
-                    if (CasaEstaOcupada[ContraDirecao[0]] == false
-                        && CasaEstaOcupada[ContraDirecao[1]] == false
-                        && CasaEstaOcupada[ContraDirecao[2]] == false
-                        && CasaEstaOcupada[ContraDirecao[3]] == false
-                        && CasaEstaOcupada[ContraDirecao[4]] == false
-                        && CasaEstaOcupada[ContraDirecao[5]] == false
-                        && ContraDirecao[6] == ID_DA_CASA)
-                    {
-                        DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
+                        if (CasaEstaOcupada[ContraDirecao[0]] == false
+                            && CasaEstaOcupada[ContraDirecao[1]] == false
+                            && ContraDirecao[2] == ID_DA_CASA)
+                        {
+                            if (CorDaPessa[ID_DA_CASA] == RivalDoPlayer
+                                || CorDaPessa[ID_DA_CASA] == Player)
+                            {
+                                DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
+                            }
+                            else
+                            {
+                                DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
+                                if (MultiCasas == true)
+                                {
+                                    DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[3]);
+                                    DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[4]);
+                                    DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[5]);
+                                }
+                            }
+                        }
+                        if (CasaEstaOcupada[ContraDirecao[0]] == false
+                            && CasaEstaOcupada[ContraDirecao[1]] == false
+                            && CasaEstaOcupada[ContraDirecao[2]] == false
+                            && ContraDirecao[3] == ID_DA_CASA)
+                        {
+                            if (CorDaPessa[ID_DA_CASA] == RivalDoPlayer
+                                || CorDaPessa[ID_DA_CASA] == Player)
+                            {
+                                DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
+                            }
+                            else
+                            {
+
+                                DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
+                                if (MultiCasas == true)
+                                {
+                                    DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[4]);
+                                    DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[5]);
+                                    DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[6]);
+                                }
+                            }
+                        }
+                        if (CasaEstaOcupada[ContraDirecao[0]] == false
+                            && CasaEstaOcupada[ContraDirecao[1]] == false
+                            && CasaEstaOcupada[ContraDirecao[2]] == false
+                            && CasaEstaOcupada[ContraDirecao[3]] == false
+                            && ContraDirecao[4] == ID_DA_CASA)
+                        {
+                            if (CorDaPessa[ID_DA_CASA] == RivalDoPlayer
+                                || CorDaPessa[ID_DA_CASA] == Player)
+                            {
+                                DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
+                            }
+                            else
+                            {
+                                DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
+                                if (MultiCasas == true)
+                                {
+                                    DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[5]);
+                                    DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[6]);
+                                }
+
+                            }
+                        }
+                        if (CasaEstaOcupada[ContraDirecao[0]] == false
+                            && CasaEstaOcupada[ContraDirecao[1]] == false
+                            && CasaEstaOcupada[ContraDirecao[2]] == false
+                            && CasaEstaOcupada[ContraDirecao[3]] == false
+                            && CasaEstaOcupada[ContraDirecao[4]] == false
+                            && ContraDirecao[5] == ID_DA_CASA)
+                        {
+                            if (CorDaPessa[ID_DA_CASA] == RivalDoPlayer
+                                || CorDaPessa[ID_DA_CASA] == Player)
+                            {
+                                DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
+                            }
+                            else
+                            {
+                                DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
+
+                                if (MultiCasas == true)
+                                {
+                                    DefineCasaOndeORreiPodeColocarComoAtacada(ContraDirecao[6]);
+                                }
+                            }
+                        }
+                        if (CasaEstaOcupada[ContraDirecao[0]] == false
+                            && CasaEstaOcupada[ContraDirecao[1]] == false
+                            && CasaEstaOcupada[ContraDirecao[2]] == false
+                            && CasaEstaOcupada[ContraDirecao[3]] == false
+                            && CasaEstaOcupada[ContraDirecao[4]] == false
+                            && CasaEstaOcupada[ContraDirecao[5]] == false
+                            && ContraDirecao[6] == ID_DA_CASA)
+                        {
+                            DefineCasaOndeORreiPodeColocarComoAtacada(ID_DA_CASA);
+                        }
                     }
                 }
             }

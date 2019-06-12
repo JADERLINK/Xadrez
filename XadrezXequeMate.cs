@@ -300,9 +300,9 @@ namespace Xadrez
             {
                 if (Pessa[CavaloJogadas[ib2]] == RivalCavalo)
                 {
-                    IdDaCasaDoDefensor = CavaloJogadas[ib2];
-                    ReiRivalNaoPodeSerSalvo = false;
-                    ReiRivalNaoPodeSerSalvofalseMetodo();
+                    //IdDaCasaDoDefensor = CavaloJogadas[ib2];
+                    //ReiRivalNaoPodeSerSalvo = false;
+                    ReiRivalNaoPodeSerSalvofalseMetodo(IdDaCasaDaPessaQueAtacaOReiRival, CavaloJogadas[ib2]);
                 }
             }
 
@@ -315,9 +315,9 @@ namespace Xadrez
                 if (DirecaoDoPeao[DiagonalDireitaCimaDaPessa[0]] == 2
                     || DirecaoDoPeao[DiagonalDireitaCimaDaPessa[0]] == 4)
                 {
-                    IdDaCasaDoDefensor = DiagonalDireitaCimaDaPessa[0];
-                    ReiRivalNaoPodeSerSalvo = false;
-                    ReiRivalNaoPodeSerSalvofalseMetodo();
+                    //IdDaCasaDoDefensor = DiagonalDireitaCimaDaPessa[0];
+                    //ReiRivalNaoPodeSerSalvo = false;
+                    ReiRivalNaoPodeSerSalvofalseMetodo(IdDaCasaDaPessaQueAtacaOReiRival, DiagonalDireitaCimaDaPessa[0]);
                 }
             }
 
@@ -328,9 +328,9 @@ namespace Xadrez
                 if (DirecaoDoPeao[DiagonalEsquerdaCimaDaPessa[0]] == 2
                     || DirecaoDoPeao[DiagonalEsquerdaCimaDaPessa[0]] == 3)
                 {
-                    IdDaCasaDoDefensor = DiagonalEsquerdaCimaDaPessa[0];
-                    ReiRivalNaoPodeSerSalvo = false;
-                    ReiRivalNaoPodeSerSalvofalseMetodo();
+                    //IdDaCasaDoDefensor = DiagonalEsquerdaCimaDaPessa[0];
+                    //ReiRivalNaoPodeSerSalvo = false;
+                    ReiRivalNaoPodeSerSalvofalseMetodo(IdDaCasaDaPessaQueAtacaOReiRival, DiagonalEsquerdaCimaDaPessa[0]);
                 }
             }
 
@@ -341,9 +341,9 @@ namespace Xadrez
                 if (DirecaoDoPeao[DiagonalDireitaBaixoDaPessa[0]] == 1
                     || DirecaoDoPeao[DiagonalDireitaBaixoDaPessa[0]] == 4)
                 {
-                    IdDaCasaDoDefensor = DiagonalDireitaBaixoDaPessa[0];
-                    ReiRivalNaoPodeSerSalvo = false;
-                    ReiRivalNaoPodeSerSalvofalseMetodo();
+                    //IdDaCasaDoDefensor = DiagonalDireitaBaixoDaPessa[0];
+                    //ReiRivalNaoPodeSerSalvo = false;
+                    ReiRivalNaoPodeSerSalvofalseMetodo(IdDaCasaDaPessaQueAtacaOReiRival, DiagonalDireitaBaixoDaPessa[0]);
                 }
             }
 
@@ -354,9 +354,9 @@ namespace Xadrez
                 if (DirecaoDoPeao[DiagonalEsquerdaBaixoDaPessa[0]] == 1
                     || DirecaoDoPeao[DiagonalEsquerdaBaixoDaPessa[0]] == 3)
                 {
-                    IdDaCasaDoDefensor = DiagonalEsquerdaBaixoDaPessa[0];
-                    ReiRivalNaoPodeSerSalvo = false;
-                    ReiRivalNaoPodeSerSalvofalseMetodo();
+                    //IdDaCasaDoDefensor = DiagonalEsquerdaBaixoDaPessa[0];
+                    //ReiRivalNaoPodeSerSalvo = false;
+                    ReiRivalNaoPodeSerSalvofalseMetodo(IdDaCasaDaPessaQueAtacaOReiRival, DiagonalEsquerdaBaixoDaPessa[0]);
                 }
             }
 
@@ -533,9 +533,9 @@ namespace Xadrez
                     {
                         if (Pessa[CavaloJogadas[ib2]] == RivalCavalo)
                         {
-                            IdDaCasaDoDefensor = CavaloJogadas[ib2];
-                            ReiRivalNaoPodeSerSalvo = false;
-                            ReiRivalNaoPodeSerSalvofalseMetodo();
+                            //IdDaCasaDoDefensor = CavaloJogadas[ib2];
+                            //ReiRivalNaoPodeSerSalvo = false;
+                            ReiRivalNaoPodeSerSalvofalseMetodo(AtacanteEmDirecaoDoRei[i], CavaloJogadas[ib2]);
                         }
                     }
 
@@ -548,9 +548,9 @@ namespace Xadrez
                     {
                         if (DirecaoDoPeao[ColunaAbaixoDaPessa[0]] == 1)
                         {
-                            IdDaCasaDoDefensor = ColunaAbaixoDaPessa[0];
-                            ReiRivalNaoPodeSerSalvo = false;
-                            ReiRivalNaoPodeSerSalvofalseMetodo();
+                            //IdDaCasaDoDefensor = ColunaAbaixoDaPessa[0];
+                            //ReiRivalNaoPodeSerSalvo = false;
+                            ReiRivalNaoPodeSerSalvofalseMetodo(AtacanteEmDirecaoDoRei[i], ColunaAbaixoDaPessa[0]);
                         }
                     }
 
@@ -560,9 +560,9 @@ namespace Xadrez
                     {
                         if (DirecaoDoPeao[ColunaAcimaDaPessa[0]] == 2)
                         {
-                            IdDaCasaDoDefensor = ColunaAcimaDaPessa[0];
-                            ReiRivalNaoPodeSerSalvo = false;
-                            ReiRivalNaoPodeSerSalvofalseMetodo();
+                            //IdDaCasaDoDefensor = ColunaAcimaDaPessa[0];
+                            //ReiRivalNaoPodeSerSalvo = false;
+                            ReiRivalNaoPodeSerSalvofalseMetodo(AtacanteEmDirecaoDoRei[i], ColunaAcimaDaPessa[0]);
                         }
                     }
 
@@ -572,9 +572,9 @@ namespace Xadrez
                     {
                         if (DirecaoDoPeao[LinhaAdireitaDaPessa[0]] == 4)
                         {
-                            IdDaCasaDoDefensor = LinhaAdireitaDaPessa[0];
-                            ReiRivalNaoPodeSerSalvo = false;
-                            ReiRivalNaoPodeSerSalvofalseMetodo();
+                            //IdDaCasaDoDefensor = LinhaAdireitaDaPessa[0];
+                            //ReiRivalNaoPodeSerSalvo = false;
+                            ReiRivalNaoPodeSerSalvofalseMetodo(AtacanteEmDirecaoDoRei[i], LinhaAdireitaDaPessa[0]);
                         }
                     }
 
@@ -584,9 +584,9 @@ namespace Xadrez
                     {
                         if (DirecaoDoPeao[LinhaAesquerdaDaPessa[0]] == 3)
                         {
-                            IdDaCasaDoDefensor = LinhaAesquerdaDaPessa[0];
-                            ReiRivalNaoPodeSerSalvo = false;
-                            ReiRivalNaoPodeSerSalvofalseMetodo();
+                            //IdDaCasaDoDefensor = LinhaAesquerdaDaPessa[0];
+                            //ReiRivalNaoPodeSerSalvo = false;
+                            ReiRivalNaoPodeSerSalvofalseMetodo(AtacanteEmDirecaoDoRei[i], LinhaAesquerdaDaPessa[0]);
                         }
                     }
 
@@ -608,9 +608,9 @@ namespace Xadrez
                             || ColunaAbaixoDaPessa[1] == 54
                             || ColunaAbaixoDaPessa[1] == 55)
                         {
-                            IdDaCasaDoDefensor = ColunaAbaixoDaPessa[1];
-                            ReiRivalNaoPodeSerSalvo = false;
-                            ReiRivalNaoPodeSerSalvofalseMetodo();
+                            //IdDaCasaDoDefensor = ColunaAbaixoDaPessa[1];
+                            //ReiRivalNaoPodeSerSalvo = false;
+                            ReiRivalNaoPodeSerSalvofalseMetodo(AtacanteEmDirecaoDoRei[i], ColunaAbaixoDaPessa[1]);
                         }
 
                     }
@@ -631,9 +631,9 @@ namespace Xadrez
                             || ColunaAcimaDaPessa[1] == 14
                             || ColunaAcimaDaPessa[1] == 15)
                         {
-                            IdDaCasaDoDefensor = ColunaAcimaDaPessa[1];
-                            ReiRivalNaoPodeSerSalvo = false;
-                            ReiRivalNaoPodeSerSalvofalseMetodo();
+                            //IdDaCasaDoDefensor = ColunaAcimaDaPessa[1];
+                            //ReiRivalNaoPodeSerSalvo = false;
+                            ReiRivalNaoPodeSerSalvofalseMetodo(AtacanteEmDirecaoDoRei[i], ColunaAcimaDaPessa[1]);
                         }
 
                     }
@@ -654,9 +654,9 @@ namespace Xadrez
                             || LinhaAdireitaDaPessa[1] == 54
                             || LinhaAdireitaDaPessa[1] == 62)
                         {
-                            IdDaCasaDoDefensor = LinhaAdireitaDaPessa[1];
-                            ReiRivalNaoPodeSerSalvo = false;
-                            ReiRivalNaoPodeSerSalvofalseMetodo();
+                            //IdDaCasaDoDefensor = LinhaAdireitaDaPessa[1];
+                            //ReiRivalNaoPodeSerSalvo = false;
+                            ReiRivalNaoPodeSerSalvofalseMetodo(AtacanteEmDirecaoDoRei[i], LinhaAdireitaDaPessa[1]);
                         }
                     }
 
@@ -676,9 +676,9 @@ namespace Xadrez
                             || LinhaAesquerdaDaPessa[1] == 49
                             || LinhaAesquerdaDaPessa[1] == 57)
                         {
-                            IdDaCasaDoDefensor = LinhaAesquerdaDaPessa[1];
-                            ReiRivalNaoPodeSerSalvo = false;
-                            ReiRivalNaoPodeSerSalvofalseMetodo();
+                            //IdDaCasaDoDefensor = LinhaAesquerdaDaPessa[1];
+                            //ReiRivalNaoPodeSerSalvo = false;
+                            ReiRivalNaoPodeSerSalvofalseMetodo(AtacanteEmDirecaoDoRei[i], LinhaAesquerdaDaPessa[1]);
                         }
                     }
 
@@ -782,6 +782,7 @@ namespace Xadrez
             int[] Direcao = new int[7];
             int[] ContraDirecao = new int[7];
 
+
             switch (DirecaoDeAnalise)
             {
                 case 0:
@@ -810,6 +811,8 @@ namespace Xadrez
                     break;
             }
 
+           
+
             if (CasaEstaOcupada[Direcao[i]] == true)
             {
 
@@ -818,6 +821,7 @@ namespace Xadrez
                 {
 
                     DefineAsColunasLinhasDiagonais(Direcao[i]);
+
 
                     switch (DirecaoDeAnalise)
                     {
@@ -846,7 +850,7 @@ namespace Xadrez
                             ContraDirecao = DiagonalEsquerdaCimaDaPessa;
                             break;
                     }
-
+                    
 
                     if (ContraDirecao[0] == CasaOndeEstaOReiDoRival)
                     {
@@ -1038,9 +1042,9 @@ namespace Xadrez
 
                     if (ContraDirecao[0] == IdDaCasaParaComparacao)
                     {
-                        IdDaCasaDoDefensor = Direcao[ib];
-                        ReiRivalNaoPodeSerSalvo = false;
-                        ReiRivalNaoPodeSerSalvofalseMetodo();
+                        //IdDaCasaDoDefensor = Direcao[ib];
+                        //ReiRivalNaoPodeSerSalvo = false;
+                        ReiRivalNaoPodeSerSalvofalseMetodo(IdDaCasaParaComparacao, Direcao[ib]);
                     }
 
 
@@ -1048,9 +1052,9 @@ namespace Xadrez
                     {
                         if (ContraDirecao[1] == IdDaCasaParaComparacao)
                         {
-                            IdDaCasaDoDefensor = Direcao[ib];
-                            ReiRivalNaoPodeSerSalvo = false;
-                            ReiRivalNaoPodeSerSalvofalseMetodo();
+                            //IdDaCasaDoDefensor = Direcao[ib];
+                            //ReiRivalNaoPodeSerSalvo = false;
+                            ReiRivalNaoPodeSerSalvofalseMetodo(IdDaCasaParaComparacao, Direcao[ib]);
                         }
                     }
                     if (CasaEstaOcupada[ContraDirecao[0]] == false
@@ -1058,9 +1062,9 @@ namespace Xadrez
                     {
                         if (ContraDirecao[2] == IdDaCasaParaComparacao)
                         {
-                            IdDaCasaDoDefensor = Direcao[ib];
-                            ReiRivalNaoPodeSerSalvo = false;
-                            ReiRivalNaoPodeSerSalvofalseMetodo();
+                            //IdDaCasaDoDefensor = Direcao[ib];
+                            //ReiRivalNaoPodeSerSalvo = false;
+                            ReiRivalNaoPodeSerSalvofalseMetodo(IdDaCasaParaComparacao, Direcao[ib]);
                         }
                     }
                     if (CasaEstaOcupada[ContraDirecao[0]] == false
@@ -1069,9 +1073,9 @@ namespace Xadrez
                     {
                         if (ContraDirecao[3] == IdDaCasaParaComparacao)
                         {
-                            IdDaCasaDoDefensor = Direcao[ib];
-                            ReiRivalNaoPodeSerSalvo = false;
-                            ReiRivalNaoPodeSerSalvofalseMetodo();
+                            //IdDaCasaDoDefensor = Direcao[ib];
+                            //ReiRivalNaoPodeSerSalvo = false;
+                            ReiRivalNaoPodeSerSalvofalseMetodo(IdDaCasaParaComparacao, Direcao[ib]);
                         }
                     }
                     if (CasaEstaOcupada[ContraDirecao[0]] == false
@@ -1081,9 +1085,9 @@ namespace Xadrez
                     {
                         if (ContraDirecao[4] == IdDaCasaParaComparacao)
                         {
-                            IdDaCasaDoDefensor = Direcao[ib];
-                            ReiRivalNaoPodeSerSalvo = false;
-                            ReiRivalNaoPodeSerSalvofalseMetodo();
+                            //IdDaCasaDoDefensor = Direcao[ib];
+                            //ReiRivalNaoPodeSerSalvo = false;
+                            ReiRivalNaoPodeSerSalvofalseMetodo(IdDaCasaParaComparacao, Direcao[ib]);
                         }
                     }
                     if (CasaEstaOcupada[ContraDirecao[0]] == false
@@ -1094,9 +1098,9 @@ namespace Xadrez
                     {
                         if (ContraDirecao[5] == IdDaCasaParaComparacao)
                         {
-                            IdDaCasaDoDefensor = Direcao[ib];
-                            ReiRivalNaoPodeSerSalvo = false;
-                            ReiRivalNaoPodeSerSalvofalseMetodo();
+                            //IdDaCasaDoDefensor = Direcao[ib];
+                            //ReiRivalNaoPodeSerSalvo = false;
+                            ReiRivalNaoPodeSerSalvofalseMetodo(IdDaCasaParaComparacao, Direcao[ib]);
                         }
                     }
                     if (CasaEstaOcupada[ContraDirecao[0]] == false
@@ -1108,9 +1112,9 @@ namespace Xadrez
                     {
                         if (ContraDirecao[6] == IdDaCasaParaComparacao)
                         {
-                            IdDaCasaDoDefensor = Direcao[ib];
-                            ReiRivalNaoPodeSerSalvo = false;
-                            ReiRivalNaoPodeSerSalvofalseMetodo();
+                            //IdDaCasaDoDefensor = Direcao[ib];
+                            //ReiRivalNaoPodeSerSalvo = false;
+                            ReiRivalNaoPodeSerSalvofalseMetodo(IdDaCasaParaComparacao, Direcao[ib]);
                         }
                     }
                 }
@@ -1118,33 +1122,33 @@ namespace Xadrez
         }
 
 
-        public void ReiRivalNaoPodeSerSalvofalseMetodo()
+        public void ReiRivalNaoPodeSerSalvofalseMetodo(int ID_DA_CASA_ONDE_VAI_A_PESSA_DO_DEFENSOR, int ID_DA_CASA_DO_DEFENSOR)
         {
             // aki to checando se meu movimento esta deixando ou n o rei rival em Xeque. 
-            // IdDaCasaDoDefensor
-            // IdDaCasaDaPessaQueAtacaOReiRival
+            // IdDaCasaDoDefensor  //ID_DA_CASA_DO_DEFENSOR
+            // IdDaCasaDaPessaQueAtacaOReiRival //ID_DA_CASA_ONDE_VAI_A_PESSA_DO_DEFENSOR
 
             // aki coloca a pessa nessa casa
-            Pessa[IdDaCasaDaPessaQueAtacaOReiRival] = Pessa[IdDaCasaDoDefensor];
-            CorDaPessa[IdDaCasaDaPessaQueAtacaOReiRival] = CorDaPessa[IdDaCasaDoDefensor];
-            CasaEstaOcupada[IdDaCasaDaPessaQueAtacaOReiRival] = true;
-            DirecaoDoPeao[IdDaCasaDaPessaQueAtacaOReiRival] = DirecaoDoPeao[IdDaCasaDoDefensor];
-            APessaJaFoiMovida[IdDaCasaDaPessaQueAtacaOReiRival] = true;
-            EmqualRodadaAPessaFoiMexida[IdDaCasaDaPessaQueAtacaOReiRival] = EmqualRodadaOplayerEstaJogando;
-            PeaoAndouDuasCasas[IdDaCasaDaPessaQueAtacaOReiRival] = false;
+            Pessa[ID_DA_CASA_ONDE_VAI_A_PESSA_DO_DEFENSOR] = Pessa[ID_DA_CASA_DO_DEFENSOR];
+            CorDaPessa[ID_DA_CASA_ONDE_VAI_A_PESSA_DO_DEFENSOR] = CorDaPessa[ID_DA_CASA_DO_DEFENSOR];
+            CasaEstaOcupada[ID_DA_CASA_ONDE_VAI_A_PESSA_DO_DEFENSOR] = true;
+            DirecaoDoPeao[ID_DA_CASA_ONDE_VAI_A_PESSA_DO_DEFENSOR] = DirecaoDoPeao[ID_DA_CASA_DO_DEFENSOR];
+            APessaJaFoiMovida[ID_DA_CASA_ONDE_VAI_A_PESSA_DO_DEFENSOR] = true;
+            EmqualRodadaAPessaFoiMexida[ID_DA_CASA_ONDE_VAI_A_PESSA_DO_DEFENSOR] = EmqualRodadaOplayerEstaJogando;
+            PeaoAndouDuasCasas[ID_DA_CASA_ONDE_VAI_A_PESSA_DO_DEFENSOR] = false;
 
             // aki limpa a casa onde tava a peça
-            Pessa[IdDaCasaDoDefensor] = 0;
-            CorDaPessa[IdDaCasaDoDefensor] = 0;
-            CasaEstaOcupada[IdDaCasaDoDefensor] = false;
-            DirecaoDoPeao[IdDaCasaDoDefensor] = 0;
-            APessaJaFoiMovida[IdDaCasaDoDefensor] = true;
-            EmqualRodadaAPessaFoiMexida[IdDaCasaDoDefensor] = 0;
-            PeaoAndouDuasCasas[IdDaCasaDoDefensor] = false;
+            Pessa[ID_DA_CASA_DO_DEFENSOR] = 0;
+            CorDaPessa[ID_DA_CASA_DO_DEFENSOR] = 0;
+            CasaEstaOcupada[ID_DA_CASA_DO_DEFENSOR] = false;
+            DirecaoDoPeao[ID_DA_CASA_DO_DEFENSOR] = 0;
+            APessaJaFoiMovida[ID_DA_CASA_DO_DEFENSOR] = true;
+            EmqualRodadaAPessaFoiMexida[ID_DA_CASA_DO_DEFENSOR] = 0;
+            PeaoAndouDuasCasas[ID_DA_CASA_DO_DEFENSOR] = false;
 
             IDCDMQDPPF_Player.Clear();
 
-            ReiRivalNaoPodeSerSalvo = false;
+            //ReiRivalNaoPodeSerSalvo = false;
 
 
             //checando se rei rival esta em Xeque
@@ -1154,6 +1158,9 @@ namespace Xadrez
                 DefineAsColunasLinhasDiagonais(id);
                 Selecionado_TabuleiroID = id;
                 Selecionado_PessaValor = Pessa[id];
+                Selecionado_CorDaPessaValor = CorDaPessa[id];
+                Selecionado_DirecaoDoPeaoValor = DirecaoDoPeao[id];
+                
 
                 ChecandoSeOReiEstaEmXequeMateChecandoPlayer = true;
                 if (Player == 2)
@@ -1207,7 +1214,7 @@ namespace Xadrez
                 ChecandoSeOReiEstaEmXequeMateChecandoPlayer = false;
             }
 
-
+            /*
             if (IDCDMQDPPF_Player.Count() != 0)
             {
                 foreach (var item in IDCDMQDPPF_Player)
@@ -1218,6 +1225,13 @@ namespace Xadrez
                     }
                 }
             }
+            */
+
+            if (IDCDMQDPPF_Player.ContainsValue(CasaOndeEstaOReiDoRival) == false)
+            {
+                ReiRivalNaoPodeSerSalvo = false; 
+            }
+
 
 
             // depois de checagem restaura jogada. 
@@ -1547,7 +1561,8 @@ namespace Xadrez
 
                 IDCDMQDPPF_Player.Clear();
 
-                ReiRivalNaoPodeSerSalvo = false;
+                //ReiRivalNaoPodeSerSalvo = false;
+
                 //if (!IDCDLOAPDOR_PodeDefender.ContainsValue(ID_ACIMA)){
                 //    IDCDLOAPDOR_PodeDefender.Add(Convert.ToString(ID_ACIMA), ID_ACIMA);}
 
@@ -1614,9 +1629,9 @@ namespace Xadrez
                     ChecandoSeOReiEstaEmXequeMateChecandoPlayer = false;
                 }
 
-                if (IDCDMQDPPF_Player.ContainsValue(CasaOndeEstaOReiDoRival))
+                if (IDCDMQDPPF_Player.ContainsValue(CasaOndeEstaOReiDoRival) == false)
                 {
-                    ReiRivalNaoPodeSerSalvo = true;
+                    ReiRivalNaoPodeSerSalvo = false;
                     //if (IDCDLOAPDOR_PodeDefender.ContainsValue(ID_ACIMA)) {
                     //    IDCDLOAPDOR_PodeDefender.Remove(Convert.ToString(ID_ACIMA)); }
                 }
