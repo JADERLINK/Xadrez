@@ -24,8 +24,25 @@ Identifica o Xeque-mate, Caso haja so um rei sem jogadas ( define Xeque-mate), e
 O programa/jogo contem um editor de tabuleiro.
 
 @edit:
+
 Adicionado V2:
+
 Corrige bugs.
+
 Adiciona multiplayer em Lan.
+
+@edit2:
+
+Adicionado V3
+
+corrigido bug em requisitar tabuleiro
+
+add tradução, mudar as cores e as imagens.
+
+add configurações salvas do usuário
+
+add a possibilidade de inverter o tabuleiro
+
+Add a possibilidade de não enviar os movimentos q você pode fazer (valido somente para o online)
 
 Att: JADERLINK
