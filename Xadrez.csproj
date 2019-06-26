@@ -35,6 +35,10 @@
   <PropertyGroup>
     <ApplicationIcon>Tabuleiro8x8.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Xadrez.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -63,6 +67,9 @@
     <Compile Include="HostServer.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Language_Color_image.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -70,6 +77,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="SimplesINI.cs" />
     <Compile Include="XadrezDefineAsColunasLinhasDiagonais.cs" />
     <Compile Include="XadrezClass.cs" />
     <Compile Include="XadrezEmpates.cs" />
@@ -96,6 +105,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="user.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

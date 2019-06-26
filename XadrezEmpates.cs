@@ -34,7 +34,7 @@ namespace Xadrez
                 //entao so tem 2 reis no jogo
                 HouveEmpate = true;
 
-                labelInfoRei = "O Jogo Empatou";
+                labelInfoRei = T_O_Jogo_Empatou; //"O Jogo Empatou";
                 labelInfoReiColor = CORES_PRETO;
             }
 
@@ -158,12 +158,12 @@ namespace Xadrez
 
                     if (Player == 1)
                     {
-                        labelInfoRei = "Jogador Azul Venceu O Jogo";
+                        labelInfoRei = T_Jogador_Azul_Venceu_O_Jogo; //"Jogador Azul Venceu O Jogo";
                         labelInfoReiColor = CORES_AZUL;
                     }
                     else
                     {
-                        labelInfoRei = "Jogador Verde Venceu O Jogo";
+                        labelInfoRei = T_Jogador_Verde_Venceu_O_Jogo; //"Jogador Verde Venceu O Jogo";
                         labelInfoReiColor = CORES_VERDE;
                     }
 

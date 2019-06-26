@@ -131,7 +131,7 @@ namespace Xadrez
 
 
         // string para enviar informações para o log 
-        public string Log;
+        //public string Log;
 
         // ativa mensagembox de Xequemate.
         public bool mesagemBoxXequeMate;
@@ -546,7 +546,12 @@ namespace Xadrez
         // ==
 
 
-
+        // tradução
+        public string T_Jogador_Azul_Esta_Em_Xeque = "Jogador Azul Esta Em Xeque";
+        public string T_Jogador_Verde_Esta_Em_Xeque = "Jogador Verde Esta Em Xeque";
+        public string T_O_Jogo_Empatou = "O Jogo Empatou";
+        public string T_Jogador_Azul_Venceu_O_Jogo = "Jogador Azul Venceu O Jogo";
+        public string T_Jogador_Verde_Venceu_O_Jogo = "Jogador Verde Venceu O Jogo";
 
         #endregion
 
@@ -554,7 +559,7 @@ namespace Xadrez
         // testa a casa do tabuleiro
         public void TestarTabuleiroDebugMetodo(int ID_DA_CASA)
         {
-            Log = "Testando o tabuleiro";
+            //Log = "Testando o tabuleiro";
 
             // se tiver no modo editor
             // e no modo selecionadado ele desselecionda
@@ -775,7 +780,7 @@ namespace Xadrez
             if (BotaoBloqueado == true)
             {
 
-                Log = "vc n pode usar esse botão ate q todo o codigo seja realizado";
+                //Log = "vc n pode usar esse botão ate q todo o codigo seja realizado";
             }
             else
             {
@@ -798,21 +803,21 @@ namespace Xadrez
                         {
                             if (HouveEmpate == true)
                             {
-                                Log = "Fim de jogo";
+                                //Log = "Fim de jogo";
                             }
                             else
                             {
                                 if (XequeMate == true)
                                 {
                                     // aki faz ação caso tenha cheq mate no jogo
-                                    Log = "Fim de jogo";
+                                    //Log = "Fim de jogo";
                                 }
                                 else
                                 {
                                     // if pra verificar se posso ou n clicar nesse botao
                                     if (NaoPodeClicarNesseBotao[ID_DA_CASA] == true)
                                     {
-                                        Log = "vc n pode clicar aki";
+                                        //Log = "vc n pode clicar aki";
                                     }
                                     else // se false eu posso clicar nessa casa
                                     {
@@ -853,7 +858,7 @@ namespace Xadrez
                                                 {
                                                     NaoPodeClicarNesseBotao[id] = NaoPodeClicarNesseBotaoComInfoDaPessaSelecionada[id];
                                                 }
-                                                Log = "deselecionado lugar onde a peça ia ser colocada";
+                                                //Log = "deselecionado lugar onde a peça ia ser colocada";
 
                                             }
 
@@ -898,7 +903,7 @@ namespace Xadrez
                                                 CasaQueClicareiParaEnPassantADireitaOuACima = 64;
                                                 CasaQueClicareiParaEnPassantAEsquerdaOuABaixo = 64;
 
-                                                Log = "deselecionado tudo";
+                                                //Log = "deselecionado tudo";
                                             }
                                         }
                                         else
@@ -996,7 +1001,7 @@ namespace Xadrez
                 }
 
                 //Console.WriteLine(" peça selecionada com sucesso ID: " + ID_DA_CASA);
-                Log = "peça selecionada com sucesso ID: " + ID_DA_CASA;
+                //Log = "peça selecionada com sucesso ID: " + ID_DA_CASA;
 
                 // aki permite selecionar outras peças do player sem ter q deselecionar a selecionada antes
 
@@ -1015,7 +1020,7 @@ namespace Xadrez
             else
             {
                 //Console.WriteLine("vc n pode selecionar essa peça ID: " + ID_DA_CASA);
-                Log = "vc n pode selecionar essa peça ID: " + ID_DA_CASA;
+                //Log = "vc n pode selecionar essa peça ID: " + ID_DA_CASA;
             }
         }
 
@@ -1070,7 +1075,7 @@ namespace Xadrez
 
 
                 //Console.WriteLine("peça desselecionada ID: " + ID_DA_CASA);
-                Log = "peça desselecionada ID: " + ID_DA_CASA;
+                //Log = "peça desselecionada ID: " + ID_DA_CASA;
 
 
             }
@@ -1195,12 +1200,12 @@ namespace Xadrez
                     }
 
 
-                    Log = "selecionado para colocar a peça aki";
+                    //Log = "selecionado para colocar a peça aki";
 
 
                 }
                 else { //se n, no pode fazer isso
-                    Log = "vc n pode colocar a peça onde ela ja esta";
+                    //Log = "vc n pode colocar a peça onde ela ja esta";
                     //Console.WriteLine("vc n pode colocar a peça onde ela ja esta");
                 }
 
@@ -1216,7 +1221,7 @@ namespace Xadrez
             if (BotaoBloqueado == true)
             {
 
-                Log = "vc n pode usar esse botão ate q todo o codigo seja realizado";
+                //Log = "vc n pode usar esse botão ate q todo o codigo seja realizado";
 
             }
             else
@@ -1376,7 +1381,7 @@ namespace Xadrez
                         }
 
                         //Vc n pode fazer esse movimento ele põe o seu rei em Xeque ou 
-                        Log = "vc n pode deixar seu rei em Xeque";
+                        //Log = "vc n pode deixar seu rei em Xeque";
                     }
                     else
                     {
@@ -1408,7 +1413,7 @@ namespace Xadrez
                         if (HouveEmpate == true)
                         {
                             //
-                            Log = "Fim De Jogo";
+                            //Log = "Fim De Jogo";
                             mesagemBoxEmpate = true;
                         }
                         else
@@ -1416,7 +1421,7 @@ namespace Xadrez
                             if (ReiRivalFoiColocadoEmXequeMate == true)
                             {
                                 //XequeMate = true;
-                                Log = "Fim De Jogo";
+                                //Log = "Fim De Jogo";
                                 mesagemBoxXequeMate = true;
 
                                 // aki ele bloqueia todos os botoes
@@ -1459,7 +1464,7 @@ namespace Xadrez
                                     EmqualRodadaOplayerEstaJogando++;
                                 }
                                 
-                                Log = "operação concluida com sucesso, agora é a vez do jogador: " + Player;
+                                //Log = "operação concluida com sucesso, agora é a vez do jogador: " + Player;
 
                                 // aki libera pra eu clicar em todos os botoes:
                                 for (int id = 0; id < 65; id++)
@@ -1486,7 +1491,7 @@ namespace Xadrez
                 else
                 {
 
-                    Log = "vc n pode clicar aqui sem terminar a jogada";
+                    //Log = "vc n pode clicar aqui sem terminar a jogada";
 
                 }
                 BotaoBloqueado = false;
@@ -1515,7 +1520,7 @@ namespace Xadrez
 
                 case 0:
                     // caso imposivel de acontecer
-                    Log = "ERRO, pesça id 0 selecionda";
+                    //Log = "ERRO, pesça id 0 selecionda";
                     break;
                 case 1: //torre
                 case 11: //torre azul
@@ -1549,7 +1554,7 @@ namespace Xadrez
                     break;
                 default:
                     // foi selecionado um id de peça n verificado
-                    Log = "ERRO, foi selecionado um id de peça n verificado";
+                    //Log = "ERRO, foi selecionado um id de peça n verificado";
                     break;
 
                  
@@ -2205,7 +2210,13 @@ namespace Xadrez
                         APessaJaFoiMovida[ColoqueiAPessaEmUmaCasa_TabuleiroID] = true;
                         break;
                     default:
-                        Console.WriteLine("erro, n foi escolhido uma pessa para o peão");
+                        // se nada rainha
+                        Pessa[ColoqueiAPessaEmUmaCasa_TabuleiroID] = 15;
+                        CorDaPessa[ColoqueiAPessaEmUmaCasa_TabuleiroID] = 1;
+                        CasaEstaOcupada[ColoqueiAPessaEmUmaCasa_TabuleiroID] = true;
+                        DirecaoDoPeao[ColoqueiAPessaEmUmaCasa_TabuleiroID] = 0;
+                        APessaJaFoiMovida[ColoqueiAPessaEmUmaCasa_TabuleiroID] = true;
+                        //Console.WriteLine("erro, n foi escolhido uma pessa para o peão");
                         break;
                 }
             }
@@ -2244,7 +2255,13 @@ namespace Xadrez
                         APessaJaFoiMovida[ColoqueiAPessaEmUmaCasa_TabuleiroID] = true;
                         break;
                     default:
-                        Console.WriteLine("erro, n foi escolhido uma pessa para o peão");
+                        //se nada rainha
+                        Pessa[ColoqueiAPessaEmUmaCasa_TabuleiroID] = 25;
+                        CorDaPessa[ColoqueiAPessaEmUmaCasa_TabuleiroID] = 2;
+                        CasaEstaOcupada[ColoqueiAPessaEmUmaCasa_TabuleiroID] = true;
+                        DirecaoDoPeao[ColoqueiAPessaEmUmaCasa_TabuleiroID] = 0;
+                        APessaJaFoiMovida[ColoqueiAPessaEmUmaCasa_TabuleiroID] = true;
+                        //Console.WriteLine("erro, n foi escolhido uma pessa para o peão");
                         break;
                 }
             }
@@ -2385,12 +2402,12 @@ namespace Xadrez
             {
                 if (Player == 1)
                 {
-                    labelInfoRei = "Jogador Azul Esta Em Xeque";
+                    labelInfoRei = T_Jogador_Azul_Esta_Em_Xeque; //"Jogador Azul Esta Em Xeque";
                     labelInfoReiColor = CORES_AZUL;
                 }
                 else
                 {
-                    labelInfoRei = "Jogador Verde Esta Em Xeque";
+                    labelInfoRei = T_Jogador_Verde_Esta_Em_Xeque; //"Jogador Verde Esta Em Xeque";
                     labelInfoReiColor = CORES_VERDE;
                 }
             }

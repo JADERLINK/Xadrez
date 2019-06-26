@@ -43,7 +43,7 @@ namespace Xadrez
                     ThreadComunica_seComHost.Start();
 
                     string OQueTavaNoChat = textBoxChat.Text;
-                    textBoxChat.Text += "Conectando Com o Servidor;" + Environment.NewLine;
+                    textBoxChat.Text += T_CHAT__Conectado_Com_O_Servidor + Environment.NewLine; //"Conectando Com o Servidor;" + Environment.NewLine;
 
 
                     ImportandoXadrezClass.TaNoOnline = true;
@@ -75,7 +75,7 @@ namespace Xadrez
                     testarTabuleiroDebugToolStripMenuItem.Enabled = false;
                     ImportandoXadrezClass.TemCasaSelecionada = false;
                     ImportandoXadrezClass.ColoqueiAPessaEmUmaCasa = false;
-                    oNOFFToolStripMenuItem5.Text = "Ativar Teste Do tabuleiro";
+                    oNOFFToolStripMenuItem5.Text = T_Ativar_Teste_Do_Tabuleiro; //"Ativar Teste Do tabuleiro";
                     ImportandoXadrezClass.TestarTabuleiroDebug = false;
 
 
@@ -83,15 +83,17 @@ namespace Xadrez
             }
             catch (FormatException)
             {
-                MessageBox.Show("IP incorreto, digite um IP valido.", "Erro:");
+                //MessageBox.Show("IP incorreto, digite um IP valido.", T_TITULO_ERRO);
+                MessageBox.Show(T_mBox08, T_TITULO_ERRO);
             }
             catch (SocketException)
             {
-                MessageBox.Show("IP incorreto, ou não pode conectar-se com o IP.", "Erro:");
+                //MessageBox.Show("IP incorreto, ou não pode conectar-se com o IP.", T_TITULO_ERRO);
+                MessageBox.Show(T_mBox09, T_TITULO_ERRO);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Erro:");
+                MessageBox.Show(ex.Message, T_TITULO_ERRO);
             }
 
         }
@@ -108,7 +110,7 @@ namespace Xadrez
                 ImportandoXadrezClass.TaNoOnline = false;
 
                 string OQueTavaNoChat = textBoxChat.Text;
-                textBoxChat.Text += "Desconectando Do Servidor;" + Environment.NewLine;
+                textBoxChat.Text += T_CHAT__Desconectado_Do_Servidor + Environment.NewLine; //"Desconectando Do Servidor;" + Environment.NewLine;
             }
 
         }
@@ -156,7 +158,7 @@ namespace Xadrez
 
                     //textBoxChat.Text += "Você Perdeu A Conexão Com O Servidor;" + Environment.NewLine;
 
-                    SetControlPropertyValue(textBoxChat, "Text", textBoxChat.Text + "Você Perdeu A Conexão Com O Servidor;" + Environment.NewLine);
+                    SetControlPropertyValue(textBoxChat, "Text", textBoxChat.Text + T_CHAT__Voce_Perdeu_A_Conexao_Com_O_Servidor + Environment.NewLine);//"Você Perdeu A Conexão Com O Servidor;" + Environment.NewLine);
                 }
 
             }

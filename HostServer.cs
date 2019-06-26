@@ -62,7 +62,7 @@ namespace Xadrez
                     ThreadComunica_seComOClient.IsBackground = true;
                     ThreadComunica_seComOClient.Start();
 
-                    textBoxChat.Text += "Servidor iniciado, Espere o outro jogador para jogar;" + Environment.NewLine;
+                    textBoxChat.Text += T_CHAT__Servidor_Iniciado + Environment.NewLine; //"Servidor iniciado, Espere o outro jogador para jogar;" + Environment.NewLine;
 
                     ImportandoXadrezClass.TaNoOnline = true;
 
@@ -93,7 +93,7 @@ namespace Xadrez
                     testarTabuleiroDebugToolStripMenuItem.Enabled = false;
                     ImportandoXadrezClass.TemCasaSelecionada = false;
                     ImportandoXadrezClass.ColoqueiAPessaEmUmaCasa = false;
-                    oNOFFToolStripMenuItem5.Text = "Ativar Teste Do tabuleiro";
+                    oNOFFToolStripMenuItem5.Text = T_Ativar_Teste_Do_Tabuleiro; //"Ativar Teste Do tabuleiro";
                     ImportandoXadrezClass.TestarTabuleiroDebug = false;
 
                 }
@@ -101,15 +101,17 @@ namespace Xadrez
             }
             catch (FormatException)
             {
-                MessageBox.Show("IP incorreto, digite um IP valido.", "Erro:");
+                //MessageBox.Show("IP incorreto, digite um IP valido.", T_TITULO_ERRO);
+                MessageBox.Show(T_mBox08, T_TITULO_ERRO);
             }
             catch (SocketException)
             {
-                MessageBox.Show("IP incorreto, digite um IP valido.", "Erro:");
+                //MessageBox.Show("IP incorreto, digite um IP valido.", T_TITULO_ERRO);
+                MessageBox.Show(T_mBox08, T_TITULO_ERRO);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Erro:");
+                MessageBox.Show(ex.Message, T_TITULO_ERRO);
                 //throw ex;
             }
 
@@ -132,7 +134,7 @@ namespace Xadrez
                             ManipulaDados = TcpClientDoCliente.GetStream();
                             ClientEstaConectado = true;
 
-                            string VaiProChat = textBoxChat.Text + "O Outro Jogador Entrou;" + Environment.NewLine;
+                            string VaiProChat = textBoxChat.Text + T_CHAT__O_Outro_Jogador_Entrou + Environment.NewLine;//"O Outro Jogador Entrou;" + Environment.NewLine;
                             SetControlPropertyValue(textBoxChat, "Text", VaiProChat); 
                         }
                     }
@@ -151,7 +153,7 @@ namespace Xadrez
                             ManipulaDados = TcpClientDoCliente.GetStream();
                             ClientEstaConectado = true;
 
-                            string VaiProChat = textBoxChat.Text + "Um Novo Jogador Entrou;" + Environment.NewLine;
+                            string VaiProChat = textBoxChat.Text + T_CHAT__Um_Novo_Jogador_Entrou + Environment.NewLine; //"Um Novo Jogador Entrou;" + Environment.NewLine;
                             SetControlPropertyValue(textBoxChat, "Text", VaiProChat);
                         }
                     }
@@ -185,7 +187,7 @@ namespace Xadrez
                 ThreadComunica_seComOClient.Abort();
 
                 string OQueTavaNoChat = textBoxChat.Text;
-                textBoxChat.Text += "Servidor Parado;" + Environment.NewLine;
+                textBoxChat.Text += T_CHAT__Servidor_Parado + Environment.NewLine; //"Servidor Parado;" + Environment.NewLine;
 
                 ImportandoXadrezClass.TaNoOnline = false;
                 ImportandoXadrezClass.PlayerDoUsuario = 3;
@@ -335,17 +337,19 @@ namespace Xadrez
                     Invoke(new Chamavoid(ImportandoXadrezClass.NomeDosBotoesPeloValorDaPessa));
                     Invoke(new Chamavoid(ImportandoXadrezClass.ChecarSeOReiFoiColocadoEmXeque));
                     Invoke(new Chamavoid(DarClickNoBotaoInfo));
+
+
                 }
                 else if (Mensagem.StartsWith("X"))
                 {
                     if (ImportandoXadrezClass.Player == 1)
                     {
-                        ImportandoXadrezClass.labelInfoRei = "Jogador Azul Venceu O Jogo";
+                        ImportandoXadrezClass.labelInfoRei = ImportandoXadrezClass.T_Jogador_Azul_Venceu_O_Jogo; //"Jogador Azul Venceu O Jogo";
                         ImportandoXadrezClass.labelInfoReiColor = ImportandoXadrezClass.CORES_AZUL;
                     }
                     else
                     {
-                        ImportandoXadrezClass.labelInfoRei = "Jogador Verde Venceu O Jogo";
+                        ImportandoXadrezClass.labelInfoRei = ImportandoXadrezClass.T_Jogador_Verde_Venceu_O_Jogo; //"Jogador Verde Venceu O Jogo";
                         ImportandoXadrezClass.labelInfoReiColor = ImportandoXadrezClass.CORES_VERDE;
                     }
                     Invoke(new Chamavoid(DarClickNoBotaoInfo));
@@ -355,7 +359,7 @@ namespace Xadrez
                 }
                 else if (Mensagem.StartsWith("E"))
                 {
-                    ImportandoXadrezClass.labelInfoRei = "O Jogo Empatou";
+                    ImportandoXadrezClass.labelInfoRei = ImportandoXadrezClass.T_O_Jogo_Empatou; //"O Jogo Empatou";
                     ImportandoXadrezClass.labelInfoReiColor = ImportandoXadrezClass.CORES_PRETO;
                     Invoke(new Chamavoid(DarClickNoBotaoInfo));
                     ImportandoXadrezClass.HouveEmpate = true;
@@ -366,7 +370,8 @@ namespace Xadrez
                 else if (Mensagem.StartsWith("R1A")
                     || Mensagem.StartsWith("R1V"))
                 {
-                    if (MessageBox.Show("O Outro Jogador Requisitou Uma Nova Partida," + Environment.NewLine + "Você Aceita Jogar Uma Nova Partida?", "Pesponda a pergunta:", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    //if (MessageBox.Show("O Outro Jogador Requisitou Uma Nova Partida," + Environment.NewLine + "Você Aceita Jogar Uma Nova Partida?", T_TITULO_Responda_a_pergunta, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (MessageBox.Show(T_mBox10 + Environment.NewLine + T_mBox11, T_TITULO_Responda_a_pergunta, MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         if (Mensagem.StartsWith("R1A"))
                         {
@@ -385,7 +390,8 @@ namespace Xadrez
                 else if (Mensagem.StartsWith("R2A")
                     || Mensagem.StartsWith("R2V"))
                 {
-                    if (MessageBox.Show("O Outro Jogador Requisitou Uma Partida De Um Jogo Carregado," + Environment.NewLine + "Você Aceita Jogar Uma 'Nova' Partida?", "Pesponda a pergunta:", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    //if (MessageBox.Show("O Outro Jogador Requisitou Uma Partida De Um Jogo Carregado," + Environment.NewLine + "Você Aceita Jogar Uma 'Nova' Partida?", T_TITULO_Responda_a_pergunta, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (MessageBox.Show(T_mBox12 + Environment.NewLine + T_mBox13, T_TITULO_Responda_a_pergunta, MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         if (Mensagem.StartsWith("R2A"))
                         {
@@ -610,8 +616,8 @@ namespace Xadrez
 
                     ImportandoXadrezClass.PlayerDoUsuario = 3;
 ;
-                    textBoxChat.Text += "Perdeu-se A Conexão Com O Outro Jogador," + Environment.NewLine +
-                        "Espere Ele Reconectar-se Para Jogar;" + Environment.NewLine;
+                    textBoxChat.Text += T_CHAT__Perdeu_se_A_Conexão_Com_O_Outro_Jogador + Environment.NewLine + //"Perdeu-se A Conexão Com O Outro Jogador," + Environment.NewLine +
+                        T_CHAT__Espere_Ele_Reconectar_se_Para_Jogar + Environment.NewLine;//"Espere Ele Reconectar-se Para Jogar;" + Environment.NewLine;
                 }
                 if (ClientEstaConectadoComHost == true)
                 {
@@ -621,7 +627,7 @@ namespace Xadrez
                     ThreadComunica_seComHost.Abort();
                     ImportandoXadrezClass.PlayerDoUsuario = 3;
 
-                    textBoxChat.Text += "Você Perdeu A Conexão Com O Servidor;" + Environment.NewLine;
+                    textBoxChat.Text += T_CHAT__Voce_Perdeu_A_Conexao_Com_O_Servidor + Environment.NewLine; //"Você Perdeu A Conexão Com O Servidor;" + Environment.NewLine;
                 }
 
             }
@@ -658,8 +664,8 @@ namespace Xadrez
                     //textBoxChat.Text += "Perdeu-se A Conexão Com O Outro Jogador," + Environment.NewLine + 
                     //    "Espere Ele Reconectar-se Para Jogar;" + Environment.NewLine;
 
-                    SetControlPropertyValue(textBoxChat, "Text", textBoxChat.Text + "Perdeu-se A Conexão Com O Outro Jogador," + Environment.NewLine +
-                        "Espere Ele Reconectar-se Para Jogar;" + Environment.NewLine);
+                    SetControlPropertyValue(textBoxChat, "Text", textBoxChat.Text + T_CHAT__Perdeu_se_A_Conexão_Com_O_Outro_Jogador + Environment.NewLine + //"Perdeu-se A Conexão Com O Outro Jogador," + Environment.NewLine +
+                        T_CHAT__Espere_Ele_Reconectar_se_Para_Jogar + Environment.NewLine); //"Espere Ele Reconectar-se Para Jogar;" + Environment.NewLine);
                 }
                 if (ClientEstaConectadoComHost == true)
                 {
@@ -670,7 +676,7 @@ namespace Xadrez
                     ImportandoXadrezClass.PlayerDoUsuario = 3;
 
                     //textBoxChat.Text += "Você Perdeu A Conexão Com O Servidor;" + Environment.NewLine;
-                    SetControlPropertyValue(textBoxChat, "Text", textBoxChat.Text + "Você Perdeu A Conexão Com O Servidor;" + Environment.NewLine);
+                    SetControlPropertyValue(textBoxChat, "Text", textBoxChat.Text + T_CHAT__Voce_Perdeu_A_Conexao_Com_O_Servidor + Environment.NewLine); //"Você Perdeu A Conexão Com O Servidor;" + Environment.NewLine);
                 }
 
                 return false;
@@ -733,6 +739,9 @@ namespace Xadrez
 
             HouveEmpateMessageBox = false;
             XequemateMessageBox = false;
+
+            ImportandoXadrezClass.TemCasaSelecionada = false;
+            ImportandoXadrezClass.ColoqueiAPessaEmUmaCasa = false;
 
         }
 

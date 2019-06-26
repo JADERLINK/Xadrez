@@ -130,12 +130,12 @@ namespace Xadrez
 
                 if (RivalDoPlayer == 1)
                 {
-                    labelInfoRei = "Jogador Azul Esta Em Xeque";
+                    labelInfoRei = T_Jogador_Azul_Esta_Em_Xeque; //"Jogador Azul Esta Em Xeque";
                     labelInfoReiColor = CORES_AZUL;
                 }
                 else
                 {
-                    labelInfoRei = "Jogador Verde Esta Em Xeque";
+                    labelInfoRei = T_Jogador_Verde_Esta_Em_Xeque; //"Jogador Verde Esta Em Xeque";
                     labelInfoReiColor = CORES_VERDE;
                 }
                 
@@ -759,12 +759,12 @@ namespace Xadrez
 
                     if (Player == 1)
                     {
-                        labelInfoRei = "Jogador Azul Venceu O Jogo";
+                        labelInfoRei = T_Jogador_Azul_Venceu_O_Jogo; //"Jogador Azul Venceu O Jogo";
                         labelInfoReiColor = CORES_AZUL;
                     }
                     else
                     {
-                        labelInfoRei = "Jogador Verde Venceu O Jogo";
+                        labelInfoRei = T_Jogador_Verde_Venceu_O_Jogo; //"Jogador Verde Venceu O Jogo";
                         labelInfoReiColor = CORES_VERDE;
                     }
 

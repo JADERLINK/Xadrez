@@ -1956,7 +1956,7 @@ namespace Xadrez
                     // none
                     break;
                 default:
-                    Console.WriteLine("n foi setado nenhuma coluna/linha/diagonal");
+                    //Console.WriteLine("n foi setado nenhuma coluna/linha/diagonal");
                     break;
 
             }

@@ -1,0 +1,178 @@
+﻿// SimplesINI, sistema simples de ini feito por mim JADERLINK
+// use // para ignorar a linha
+// cada string tem que estar em uma linha
+// <key> = <string>
+// as keys podem estar disposta em qualquer ondem
+// os espaços nos começos e fins das frases serão ignorados
+// nota: a mesma key não pode aparecer mais de uma vez
+///////////////////////////////////////
+TranslatedBy = Traduzido Por: Coloque seu nome aqui.
+// menus:
+001 = Menu
+002 = Jogo Online
+003 = Config
+004 = Créditos
+005 = Concluir Jogada
+006 = Nova partida
+007 = Salvar Como..
+008 = Carregar Para Jogar
+009 = Carregar Para Editar
+010 = Editar Novo Jogo
+011 = Sair
+012 = Hostear Partida
+013 = Conectar Na Partida
+014 = Desconectar
+015 = Requisitar Nova Partida
+016 = Requisitar Jogo Carregado
+017 = Requisitar Dados Do Tabuleiro
+018 = Cor Nos Nomes
+019 = Nomes/Imagens
+020 = Auto Concluir Jogada
+021 = Descrição No Tabuleiro
+022 = Info De Debug
+023 = Testar Tabuleiro (Debug)
+145 = Inverter Tabuleiro
+146 = Se Envia Meus Movimentos
+// botões
+024 = Concluir Jogada
+025 = Hostear
+026 = Conectar
+// radio button
+027 = Carregar Partida
+028 = Nova Partida
+029 = Selecionar e editar
+030 = Subistituir
+// group box
+031 = Modo De Edição
+032 = Peça:
+033 = Geral:
+// labels
+034 = Escolha no que o peão vai virar
+035 = Jogador:
+036 = Selecione A Peça.
+037 = A Peça Ja Foi Movida?
+038 = Em Qual Rodada A Peça Foi Mexida?
+039 = Peão Andou Duas Casas?
+040 = Direção Do Peão.
+041 = Player Atual.
+042 = Em Qual Rodada O Player Esta Jogando?
+043 = Info Dos Botões:
+044 = Host:
+045 = Conectar:
+046 = IP:
+047 = DOOR:
+048 = IP:
+049 = DOOR:
+// strings
+// caixas de escolhas 
+050 = Rainha
+051 = Torre
+052 = Bispo
+053 = Cavalo
+054 = Vazio
+055 = False
+056 = True
+057 = Pra Cima
+058 = Pra Baixo
+059 = Pra Direita
+060 = Pra Esquerda
+061 = Player Azul
+062 = Player Verde
+// resto dos menus
+063 = Colocar Texto Preto
+064 = Colocar Texto Colorido
+065 = Colocar nomes nas casas
+066 = Colocar imagem nas casas
+067 = Ativar Função
+068 = Desativar Função
+069 = Desativar Popup
+070 = Ativar Popup
+071 = Ativar Info De Debug
+072 = Desativar Info De Debug
+073 = Ativar Teste Do Tabuleiro
+074 = Desativar Teste Do Tabuleiro
+147 = Não Enviar Meus Movimentos
+148 = Enviar Meus Movimentos
+// strigs do tabuleiro
+075 = Peão Verde
+076 = Torre Verde
+077 = Cavalo Verde
+078 = Bispo Verde
+079 = Rei Verde
+080 = Rainha Verde
+081 = Peão Azul
+082 = Torre Azul
+083 = Cavalo Azul
+084 = Bispo Azul
+085 = Rei Azul
+086 = Rainha Azul
+087 = [Selec]
+088 = [Aqui]
+089 = [Pode]
+090 = [Roque]
+091 = [En Pasant]
+092 = Azul
+093 = Verde
+094 = [Xeque]
+095 = [CAVALO]
+096 = [BAIXO]
+097 = [CIMA]
+098 = [DIREITA]
+099 = [ESQUERDA]
+100 = [DIREITA BAIXO]
+101 = [DIREITA CIMA]
+102 = [ESQUERDA BAIXO]
+103 = [ESQUERDA CIMA]
+// descrição
+104 = Peça Selecionada
+105 = Colocar Peça Aqui
+106 = Pode Ser Colocado Aqui
+107 = Pode Fazer Roque
+108 = Pode Fazer En Pasant
+109 = Você Fica Em Xeque, Não
+// nota: 109 + 106 ou 109 + 107 ou 109 + 108, 
+// E 106, 107 e 108 são usados separadamentes
+110 = Casa Selecionada
+// em baixo do tabuleiro 
+111 = Jogador Azul Esta Em Xeque
+112 = Jogador Verde Esta Em Xeque
+113 = O Jogo Empatou
+114 = Jogador Azul Venceu O Jogo
+115 = Jogador Verde Venceu O Jogo
+// textos que vão no chat
+116 = Conectado com o servidor;
+117 = Desconectado do servidor;
+118 = Você perdeu a conexão com o servidor;
+119 = Servidor iniciado, espere o outro jogador para jogar;
+120 = O outro jogador entrou;
+121 = Um novo jogador entrou;
+122 = Servidor parado;
+123 = Perdeu-se a conexão com o outro jogador,
+124 = espere ele reconectar-se para continuar a partida;
+// nota: 123 + 124, um texto so, dividido em 2 linhas
+// messageBox titulos
+125 = Erro:
+126 = Responda a pergunta:
+127 = Fim De Jogo
+128 = Créditos:
+// conteudo das messsageBox
+129 = Você não pode salvar um jogo com Xeque-mate.
+130 = Você não pode salvar um jogo sem que tenha pelo menos um rei azul e um rei verde.
+131 = Você não pode salvar um jogo que tenha mais de um rei azul ou de um rei verde.
+132 = Erro: o arquivo não é do tipo adeguando ou está conrompido
+133 = Você realmente deseja requisitar uma nova partida?
+134 = Você realmente deseja requisitar os dados do tabuleiro do outro jogador?
+135 = Somente faça isso caso os dois jogadores estejam incapacitados de jogar.
+// 134 e 135 fazem parte da mesma messageBox
+136 = IP incorreto, digite um IP valido.
+137 = IP incorreto, ou não pôde conectar-se com o IP.
+138 = O Outro Jogador Requisitou Uma Nova Partida,
+139 = Você Aceita Jogar Uma Nova Partida?
+// 138 e 139 fazem parte da mesma messageBox
+140 = O Outro Jogador Requisitou Uma Partida De Um Jogo Carregado,
+141 = Você Aceita Jogar Uma 'Nova' Partida?
+// 140 e 141 fazem parte da mesma messageBox
+142 = O Jogo Empatou
+143 = Fim De Jogo, Jogador Azul Venceu
+144 = Fim De Jogo, Jogador Verde Venceu
+// END

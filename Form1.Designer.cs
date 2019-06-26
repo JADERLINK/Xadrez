@@ -53,7 +53,9 @@
             this.oNOFFToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.autoConcluirJogadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oNOFFToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.descriçãoNoTabuleiroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inverterTabuleiroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.oNOFFToolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.descricaoNoTabuleiroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oNOFFToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.infoDeDebugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oNOFFToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
@@ -196,6 +198,9 @@
             this.textBoxClientIP = new System.Windows.Forms.TextBox();
             this.numericUpDownClientDoor = new System.Windows.Forms.NumericUpDown();
             this.buttonConectar = new System.Windows.Forms.Button();
+            this.enviaEscolhaDeJogadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.oNOFFToolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panelTabuleiro.SuspendLayout();
             this.panelJogoNormal.SuspendLayout();
@@ -295,7 +300,9 @@
             this.toolStripSeparator1,
             this.requisitarNovaPartidaToolStripMenuItem,
             this.requisitarJogoCarregadoToolStripMenuItem,
-            this.requisitarDadosDoTabuleiroToolStripMenuItem});
+            this.requisitarDadosDoTabuleiroToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.enviaEscolhaDeJogadaToolStripMenuItem});
             this.jogoOnlineToolStripMenuItem.Name = "jogoOnlineToolStripMenuItem";
             this.jogoOnlineToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
             this.jogoOnlineToolStripMenuItem.Text = "Jogo Online";
@@ -353,7 +360,8 @@
             this.corNosNomesToolStripMenuItem,
             this.nomesImagensToolStripMenuItem,
             this.autoConcluirJogadaToolStripMenuItem,
-            this.descriçãoNoTabuleiroToolStripMenuItem,
+            this.inverterTabuleiroToolStripMenuItem,
+            this.descricaoNoTabuleiroToolStripMenuItem,
             this.infoDeDebugToolStripMenuItem,
             this.testarTabuleiroDebugToolStripMenuItem});
             this.configToolStripMenuItem.Name = "configToolStripMenuItem";
@@ -405,13 +413,28 @@
             this.oNOFFToolStripMenuItem2.Text = "ON-OFF";
             this.oNOFFToolStripMenuItem2.Click += new System.EventHandler(this.oNOFFToolStripMenuItem2_Click);
             // 
-            // descriçãoNoTabuleiroToolStripMenuItem
+            // inverterTabuleiroToolStripMenuItem
             // 
-            this.descriçãoNoTabuleiroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.inverterTabuleiroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.oNOFFToolStripMenuItem6});
+            this.inverterTabuleiroToolStripMenuItem.Name = "inverterTabuleiroToolStripMenuItem";
+            this.inverterTabuleiroToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.inverterTabuleiroToolStripMenuItem.Text = "Inverter Tabuleiro";
+            // 
+            // oNOFFToolStripMenuItem6
+            // 
+            this.oNOFFToolStripMenuItem6.Name = "oNOFFToolStripMenuItem6";
+            this.oNOFFToolStripMenuItem6.Size = new System.Drawing.Size(118, 22);
+            this.oNOFFToolStripMenuItem6.Text = "ON_OFF";
+            this.oNOFFToolStripMenuItem6.Click += new System.EventHandler(this.oNOFFToolStripMenuItem6_Click);
+            // 
+            // descricaoNoTabuleiroToolStripMenuItem
+            // 
+            this.descricaoNoTabuleiroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.oNOFFToolStripMenuItem3});
-            this.descriçãoNoTabuleiroToolStripMenuItem.Name = "descriçãoNoTabuleiroToolStripMenuItem";
-            this.descriçãoNoTabuleiroToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.descriçãoNoTabuleiroToolStripMenuItem.Text = "Descrição No Tabuleiro";
+            this.descricaoNoTabuleiroToolStripMenuItem.Name = "descricaoNoTabuleiroToolStripMenuItem";
+            this.descricaoNoTabuleiroToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.descricaoNoTabuleiroToolStripMenuItem.Text = "Descrição No Tabuleiro";
             // 
             // oNOFFToolStripMenuItem3
             // 
@@ -2220,6 +2243,7 @@
             this.textBoxHostIP.Name = "textBoxHostIP";
             this.textBoxHostIP.Size = new System.Drawing.Size(162, 20);
             this.textBoxHostIP.TabIndex = 1;
+            this.textBoxHostIP.TextChanged += new System.EventHandler(this.textBoxHostIP_TextChanged);
             // 
             // labelTraduz013
             // 
@@ -2276,6 +2300,7 @@
             this.textBoxClientIP.Name = "textBoxClientIP";
             this.textBoxClientIP.Size = new System.Drawing.Size(162, 20);
             this.textBoxClientIP.TabIndex = 1;
+            this.textBoxClientIP.TextChanged += new System.EventHandler(this.textBoxClientIP_TextChanged);
             // 
             // numericUpDownClientDoor
             // 
@@ -2308,6 +2333,26 @@
             this.buttonConectar.Text = "Conectar";
             this.buttonConectar.UseVisualStyleBackColor = true;
             this.buttonConectar.Click += new System.EventHandler(this.buttonConectar_Click);
+            // 
+            // enviaEscolhaDeJogadaToolStripMenuItem
+            // 
+            this.enviaEscolhaDeJogadaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.oNOFFToolStripMenuItem7});
+            this.enviaEscolhaDeJogadaToolStripMenuItem.Name = "enviaEscolhaDeJogadaToolStripMenuItem";
+            this.enviaEscolhaDeJogadaToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.enviaEscolhaDeJogadaToolStripMenuItem.Text = "Se Envia Meus Movimentos";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(230, 6);
+            // 
+            // oNOFFToolStripMenuItem7
+            // 
+            this.oNOFFToolStripMenuItem7.Name = "oNOFFToolStripMenuItem7";
+            this.oNOFFToolStripMenuItem7.Size = new System.Drawing.Size(180, 22);
+            this.oNOFFToolStripMenuItem7.Text = "ON_OFF";
+            this.oNOFFToolStripMenuItem7.Click += new System.EventHandler(this.oNOFFToolStripMenuItem7_Click);
             // 
             // Form1
             // 
@@ -2377,7 +2422,7 @@
         private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem autoConcluirJogadaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem descriçãoNoTabuleiroToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem descricaoNoTabuleiroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem infoDeDebugToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem4;
@@ -2543,6 +2588,11 @@
         private System.Windows.Forms.ToolStripMenuItem requisitarDadosDoTabuleiroToolStripMenuItem;
         private System.Windows.Forms.Label labelTtraduz020;
         private System.Windows.Forms.Panel panelComOsRadiosDaPartida;
+        private System.Windows.Forms.ToolStripMenuItem inverterTabuleiroToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem6;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem enviaEscolhaDeJogadaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem oNOFFToolStripMenuItem7;
     }
 }
 

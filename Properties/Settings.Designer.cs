@@ -22,5 +22,137 @@ namespace Xadrez.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool TextoDasCasasColorido {
+            get {
+                return ((bool)(this["TextoDasCasasColorido"]));
+            }
+            set {
+                this["TextoDasCasasColorido"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ColocarImagensNasCasas {
+            get {
+                return ((bool)(this["ColocarImagensNasCasas"]));
+            }
+            set {
+                this["ColocarImagensNasCasas"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoConcluirJogadaOn {
+            get {
+                return ((bool)(this["AutoConcluirJogadaOn"]));
+            }
+            set {
+                this["AutoConcluirJogadaOn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MostrarPopupDasCasas {
+            get {
+                return ((bool)(this["MostrarPopupDasCasas"]));
+            }
+            set {
+                this["MostrarPopupDasCasas"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool VerInfoDeDebug {
+            get {
+                return ((bool)(this["VerInfoDeDebug"]));
+            }
+            set {
+                this["VerInfoDeDebug"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool TestarTabuleiroDebug {
+            get {
+                return ((bool)(this["TestarTabuleiroDebug"]));
+            }
+            set {
+                this["TestarTabuleiroDebug"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InverterTabuleiro {
+            get {
+                return ((bool)(this["InverterTabuleiro"]));
+            }
+            set {
+                this["InverterTabuleiro"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte IdDaPessaQueOPeaoVaiVirar {
+            get {
+                return ((byte)(this["IdDaPessaQueOPeaoVaiVirar"]));
+            }
+            set {
+                this["IdDaPessaQueOPeaoVaiVirar"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string HostIP {
+            get {
+                return ((string)(this["HostIP"]));
+            }
+            set {
+                this["HostIP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ClientIP {
+            get {
+                return ((string)(this["ClientIP"]));
+            }
+            set {
+                this["ClientIP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SeEnviaMovimentosDeJogada {
+            get {
+                return ((bool)(this["SeEnviaMovimentosDeJogada"]));
+            }
+            set {
+                this["SeEnviaMovimentosDeJogada"] = value;
+            }
+        }
     }
 }

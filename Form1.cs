@@ -16,6 +16,7 @@ using System.Reflection;
 
 namespace Xadrez
 {
+
     public partial class Form1 : Form
     {
 
@@ -32,6 +33,10 @@ namespace Xadrez
         public bool MostrarPopupDasCasas;
 
         public bool VerInfoDeDebug;
+
+        public bool InverterTabuleiro;
+
+        public bool SeEnviaMovimentosDeJogada;
 
         // carregar pra jogar 
         public bool CarregarPraJogar;
@@ -52,7 +57,79 @@ namespace Xadrez
         public bool HouveEmpateMessageBox;
         public bool XequemateMessageBox;
 
+        // string para traduzir o jogo
+        // combo box
+        string T_Rainha = "Rainha";
+        string T_Torre = "Torre";
+        string T_Bispo = "Bispo";
+        string T_Cavalo = "Cavalo";
+        string T_Vazio = "Vazio";
+        string T_False = "False";
+        string T_True = "True";
+        string T_Pra_Cima = "Pra Cima";
+        string T_Pra_Baixo = "Pra Baixo";
+        string T_Pra_Direita = "Pra Direita";
+        string T_Pra_Esquerda = "Pra Esquerda";
+        string T_Player_Azul = "Player Azul";
+        string T_Player_Verde = "Player Verde";
+        // resto dos menus
+        string T_Colocar_Texto_Preto = "Colocar Texto Preto";
+        string T_Colocar_Texto_Colorido = "Colocar Texto Colorido";
+        string T_Colocar_Nomes_Nas_Casas = "Colocar nomes nas casas";
+        string T_Colocar_Imagem_Nas_Casas = "Colocar imagem nas casas";
+        string T_Ativar_Funcao = "Ativar Função";
+        string T_Desativar_Funcao = "Desativar Função";
+        string T_Desativar_Popup = "Desativar Popup";
+        string T_Ativar_Popup = "Ativar Popup";
+        string T_Ativar_Info_De_Debug = "Ativar Info De Debug";
+        string T_Desativar_Info_De_Debug = "Desativar Info De Debug";
+        string T_Ativar_Teste_Do_Tabuleiro = "Ativar Teste Do Tabuleiro";
+        string T_Desativar_Teste_Do_Tabuleiro = "Desativar Teste Do Tabuleiro";
+        // novo
+        string T_Nao_Enviar_Meus_Movimentos = "Não Enviar Meus Movimentos";
+        string T_Enviar_Meus_Movimentos = "Enviar Meus Movimentos";
 
+        // textos que vão no chat
+        string T_CHAT__Conectado_Com_O_Servidor = "Conectado com o servidor;";
+        string T_CHAT__Desconectado_Do_Servidor = "Desconectado do servidor;";
+        string T_CHAT__Voce_Perdeu_A_Conexao_Com_O_Servidor = "Você perdeu a conexão com o servidor;";
+        string T_CHAT__Servidor_Iniciado = "Servidor iniciado, espere o outro jogador para jogar;";
+        string T_CHAT__O_Outro_Jogador_Entrou = "O outro jogador entrou;";
+        string T_CHAT__Um_Novo_Jogador_Entrou = "Um novo jogador entrou;";
+        string T_CHAT__Servidor_Parado = "Servidor parado;";
+        string T_CHAT__Perdeu_se_A_Conexão_Com_O_Outro_Jogador = "Perdeu-se a conexão com o outro jogador,";
+        string T_CHAT__Espere_Ele_Reconectar_se_Para_Jogar = "espere ele reconectar-se para continuar a partida;";
+
+
+        // textos nas messageBox
+        //titulos
+        string T_TITULO_ERRO = "Erro:";
+        string T_TITULO_Responda_a_pergunta = "Responda a pergunta:";
+        string T_TITULO_Fim_De_Jogo = "Fim De Jogo";
+        string T_TITULO_CREDITOS = "Créditos:";
+
+        // messsageBox
+        string T_mBox01 = "Você não pode salvar um jogo com Xeque-mate.";
+        string T_mBox02 = "Você não pode salvar um jogo sem que tenha pelo menos um rei azul e um rei verde.";
+        string T_mBox03 = "Você não pode salvar um jogo que tenha mais de um rei azul ou de um rei verde.";
+        string T_mBox04 = "Erro: o arquivo não é do tipo adeguando ou está conrompido";
+        string T_mBox05 = "Você realmente deseja requisitar uma nova partida?";
+        string T_mBox06 = "Você realmente deseja requisitar os dados do tabuleiro do outro jogador?";
+        string T_mBox07 = "Somente faça isso caso os dois jogadores estejam incapacitados de jogar.";
+        string T_mBox08 = "IP incorreto, digite um IP valido.";
+        string T_mBox09 = "IP incorreto, ou não pôde conectar-se com o IP.";
+        string T_mBox10 = "O Outro Jogador Requisitou Uma Nova Partida,";
+        string T_mBox11 = "Você Aceita Jogar Uma Nova Partida?";
+        string T_mBox12 = "O Outro Jogador Requisitou Uma Partida De Um Jogo Carregado,";
+        string T_mBox13 = "Você Aceita Jogar Uma 'Nova' Partida?";
+        string T_mBox14 = "O Jogo Empatou";
+        string T_mBox15 = "Fim De Jogo, Jogador Azul Venceu";
+        string T_mBox16 = "Fim De Jogo, Jogador Verde Venceu";
+
+
+        string T_Translated_By = "";
+
+        // fim das string
 
         public Form1()
         {
@@ -65,6 +142,51 @@ namespace Xadrez
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // carrega as configurações do usuario
+
+            try
+            {
+                TextoDasCasasColorido = Properties.Settings.Default.TextoDasCasasColorido;
+                ColocarImagensNasCasas = Properties.Settings.Default.ColocarImagensNasCasas;
+                AutoConcluirJogadaOn = Properties.Settings.Default.AutoConcluirJogadaOn;
+                MostrarPopupDasCasas = Properties.Settings.Default.MostrarPopupDasCasas;
+                VerInfoDeDebug = Properties.Settings.Default.VerInfoDeDebug;
+                ImportandoXadrezClass.TestarTabuleiroDebug = Properties.Settings.Default.TestarTabuleiroDebug;
+                InverterTabuleiro = Properties.Settings.Default.InverterTabuleiro;
+                SeEnviaMovimentosDeJogada = Properties.Settings.Default.SeEnviaMovimentosDeJogada;
+                ImportandoXadrezClass.IdDaPessaQueOPeaoVaiVirar = Properties.Settings.Default.IdDaPessaQueOPeaoVaiVirar;
+                textBoxClientIP.Text = Properties.Settings.Default.ClientIP;
+                textBoxHostIP.Text = Properties.Settings.Default.HostIP;
+            }
+            catch (Exception)
+            {
+                TextoDasCasasColorido = true;
+                ColocarImagensNasCasas = true;
+                AutoConcluirJogadaOn = false;
+                MostrarPopupDasCasas = true;
+                VerInfoDeDebug = false;
+                ImportandoXadrezClass.TestarTabuleiroDebug = false;
+                InverterTabuleiro = false;
+                SeEnviaMovimentosDeJogada = true;
+                ImportandoXadrezClass.IdDaPessaQueOPeaoVaiVirar = 0;
+                textBoxClientIP.Text = "";
+                textBoxHostIP.Text = "";
+            }
+
+            //carrega modificações
+            CarregaLanguage();
+            CarregaCores();
+            CarregaImagens();
+
+            // ///
+
+            // QUANDO ABRIR O PROGRAMA JA VAI TER UMA NOVA PARTIDA
+            ImportandoXadrezClass.IniciandoNovaPartida();
+            ImportandoXadrezClass.NomeDosBotoesPeloValorDaPessa();
+
+
+
+            // ///
             requisitarJogoCarregadoToolStripMenuItem.Enabled = false;
             requisitarNovaPartidaToolStripMenuItem.Enabled = false;
             requisitarDadosDoTabuleiroToolStripMenuItem.Enabled = false;
@@ -89,49 +211,236 @@ namespace Xadrez
             ImportandoXadrezClass.labelInfoRei = "";
             ImportandoXadrezClass.IdNunericoParaNomeMetodo();
             ImportandoXadrezClass.DescricaoDosBotoesDebugMetodo();
+            ImportandoXadrezClass.DescricaoDosBotoesMetodo();
             toolTipDescricaoDasCasas.SetToolTip(numericUpDownInfoDebug, ImportandoXadrezClass.DescricaoDosBotoesDebug[64]);
 
-            // QUANDO ABRIR O PROGRAMA JA VAI TER UMA NOVA PARTIDA
-            ImportandoXadrezClass.IniciandoNovaPartida();
-            
-            // colocar imagem, e nomes coloridos
-            RenomearNomeDosBotoesDoTabuleiroSemTexto();
-            MudarCorDoTextoDasCasasColorido();
-            ComImagensNasCasas();
 
+            // seta as coisas conforme config do user
+
+            if (TextoDasCasasColorido == true)
+            {
+                oNOFFToolStripMenuItem.Text = T_Colocar_Texto_Preto; //"Colocar Texto Preto";
+                MudarCorDoTextoDasCasasColorido();
+            }
+            else
+            {
+                oNOFFToolStripMenuItem.Text = T_Colocar_Texto_Colorido;
+                MudarCorDoTextoDasCasasPreto();
+            }
+
+            if (ColocarImagensNasCasas == true)
+            {
+                oNOFFToolStripMenuItem1.Text = T_Colocar_Nomes_Nas_Casas; //"Colocar nomes nas casas";
+                ComImagensNasCasas();
+                RenomearNomeDosBotoesDoTabuleiroSemTexto();
+            }
+            else
+            {
+                oNOFFToolStripMenuItem1.Text = T_Colocar_Imagem_Nas_Casas;
+                SemImagensNasCasas();
+                RenomearNomeDosBotoesDoTabuleiro();
+            }
+
+            if (AutoConcluirJogadaOn == true)
+            {
+                oNOFFToolStripMenuItem2.Text = T_Desativar_Funcao;
+                ImportandoXadrezClass.AutoConcluirJogada = true;
+
+            }
+            else
+            {
+                oNOFFToolStripMenuItem2.Text = T_Ativar_Funcao; //"Ativar Função";
+                ImportandoXadrezClass.AutoConcluirJogada = false;
+            }
+
+            if (MostrarPopupDasCasas == true)
+            {
+                oNOFFToolStripMenuItem3.Text = T_Desativar_Popup; //"Desativar Popup";
+                toolTipDescricaoDasCasas.Active = true;
+            }
+            else
+            {
+                oNOFFToolStripMenuItem3.Text = T_Ativar_Popup;
+                toolTipDescricaoDasCasas.Active = false;
+            }
+
+            if (VerInfoDeDebug == true)
+            {
+                oNOFFToolStripMenuItem4.Text = T_Desativar_Info_De_Debug;
+                DescricaoDosBotoesDebug();
+            }
+            else
+            {
+                oNOFFToolStripMenuItem4.Text = T_Ativar_Info_De_Debug; //"Ativar Info De Debug";
+                DescricaoDosBotoes();
+            }
+
+            ImportandoXadrezClass.TemCasaSelecionada = false;
+            ImportandoXadrezClass.ColoqueiAPessaEmUmaCasa = false;
+
+            if (ImportandoXadrezClass.TestarTabuleiroDebug == true)
+            {
+                oNOFFToolStripMenuItem5.Text = T_Desativar_Teste_Do_Tabuleiro;
+            }
+            else
+            {
+                oNOFFToolStripMenuItem5.Text = T_Ativar_Teste_Do_Tabuleiro; //"Ativar Teste Do Tabuleiro";
+            }
+
+            if (InverterTabuleiro == true)
+            {
+                oNOFFToolStripMenuItem6.Text = T_Ativar_Funcao; //T_Desativar_Funcao;
+
+                comboBoxDirecaoDoPeao.Items.Add(T_Pra_Baixo);
+                comboBoxDirecaoDoPeao.Items.Add(T_Pra_Cima);
+                comboBoxDirecaoDoPeao.Items.Add(T_Pra_Direita);
+                comboBoxDirecaoDoPeao.Items.Add(T_Pra_Esquerda);
+
+                labelDisplay1.Text = "8";
+                labelDisplay2.Text = "7";
+                labelDisplay3.Text = "6";
+                labelDisplay4.Text = "5";
+                labelDisplay5.Text = "4";
+                labelDisplay6.Text = "3";
+                labelDisplay7.Text = "2";
+                labelDisplay8.Text = "1";
+
+                button1A.Location = new Point(button1A.Location.X, 490);
+                button1B.Location = new Point(button1B.Location.X, 490);
+                button1C.Location = new Point(button1C.Location.X, 490);
+                button1D.Location = new Point(button1D.Location.X, 490);
+                button1E.Location = new Point(button1E.Location.X, 490);
+                button1F.Location = new Point(button1F.Location.X, 490);
+                button1G.Location = new Point(button1G.Location.X, 490);
+                button1H.Location = new Point(button1H.Location.X, 490);
+                //
+                button2A.Location = new Point(button2A.Location.X, 420);
+                button2B.Location = new Point(button2B.Location.X, 420);
+                button2C.Location = new Point(button2C.Location.X, 420);
+                button2D.Location = new Point(button2D.Location.X, 420);
+                button2E.Location = new Point(button2E.Location.X, 420);
+                button2F.Location = new Point(button2F.Location.X, 420);
+                button2G.Location = new Point(button2G.Location.X, 420);
+                button2H.Location = new Point(button2H.Location.X, 420);
+                //
+                button3A.Location = new Point(button3A.Location.X, 350);
+                button3B.Location = new Point(button3B.Location.X, 350);
+                button3C.Location = new Point(button3C.Location.X, 350);
+                button3D.Location = new Point(button3D.Location.X, 350);
+                button3E.Location = new Point(button3E.Location.X, 350);
+                button3F.Location = new Point(button3F.Location.X, 350);
+                button3G.Location = new Point(button3G.Location.X, 350);
+                button3H.Location = new Point(button3H.Location.X, 350);
+                //
+                button4A.Location = new Point(button4A.Location.X, 280);
+                button4B.Location = new Point(button4B.Location.X, 280);
+                button4C.Location = new Point(button4C.Location.X, 280);
+                button4D.Location = new Point(button4D.Location.X, 280);
+                button4E.Location = new Point(button4E.Location.X, 280);
+                button4F.Location = new Point(button4F.Location.X, 280);
+                button4G.Location = new Point(button4G.Location.X, 280);
+                button4H.Location = new Point(button4H.Location.X, 280);
+                //
+                button5A.Location = new Point(button5A.Location.X, 210);
+                button5B.Location = new Point(button5B.Location.X, 210);
+                button5C.Location = new Point(button5C.Location.X, 210);
+                button5D.Location = new Point(button5D.Location.X, 210);
+                button5E.Location = new Point(button5E.Location.X, 210);
+                button5F.Location = new Point(button5F.Location.X, 210);
+                button5G.Location = new Point(button5G.Location.X, 210);
+                button5H.Location = new Point(button5H.Location.X, 210);
+                //
+                button6A.Location = new Point(button6A.Location.X, 140);
+                button6B.Location = new Point(button6B.Location.X, 140);
+                button6C.Location = new Point(button6C.Location.X, 140);
+                button6D.Location = new Point(button6D.Location.X, 140);
+                button6E.Location = new Point(button6E.Location.X, 140);
+                button6F.Location = new Point(button6F.Location.X, 140);
+                button6G.Location = new Point(button6G.Location.X, 140);
+                button6H.Location = new Point(button6H.Location.X, 140);
+                //
+                button7A.Location = new Point(button7A.Location.X, 70);
+                button7B.Location = new Point(button7B.Location.X, 70);
+                button7C.Location = new Point(button7C.Location.X, 70);
+                button7D.Location = new Point(button7D.Location.X, 70);
+                button7E.Location = new Point(button7E.Location.X, 70);
+                button7F.Location = new Point(button7F.Location.X, 70);
+                button7G.Location = new Point(button7G.Location.X, 70);
+                button7H.Location = new Point(button7H.Location.X, 70);
+                //
+                button8A.Location = new Point(button8A.Location.X, 0);
+                button8B.Location = new Point(button8B.Location.X, 0);
+                button8C.Location = new Point(button8C.Location.X, 0);
+                button8D.Location = new Point(button8D.Location.X, 0);
+                button8E.Location = new Point(button8E.Location.X, 0);
+                button8F.Location = new Point(button8F.Location.X, 0);
+                button8G.Location = new Point(button8G.Location.X, 0);
+                button8H.Location = new Point(button8H.Location.X, 0);
+                // END
+            }
+            else
+            {
+                oNOFFToolStripMenuItem6.Text = T_Desativar_Funcao; //T_Ativar_Funcao;
+
+                comboBoxDirecaoDoPeao.Items.Add(T_Pra_Cima);
+                comboBoxDirecaoDoPeao.Items.Add(T_Pra_Baixo);
+                comboBoxDirecaoDoPeao.Items.Add(T_Pra_Direita);
+                comboBoxDirecaoDoPeao.Items.Add(T_Pra_Esquerda);
+            }
+
+            if (SeEnviaMovimentosDeJogada == true)
+            {
+                oNOFFToolStripMenuItem7.Text = T_Nao_Enviar_Meus_Movimentos;
+            }
+            else
+            {
+                oNOFFToolStripMenuItem7.Text = T_Enviar_Meus_Movimentos;
+            }
+
+            // colocar imagem, e nomes coloridos
+            //RenomearNomeDosBotoesDoTabuleiroSemTexto();
+            //MudarCorDoTextoDasCasasColorido();
+            //ComImagensNasCasas();
+            /*
             TextoDasCasasColorido = true;
-            oNOFFToolStripMenuItem.Text = "Colocar Texto Preto";
+            oNOFFToolStripMenuItem.Text = T_Colocar_Texto_Preto; //"Colocar Texto Preto";
 
             ColocarImagensNasCasas = true;
-            oNOFFToolStripMenuItem1.Text = "Colocar nomes nas casas";
+            oNOFFToolStripMenuItem1.Text = T_Colocar_Nomes_Nas_Casas; //"Colocar nomes nas casas";
 
             AutoConcluirJogadaOn = false;
-            oNOFFToolStripMenuItem2.Text = "Ativar Função";
+            oNOFFToolStripMenuItem2.Text = T_Ativar_Funcao; //"Ativar Função";
 
             MostrarPopupDasCasas = true;
-            oNOFFToolStripMenuItem3.Text = "Desativar Popup";
+            oNOFFToolStripMenuItem3.Text = T_Desativar_Popup; //"Desativar Popup";
 
             VerInfoDeDebug = false;
-            oNOFFToolStripMenuItem4.Text = "Ativar Info De Debug";
+            oNOFFToolStripMenuItem4.Text = T_Ativar_Info_De_Debug; //"Ativar Info De Debug";
 
             //Testar Tabuleiro(Debug)
             ImportandoXadrezClass.TestarTabuleiroDebug = false;
-            oNOFFToolStripMenuItem5.Text = "Ativar Teste Do Tabuleiro";
+            oNOFFToolStripMenuItem5.Text = T_Ativar_Teste_Do_Tabuleiro; //"Ativar Teste Do Tabuleiro";
+
+
+            // INVETER TABULEIRO
+            oNOFFToolStripMenuItem6.Text = T_Ativar_Funcao;
  
-            ImportandoXadrezClass.DescricaoDosBotoesMetodo();
             DescricaoDosBotoes();
+            */
+            //
+
 
             DarClickNoBotaoInfo();
 
             // configurando combo box do peão
 
-            comboBoxPeao.Items.Add("Rainha");
-            comboBoxPeao.Items.Add("Torre");
-            comboBoxPeao.Items.Add("Bispo");
-            comboBoxPeao.Items.Add("Cavalo");
-            comboBoxPeao.SelectedItem = "Rainha";
-            //ImportandoXadrezClass.IdDaPessaQueOPeaoVaiVirar = Convert.ToByte(comboBoxPeao.SelectedIndex);
-            ImportandoXadrezClass.IdDaPessaQueOPeaoVaiVirar = 0;
+            comboBoxPeao.Items.Add(T_Rainha);//("Rainha");
+            comboBoxPeao.Items.Add(T_Torre);//("Torre");
+            comboBoxPeao.Items.Add(T_Bispo);//("Bispo");
+            comboBoxPeao.Items.Add(T_Cavalo);//("Cavalo");
+            comboBoxPeao.SelectedIndex = ImportandoXadrezClass.IdDaPessaQueOPeaoVaiVirar;
+            //comboBoxPeao.SelectedIndex = 0; //comboBoxPeao.SelectedItem = "Rainha";
+            //ImportandoXadrezClass.IdDaPessaQueOPeaoVaiVirar = 0;
 
 
             panelJogoNormal.Show();
@@ -162,7 +471,7 @@ namespace Xadrez
             ImportandoXadrezClass.DirecaoDoPeaoValor = 0;
 
 
-            comboBoxPessaEscolhida.Items.Add("Vazio");
+            comboBoxPessaEscolhida.Items.Add(T_Vazio);//("Vazio");
             comboBoxPessaEscolhida.Items.Add(ImportandoXadrezClass.NomePA);
             comboBoxPessaEscolhida.Items.Add(ImportandoXadrezClass.NomeTA);
             comboBoxPessaEscolhida.Items.Add(ImportandoXadrezClass.NomeCA);
@@ -175,25 +484,26 @@ namespace Xadrez
             comboBoxPessaEscolhida.Items.Add(ImportandoXadrezClass.NomeBV);
             comboBoxPessaEscolhida.Items.Add(ImportandoXadrezClass.NomeREV);
             comboBoxPessaEscolhida.Items.Add(ImportandoXadrezClass.NomeRAV);
-            comboBoxPessaEscolhida.SelectedItem = "Vazio";
+            comboBoxPessaEscolhida.SelectedIndex = 0; //comboBoxPessaEscolhida.SelectedItem = "Vazio";
 
-            comboBoxAPessaJaFoiMovida.Items.Add("False");
-            comboBoxAPessaJaFoiMovida.Items.Add("True");
-            comboBoxAPessaJaFoiMovida.SelectedItem = "False";
 
-            comboBoxDirecaoDoPeao.Items.Add("Pra Cima");
-            comboBoxDirecaoDoPeao.Items.Add("Pra Baixo");
-            comboBoxDirecaoDoPeao.Items.Add("Pra Direita");
-            comboBoxDirecaoDoPeao.Items.Add("Pra Esquerda");
-            comboBoxDirecaoDoPeao.SelectedItem = "Pra Cima";
+            comboBoxAPessaJaFoiMovida.Items.Add(T_False);//("False");
+            comboBoxAPessaJaFoiMovida.Items.Add(T_True);//("True");
+            comboBoxAPessaJaFoiMovida.SelectedIndex = 0; //comboBoxAPessaJaFoiMovida.SelectedItem = "False";
 
-            comboBoxPeaoAndouDuasCasas.Items.Add("False");
-            comboBoxPeaoAndouDuasCasas.Items.Add("True");
-            comboBoxPeaoAndouDuasCasas.SelectedItem = "False";
+            //comboBoxDirecaoDoPeao.Items.Add(T_Pra_Cima);//("Pra Cima");
+            //comboBoxDirecaoDoPeao.Items.Add(T_Pra_Baixo);//("Pra Baixo");
+            //comboBoxDirecaoDoPeao.Items.Add(T_Pra_Direita);//("Pra Direita");
+            //comboBoxDirecaoDoPeao.Items.Add(T_Pra_Esquerda);//("Pra Esquerda");
+            comboBoxDirecaoDoPeao.SelectedIndex = 0; //comboBoxDirecaoDoPeao.SelectedItem = "Pra Cima";
 
-            comboBoxPlayerAtual.Items.Add("Player Azul");
-            comboBoxPlayerAtual.Items.Add("Player Verde");
-            comboBoxPlayerAtual.SelectedItem = "Player Azul";
+            comboBoxPeaoAndouDuasCasas.Items.Add(T_False);//("False");
+            comboBoxPeaoAndouDuasCasas.Items.Add(T_True);//("True");
+            comboBoxPeaoAndouDuasCasas.SelectedIndex = 0;  //comboBoxPeaoAndouDuasCasas.SelectedItem = "False";
+
+            comboBoxPlayerAtual.Items.Add(T_Player_Azul);//("Player Azul");
+            comboBoxPlayerAtual.Items.Add(T_Player_Verde);//("Player Verde");
+            comboBoxPlayerAtual.SelectedIndex = 0; //comboBoxPlayerAtual.SelectedItem = "Player Azul";
 
         }
 
@@ -669,10 +979,11 @@ namespace Xadrez
                 }
                 else
                 {
-                    if (ImportandoXadrezClass.Player == ImportandoXadrezClass.PlayerDoUsuario)
+                    if (ImportandoXadrezClass.Player == ImportandoXadrezClass.PlayerDoUsuario
+                        && SeEnviaMovimentosDeJogada == true)
                     {
                         EnviaAsinformacoesDoDisplayDeJogada();
-                    }                  
+                    }
                 }
              
                 //EnviaXequeMateOuEmpate();
@@ -697,7 +1008,8 @@ namespace Xadrez
                 }
                 else
                 {
-                    if (ImportandoXadrezClass.Player == ImportandoXadrezClass.PlayerDoUsuario)
+                    if (ImportandoXadrezClass.Player == ImportandoXadrezClass.PlayerDoUsuario
+                        && SeEnviaMovimentosDeJogada == true)
                     {
                         EnviaAsinformacoesDoDisplayDeJogada();
                     }
@@ -712,7 +1024,7 @@ namespace Xadrez
         {
             ImportandoXadrezClass.IniciandoNovaPartida();
             //textBoxChat.Text = "Iniciando novo jogo";
-            ImportandoXadrezClass.Log = "";
+            //ImportandoXadrezClass.Log = "";
             DarClickNoBotaoInfo();
             //
             panelJogoNormal.Show();
@@ -750,8 +1062,9 @@ namespace Xadrez
                 }
                 else
                 {
-                    if (ImportandoXadrezClass.Player == ImportandoXadrezClass.PlayerDoUsuario)
-                    {
+                    if (ImportandoXadrezClass.Player == ImportandoXadrezClass.PlayerDoUsuario
+                        && SeEnviaMovimentosDeJogada == true)
+                    {                     
                         EnviaAsinformacoesDoDisplayDeJogada();
                     }
                 }
@@ -1544,8 +1857,16 @@ namespace Xadrez
         private void comboBoxPeao_SelectedIndexChanged(object sender, EventArgs e)
         {
             ImportandoXadrezClass.IdDaPessaQueOPeaoVaiVirar = Convert.ToByte(comboBoxPeao.SelectedIndex);
-        }
 
+            try
+            {
+                Properties.Settings.Default.IdDaPessaQueOPeaoVaiVirar = Convert.ToByte(comboBoxPeao.SelectedIndex);
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception)
+            {
+            }
+        }
 
         //Cor nos nomes
         private void oNOFFToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1554,13 +1875,31 @@ namespace Xadrez
             {
                 MudarCorDoTextoDasCasasPreto();
                 TextoDasCasasColorido = false;
-                oNOFFToolStripMenuItem.Text = "Colocar Texto Colorido";
+                oNOFFToolStripMenuItem.Text = T_Colocar_Texto_Colorido; //"Colocar Texto Colorido";
+                try
+                {
+                    Properties.Settings.Default.TextoDasCasasColorido = false;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {
+                }
+               
             }
             else
             {
                 MudarCorDoTextoDasCasasColorido();
                 TextoDasCasasColorido = true;
-                oNOFFToolStripMenuItem.Text = "Colocar Texto Preto";
+                oNOFFToolStripMenuItem.Text = T_Colocar_Texto_Preto; //"Colocar Texto Preto";
+                try
+                {
+                    Properties.Settings.Default.TextoDasCasasColorido = true;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {
+                }
+                
             }
 
         }
@@ -1573,15 +1912,32 @@ namespace Xadrez
                 SemImagensNasCasas();
                 RenomearNomeDosBotoesDoTabuleiro();
                 ColocarImagensNasCasas = false;
-                oNOFFToolStripMenuItem1.Text = "Colocar Imagem nas casas";
+                oNOFFToolStripMenuItem1.Text = T_Colocar_Imagem_Nas_Casas;//"Colocar Imagem nas casas";
+                try
+                {
+                    Properties.Settings.Default.ColocarImagensNasCasas = false;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {
+                }
+                
             }
             else
             {
                 ComImagensNasCasas();
                 RenomearNomeDosBotoesDoTabuleiroSemTexto();
                 ColocarImagensNasCasas = true;
-                oNOFFToolStripMenuItem1.Text = "Colocar nomes nas casas";
-
+                oNOFFToolStripMenuItem1.Text = T_Colocar_Nomes_Nas_Casas;//"Colocar nomes nas casas";
+                try
+                {
+                    Properties.Settings.Default.ColocarImagensNasCasas = true;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {
+                }
+               
             }
         }
 
@@ -1590,17 +1946,35 @@ namespace Xadrez
         {
             if (AutoConcluirJogadaOn == true)
             {
-                oNOFFToolStripMenuItem2.Text = "Ativar Função";
+                oNOFFToolStripMenuItem2.Text = T_Ativar_Funcao; //"Ativar Função";
                 ImportandoXadrezClass.AutoConcluirJogada = false;
                 AutoConcluirJogadaOn = false;
-
+                
+                try
+                {
+                    Properties.Settings.Default.AutoConcluirJogadaOn = false;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {
+                }
+                
             }
             else
             {
-                oNOFFToolStripMenuItem2.Text = "Desativar Função";
+                oNOFFToolStripMenuItem2.Text = T_Desativar_Funcao; //"Desativar Função";
                 ImportandoXadrezClass.AutoConcluirJogada = true;
                 AutoConcluirJogadaOn = true;
+                try
+                {
+                    Properties.Settings.Default.AutoConcluirJogadaOn = true;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {
+                }
 
+                
             }
         }
         
@@ -1610,14 +1984,32 @@ namespace Xadrez
             if (MostrarPopupDasCasas == true)
             {
                 toolTipDescricaoDasCasas.Active = false;
-                oNOFFToolStripMenuItem3.Text = "Ativar Popup";
+                oNOFFToolStripMenuItem3.Text = T_Ativar_Popup; //"Ativar Popup";
                 MostrarPopupDasCasas = false;
+                try
+                {
+                    Properties.Settings.Default.MostrarPopupDasCasas = false;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {
+                }
+                
             }
             else
             {
                 toolTipDescricaoDasCasas.Active = true;
-                oNOFFToolStripMenuItem3.Text = "Desativar Popup";
+                oNOFFToolStripMenuItem3.Text = T_Desativar_Popup; //"Desativar Popup";
                 MostrarPopupDasCasas = true;
+                try
+                {
+                    Properties.Settings.Default.MostrarPopupDasCasas = true;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {
+                }
+                
             }
         }
 
@@ -1628,15 +2020,33 @@ namespace Xadrez
             {
                 ImportandoXadrezClass.DescricaoDosBotoesMetodo();
                 DescricaoDosBotoes();
-                oNOFFToolStripMenuItem4.Text = "Ativar Info De Debug";
+                oNOFFToolStripMenuItem4.Text = T_Ativar_Info_De_Debug; //"Ativar Info De Debug";
                 VerInfoDeDebug = false;
+                try
+                {
+                    Properties.Settings.Default.VerInfoDeDebug = false;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {
+                }
+                
             }
             else
             {
                 ImportandoXadrezClass.DescricaoDosBotoesDebugMetodo();
                 DescricaoDosBotoesDebug();
-                oNOFFToolStripMenuItem4.Text = "Desativar Info De Debug";
+                oNOFFToolStripMenuItem4.Text = T_Desativar_Info_De_Debug;//"Desativar Info De Debug";
                 VerInfoDeDebug = true;
+                try
+                {
+                    Properties.Settings.Default.VerInfoDeDebug = true;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {
+                }
+                
             }
         }
 
@@ -1664,19 +2074,22 @@ namespace Xadrez
 
             if (ImportandoXadrezClass.XequeMate == true)
             {
-                MessageBox.Show("Você não pode salvar um jogo com Xeque-mate.", "Erro:");
+                //MessageBox.Show("Você não pode salvar um jogo com Xeque-mate.", T_TITULO_ERRO);
+                MessageBox.Show(T_mBox01, T_TITULO_ERRO);
             }
             else
             {
                 if (ImportandoXadrezClass.CasaOndeEstaOReiDoPlayer == 64 || ImportandoXadrezClass.CasaOndeEstaOReiDoRival == 64)
                 {
-                    MessageBox.Show("Você não pode salvar um jogo sem que tenha pelo menos um rei azul e um rei verde.", "Erro:");
+                    //MessageBox.Show("Você não pode salvar um jogo sem que tenha pelo menos um rei azul e um rei verde.", T_TITULO_ERRO);
+                    MessageBox.Show(T_mBox02, T_TITULO_ERRO);
                 }
                 else
                 {
                     if (QuantidadeDeReis.Count != 2)
                     {
-                        MessageBox.Show("Você não pode salvar um jogo que tenha mais de um rei azul ou de um rei verde.", "Erro:");
+                        //MessageBox.Show("Você não pode salvar um jogo que tenha mais de um rei azul ou de um rei verde.", T_TITULO_ERRO);
+                        MessageBox.Show(T_mBox03, T_TITULO_ERRO);
                     }
                     else
                     {
@@ -1928,7 +2341,7 @@ namespace Xadrez
                     ImportandoXadrezClass.TemCasaSelecionada = false;
 
 
-                    ImportandoXadrezClass.Log = "Jogo carregado com sucesso";
+                    //ImportandoXadrezClass.Log = "Jogo carregado com sucesso";
 
                     //textBoxLog.Text = "Carregado Jogo";
                     //ImportandoXadrezClass.Log = "";
@@ -2100,7 +2513,8 @@ namespace Xadrez
             }
             else
             {
-                MessageBox.Show("Erro: o arquivo não é do tipo adeguando ou esta conrompido", "Erro");
+                //MessageBox.Show("Erro: o arquivo não é do tipo adeguando ou esta conrompido", T_TITULO_ERRO);
+                MessageBox.Show(T_mBox04, T_TITULO_ERRO);
             }
 
             LerArquivo.Close();
@@ -2159,7 +2573,8 @@ namespace Xadrez
             comboBoxPeaoAndouDuasCasas.Enabled = false;
             numericUpDownEmqualRodadaAPessaFoiMexida.Enabled = false;
 
-            comboBoxPessaEscolhida.SelectedItem = "Vazio";
+            comboBoxPessaEscolhida.SelectedItem = T_Vazio; //"Vazio";
+           
 
             ImportandoXadrezClass.CasaEstaOcupadaValor = false;
             ImportandoXadrezClass.CorDaPessaValor = 0;
@@ -2665,6 +3080,7 @@ namespace Xadrez
                         ImportandoXadrezClass.comboBoxDirecaoDoPeaoEnabled = false;
 
                         ImportandoXadrezClass.comboBoxPessaEscolhidaSelectedIndex = 0;
+
                         break;
                     case 1:// peão azul
                         ImportandoXadrezClass.PessaValor = 16;
@@ -3109,7 +3525,7 @@ namespace Xadrez
         {
             ImportandoXadrezClass.EditarNovoJogo();
             //textBoxChat.Text = "";
-            ImportandoXadrezClass.Log = "";
+            //ImportandoXadrezClass.Log = "";
             DarClickNoBotaoInfo();
             //
             panelHostearPartida.Hide();
@@ -3391,7 +3807,7 @@ namespace Xadrez
         {
             // info Environment.NewLine coloca nova linha
 
-            MessageBox.Show("Xadrez By Jaderlink" + Environment.NewLine + "Site: jaderlink.blogspot.com" + Environment.NewLine + "Versão: 2.0", "Créditos:");
+            MessageBox.Show("Xadrez By Jaderlink" + Environment.NewLine + "Site: jaderlink.blogspot.com" + Environment.NewLine + "Version: 3.0" + Environment.NewLine + T_Translated_By, T_TITULO_CREDITOS);
            
         }
 
@@ -3407,8 +3823,17 @@ namespace Xadrez
                 DarClickNoBotaoInfo();
                 ImportandoXadrezClass.TemCasaSelecionada = false;
                 ImportandoXadrezClass.ColoqueiAPessaEmUmaCasa = false;
-                oNOFFToolStripMenuItem5.Text = "Ativar Teste Do Tabuleiro";
+                oNOFFToolStripMenuItem5.Text = T_Ativar_Teste_Do_Tabuleiro; //"Ativar Teste Do Tabuleiro";
                 ImportandoXadrezClass.TestarTabuleiroDebug = false;
+                try
+                {
+                    Properties.Settings.Default.TestarTabuleiroDebug = false;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {
+                }
+                
             }
             else
             {
@@ -3416,8 +3841,373 @@ namespace Xadrez
                 DarClickNoBotaoInfo();
                 ImportandoXadrezClass.TemCasaSelecionada = false;
                 ImportandoXadrezClass.ColoqueiAPessaEmUmaCasa = false;
-                oNOFFToolStripMenuItem5.Text = "Desativar Teste Do Tabuleiro";
+                oNOFFToolStripMenuItem5.Text = T_Desativar_Teste_Do_Tabuleiro; //"Desativar Teste Do Tabuleiro";
                 ImportandoXadrezClass.TestarTabuleiroDebug = true;
+                try
+                {
+                    Properties.Settings.Default.TestarTabuleiroDebug = true;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {
+                }
+               
+            }
+        }
+
+        // inverter tabuleiro
+        private void oNOFFToolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            if (InverterTabuleiro == true)
+            {
+                // se on desativa
+                InverterTabuleiro = false;
+                oNOFFToolStripMenuItem6.Text = T_Desativar_Funcao; //T_Ativar_Funcao;
+
+                comboBoxDirecaoDoPeao.Items.Clear();
+                comboBoxDirecaoDoPeao.Items.Add(T_Pra_Cima);
+                comboBoxDirecaoDoPeao.Items.Add(T_Pra_Baixo);
+                comboBoxDirecaoDoPeao.Items.Add(T_Pra_Direita);
+                comboBoxDirecaoDoPeao.Items.Add(T_Pra_Esquerda);
+
+                if (ImportandoXadrezClass.ModoEditor_TemCasaSelecionada == true
+                   && ImportandoXadrezClass.ModoEditor_Selecionar == true
+                   && ImportandoXadrezClass.ModoEditor == true)
+                {
+                    if (ImportandoXadrezClass.DirecaoDoPeao[ImportandoXadrezClass.Selecionado_TabuleiroID] == 1)
+                    {
+                        comboBoxDirecaoDoPeao.SelectedIndex = 0;
+                    }
+                    if (ImportandoXadrezClass.DirecaoDoPeao[ImportandoXadrezClass.Selecionado_TabuleiroID] == 2)
+                    {
+                        comboBoxDirecaoDoPeao.SelectedIndex = 1;
+                    }
+                }
+
+                if (ImportandoXadrezClass.ModoEditor == true
+                  && ImportandoXadrezClass.ModoEditor_Subistituir == true)
+                {
+                    radioButton_Edit_Selecionar.Checked = true;
+                    radioButton_Edit_Subistituir.Checked = false;
+
+                    ImportandoXadrezClass.ModoEditor_Selecionar = true;
+                    ImportandoXadrezClass.ModoEditor_Subistituir = false;
+
+                    comboBoxAPessaJaFoiMovida.Enabled = false;
+                    comboBoxDirecaoDoPeao.Enabled = false;
+                    comboBoxPeaoAndouDuasCasas.Enabled = false;
+                    comboBoxPessaEscolhida.Enabled = false;
+                    numericUpDownEmqualRodadaAPessaFoiMexida.Enabled = false;
+
+                    ImportandoXadrezClass.ModoEditor_TemCasaSelecionada = false;
+
+                    ImportandoXadrezClass.CasaEstaOcupadaValor = false;
+                    ImportandoXadrezClass.CorDaPessaValor = 0;
+                    ImportandoXadrezClass.PessaValor = 0;
+                    ImportandoXadrezClass.APessaJaFoiMovidaValor = false;
+                    ImportandoXadrezClass.EmqualRodadaAPessaFoiMexidaValor = 0;
+                    ImportandoXadrezClass.PeaoAndouDuasCasasValor = false;
+                    ImportandoXadrezClass.DirecaoDoPeaoValor = 0;
+                }
+
+
+                labelDisplay1.Text = "1";
+                labelDisplay2.Text = "2";
+                labelDisplay3.Text = "3";
+                labelDisplay4.Text = "4";
+                labelDisplay5.Text = "5";
+                labelDisplay6.Text = "6";
+                labelDisplay7.Text = "7";
+                labelDisplay8.Text = "8";
+
+                button1A.Location = new Point(button1A.Location.X, 0);
+                button1B.Location = new Point(button1B.Location.X, 0);
+                button1C.Location = new Point(button1C.Location.X, 0);
+                button1D.Location = new Point(button1D.Location.X, 0);
+                button1E.Location = new Point(button1E.Location.X, 0);
+                button1F.Location = new Point(button1F.Location.X, 0);
+                button1G.Location = new Point(button1G.Location.X, 0);
+                button1H.Location = new Point(button1H.Location.X, 0);
+                //
+                button2A.Location = new Point(button2A.Location.X, 70);
+                button2B.Location = new Point(button2B.Location.X, 70);
+                button2C.Location = new Point(button2C.Location.X, 70);
+                button2D.Location = new Point(button2D.Location.X, 70);
+                button2E.Location = new Point(button2E.Location.X, 70);
+                button2F.Location = new Point(button2F.Location.X, 70);
+                button2G.Location = new Point(button2G.Location.X, 70);
+                button2H.Location = new Point(button2H.Location.X, 70);
+                //
+                button3A.Location = new Point(button3A.Location.X, 140);
+                button3B.Location = new Point(button3B.Location.X, 140);
+                button3C.Location = new Point(button3C.Location.X, 140);
+                button3D.Location = new Point(button3D.Location.X, 140);
+                button3E.Location = new Point(button3E.Location.X, 140);
+                button3F.Location = new Point(button3F.Location.X, 140);
+                button3G.Location = new Point(button3G.Location.X, 140);
+                button3H.Location = new Point(button3H.Location.X, 140);
+                //
+                button4A.Location = new Point(button4A.Location.X, 210);
+                button4B.Location = new Point(button4B.Location.X, 210);
+                button4C.Location = new Point(button4C.Location.X, 210);
+                button4D.Location = new Point(button4D.Location.X, 210);
+                button4E.Location = new Point(button4E.Location.X, 210);
+                button4F.Location = new Point(button4F.Location.X, 210);
+                button4G.Location = new Point(button4G.Location.X, 210);
+                button4H.Location = new Point(button4H.Location.X, 210);
+                //
+                button5A.Location = new Point(button5A.Location.X, 280);
+                button5B.Location = new Point(button5B.Location.X, 280);
+                button5C.Location = new Point(button5C.Location.X, 280);
+                button5D.Location = new Point(button5D.Location.X, 280);
+                button5E.Location = new Point(button5E.Location.X, 280);
+                button5F.Location = new Point(button5F.Location.X, 280);
+                button5G.Location = new Point(button5G.Location.X, 280);
+                button5H.Location = new Point(button5H.Location.X, 280);
+                //
+                button6A.Location = new Point(button6A.Location.X, 350);
+                button6B.Location = new Point(button6B.Location.X, 350);
+                button6C.Location = new Point(button6C.Location.X, 350);
+                button6D.Location = new Point(button6D.Location.X, 350);
+                button6E.Location = new Point(button6E.Location.X, 350);
+                button6F.Location = new Point(button6F.Location.X, 350);
+                button6G.Location = new Point(button6G.Location.X, 350);
+                button6H.Location = new Point(button6H.Location.X, 350);
+                //
+                button7A.Location = new Point(button7A.Location.X, 420);
+                button7B.Location = new Point(button7B.Location.X, 420);
+                button7C.Location = new Point(button7C.Location.X, 420);
+                button7D.Location = new Point(button7D.Location.X, 420);
+                button7E.Location = new Point(button7E.Location.X, 420);
+                button7F.Location = new Point(button7F.Location.X, 420);
+                button7G.Location = new Point(button7G.Location.X, 420);
+                button7H.Location = new Point(button7H.Location.X, 420);
+                //
+                button8A.Location = new Point(button8A.Location.X, 490);
+                button8B.Location = new Point(button8B.Location.X, 490);
+                button8C.Location = new Point(button8C.Location.X, 490);
+                button8D.Location = new Point(button8D.Location.X, 490);
+                button8E.Location = new Point(button8E.Location.X, 490);
+                button8F.Location = new Point(button8F.Location.X, 490);
+                button8G.Location = new Point(button8G.Location.X, 490);
+                button8H.Location = new Point(button8H.Location.X, 490);
+                // END
+
+                try
+                {
+                    Properties.Settings.Default.InverterTabuleiro = false;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {
+                }
+
+            }
+            else
+            {
+                // se false ativa função 
+                InverterTabuleiro = true;
+                oNOFFToolStripMenuItem6.Text = T_Ativar_Funcao; //T_Desativar_Funcao;
+
+                comboBoxDirecaoDoPeao.Items.Clear();
+                comboBoxDirecaoDoPeao.Items.Add(T_Pra_Baixo);
+                comboBoxDirecaoDoPeao.Items.Add(T_Pra_Cima);
+                comboBoxDirecaoDoPeao.Items.Add(T_Pra_Direita);
+                comboBoxDirecaoDoPeao.Items.Add(T_Pra_Esquerda);
+
+                if (ImportandoXadrezClass.ModoEditor_TemCasaSelecionada == true
+                    && ImportandoXadrezClass.ModoEditor_Selecionar == true
+                    && ImportandoXadrezClass.ModoEditor == true)
+                {
+                    if (ImportandoXadrezClass.DirecaoDoPeao[ImportandoXadrezClass.Selecionado_TabuleiroID] == 1)
+                    {
+                        comboBoxDirecaoDoPeao.SelectedIndex = 0;
+                    }
+                    if (ImportandoXadrezClass.DirecaoDoPeao[ImportandoXadrezClass.Selecionado_TabuleiroID] == 2)
+                    {
+                        comboBoxDirecaoDoPeao.SelectedIndex = 1;
+                    }
+                }
+
+                if (ImportandoXadrezClass.ModoEditor == true
+                  && ImportandoXadrezClass.ModoEditor_Subistituir == true)
+                {
+
+                    radioButton_Edit_Selecionar.Checked = true;
+                    radioButton_Edit_Subistituir.Checked = false;
+
+                    ImportandoXadrezClass.ModoEditor_Selecionar = true;
+                    ImportandoXadrezClass.ModoEditor_Subistituir = false;
+
+                    comboBoxAPessaJaFoiMovida.Enabled = false;
+                    comboBoxDirecaoDoPeao.Enabled = false;
+                    comboBoxPeaoAndouDuasCasas.Enabled = false;
+                    comboBoxPessaEscolhida.Enabled = false;
+                    numericUpDownEmqualRodadaAPessaFoiMexida.Enabled = false;
+
+                    ImportandoXadrezClass.ModoEditor_TemCasaSelecionada = false;
+
+                    ImportandoXadrezClass.CasaEstaOcupadaValor = false;
+                    ImportandoXadrezClass.CorDaPessaValor = 0;
+                    ImportandoXadrezClass.PessaValor = 0;
+                    ImportandoXadrezClass.APessaJaFoiMovidaValor = false;
+                    ImportandoXadrezClass.EmqualRodadaAPessaFoiMexidaValor = 0;
+                    ImportandoXadrezClass.PeaoAndouDuasCasasValor = false;
+                    ImportandoXadrezClass.DirecaoDoPeaoValor = 0;
+                }
+
+
+                labelDisplay1.Text = "8";
+                labelDisplay2.Text = "7";
+                labelDisplay3.Text = "6";
+                labelDisplay4.Text = "5";
+                labelDisplay5.Text = "4";
+                labelDisplay6.Text = "3";
+                labelDisplay7.Text = "2";
+                labelDisplay8.Text = "1";
+
+                button1A.Location = new Point(button1A.Location.X, 490);
+                button1B.Location = new Point(button1B.Location.X, 490);
+                button1C.Location = new Point(button1C.Location.X, 490);
+                button1D.Location = new Point(button1D.Location.X, 490);
+                button1E.Location = new Point(button1E.Location.X, 490);
+                button1F.Location = new Point(button1F.Location.X, 490);
+                button1G.Location = new Point(button1G.Location.X, 490);
+                button1H.Location = new Point(button1H.Location.X, 490);
+                //
+                button2A.Location = new Point(button2A.Location.X, 420);
+                button2B.Location = new Point(button2B.Location.X, 420);
+                button2C.Location = new Point(button2C.Location.X, 420);
+                button2D.Location = new Point(button2D.Location.X, 420);
+                button2E.Location = new Point(button2E.Location.X, 420);
+                button2F.Location = new Point(button2F.Location.X, 420);
+                button2G.Location = new Point(button2G.Location.X, 420);
+                button2H.Location = new Point(button2H.Location.X, 420);
+                //
+                button3A.Location = new Point(button3A.Location.X, 350);
+                button3B.Location = new Point(button3B.Location.X, 350);
+                button3C.Location = new Point(button3C.Location.X, 350);
+                button3D.Location = new Point(button3D.Location.X, 350);
+                button3E.Location = new Point(button3E.Location.X, 350);
+                button3F.Location = new Point(button3F.Location.X, 350);
+                button3G.Location = new Point(button3G.Location.X, 350);
+                button3H.Location = new Point(button3H.Location.X, 350);
+                //
+                button4A.Location = new Point(button4A.Location.X, 280);
+                button4B.Location = new Point(button4B.Location.X, 280);
+                button4C.Location = new Point(button4C.Location.X, 280);
+                button4D.Location = new Point(button4D.Location.X, 280);
+                button4E.Location = new Point(button4E.Location.X, 280);
+                button4F.Location = new Point(button4F.Location.X, 280);
+                button4G.Location = new Point(button4G.Location.X, 280);
+                button4H.Location = new Point(button4H.Location.X, 280);
+                //
+                button5A.Location = new Point(button5A.Location.X, 210);
+                button5B.Location = new Point(button5B.Location.X, 210);
+                button5C.Location = new Point(button5C.Location.X, 210);
+                button5D.Location = new Point(button5D.Location.X, 210);
+                button5E.Location = new Point(button5E.Location.X, 210);
+                button5F.Location = new Point(button5F.Location.X, 210);
+                button5G.Location = new Point(button5G.Location.X, 210);
+                button5H.Location = new Point(button5H.Location.X, 210);
+                //
+                button6A.Location = new Point(button6A.Location.X, 140);
+                button6B.Location = new Point(button6B.Location.X, 140);
+                button6C.Location = new Point(button6C.Location.X, 140);
+                button6D.Location = new Point(button6D.Location.X, 140);
+                button6E.Location = new Point(button6E.Location.X, 140);
+                button6F.Location = new Point(button6F.Location.X, 140);
+                button6G.Location = new Point(button6G.Location.X, 140);
+                button6H.Location = new Point(button6H.Location.X, 140);
+                //
+                button7A.Location = new Point(button7A.Location.X, 70);
+                button7B.Location = new Point(button7B.Location.X, 70);
+                button7C.Location = new Point(button7C.Location.X, 70);
+                button7D.Location = new Point(button7D.Location.X, 70);
+                button7E.Location = new Point(button7E.Location.X, 70);
+                button7F.Location = new Point(button7F.Location.X, 70);
+                button7G.Location = new Point(button7G.Location.X, 70);
+                button7H.Location = new Point(button7H.Location.X, 70);
+                //
+                button8A.Location = new Point(button8A.Location.X, 0);
+                button8B.Location = new Point(button8B.Location.X, 0);
+                button8C.Location = new Point(button8C.Location.X, 0);
+                button8D.Location = new Point(button8D.Location.X, 0);
+                button8E.Location = new Point(button8E.Location.X, 0);
+                button8F.Location = new Point(button8F.Location.X, 0);
+                button8G.Location = new Point(button8G.Location.X, 0);
+                button8H.Location = new Point(button8H.Location.X, 0);
+                // END
+
+                try
+                {
+                    Properties.Settings.Default.InverterTabuleiro = true;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {
+                }
+
+            }
+
+
+
+        }
+
+        // Envia Escolha De Jogada
+        private void oNOFFToolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            if (SeEnviaMovimentosDeJogada == true)
+            {
+                SeEnviaMovimentosDeJogada = false;
+                oNOFFToolStripMenuItem7.Text = T_Enviar_Meus_Movimentos; //desativar
+
+                if (ImportandoXadrezClass.Player == ImportandoXadrezClass.PlayerDoUsuario)
+                {
+                    if (ClientEstaConectadoComHost == true
+                        || ClientEstaConectado == true)
+                    {
+                        string DadosASeremEnviados = "5 ";
+                        for (int i = 0; i < 65; i++)
+                        {
+                            DadosASeremEnviados += Convert.ToString(Convert.ToChar(00));
+                        }
+
+                        EnviaDados(DadosASeremEnviados);
+                    }
+                }
+
+                try
+                {
+                    Properties.Settings.Default.SeEnviaMovimentosDeJogada = false;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {               
+                }
+            }
+            else
+            {
+                SeEnviaMovimentosDeJogada = true;
+                oNOFFToolStripMenuItem7.Text = T_Nao_Enviar_Meus_Movimentos; //ativar
+
+                if (ImportandoXadrezClass.Player == ImportandoXadrezClass.PlayerDoUsuario)
+                {
+                    if (ClientEstaConectadoComHost == true
+                        || ClientEstaConectado == true)
+                    {
+                        EnviaAsinformacoesDoDisplayDeJogada();
+                    }
+                }
+
+                try
+                {
+                    Properties.Settings.Default.SeEnviaMovimentosDeJogada = true;
+                    Properties.Settings.Default.Save();
+                }
+                catch (Exception)
+                {
+                }
             }
         }
 
@@ -3515,7 +4305,7 @@ namespace Xadrez
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Erro:");
+                MessageBox.Show(ex.Message, T_TITULO_ERRO);
             }
        
         }
@@ -3570,8 +4360,9 @@ namespace Xadrez
             if (ClientEstaConectadoComHost == true
                 || ClientEstaConectado == true)
             {
-                if (MessageBox.Show("Você Realmente Deseja Requisitar Uma Nova Partida?", "Responda a pergunta:", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
+                //if (MessageBox.Show("Você Realmente Deseja Requisitar Uma Nova Partida?", T_TITULO_Responda_a_pergunta, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show(T_mBox05, T_TITULO_Responda_a_pergunta, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
                     if (ClientEstaConectadoComHost == true)
                     {
                         string Oqvaiserenviado = "R1A Jogador Azul requisita novo jogo";
@@ -3605,8 +4396,10 @@ namespace Xadrez
             if (ClientEstaConectadoComHost == true
                 || ClientEstaConectado == true)
             {
-                if (MessageBox.Show("Você Realmente Deseja Requisitar Os Dados Do Tabuleiro Do Outro Jogador?" + Environment.NewLine + 
-                    "Somente Faça isso caso os dois Jogadores Estejam incapacitados De Jogar.", "Responda a pergunta:", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                //if (MessageBox.Show("Você Realmente Deseja Requisitar Os Dados Do Tabuleiro Do Outro Jogador?" + Environment.NewLine + 
+                if (MessageBox.Show(T_mBox06 + Environment.NewLine +
+                    //"Somente Faça isso caso os dois Jogadores Estejam incapacitados De Jogar.", T_TITULO_Responda_a_pergunta, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    T_mBox07, T_TITULO_Responda_a_pergunta, MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     string PedeDados = "T Passa os dados ai";
                     EnviaDados(PedeDados);
@@ -3739,6 +4532,17 @@ namespace Xadrez
 
             // fim
 
+
+            // novo
+            ImportandoXadrezClass.TemCasaSelecionada = false;
+            ImportandoXadrezClass.ColoqueiAPessaEmUmaCasa = false;
+
+            for (int i = 0; i < 65; i++)
+            {
+                ImportandoXadrezClass.NaoPodeClicarNesseBotao[i] = false;
+            }
+
+
         }
 
         public void EnviaOsDadosProOutroPlayer()
@@ -3790,27 +4594,56 @@ namespace Xadrez
             {
                 XequemateMessageBox = false;
 
-                string Vencedor = "";
+                //string Vencedor = "";
 
                 if (ImportandoXadrezClass.Player == 1)
                 {
-                    Vencedor = ImportandoXadrezClass.NomeAZUL;
+                    Invoke(new MessageBoxDelegate(ShowMessage), T_mBox15, T_TITULO_Fim_De_Jogo, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //Vencedor = ImportandoXadrezClass.NomeAZUL;
                 }
                 if (ImportandoXadrezClass.Player == 2)
                 {
-                    Vencedor = ImportandoXadrezClass.NomeVERDE;
+                    Invoke(new MessageBoxDelegate(ShowMessage), T_mBox16, T_TITULO_Fim_De_Jogo, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //Vencedor = ImportandoXadrezClass.NomeVERDE;
                 }
-                Invoke(new MessageBoxDelegate(ShowMessage), "Fim De Jogo, Jogador " + Vencedor + " Venceu", "Fim De Jogo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //Invoke(new MessageBoxDelegate(ShowMessage), "Fim De Jogo, Jogador " + Vencedor + " Venceu", T_TITULO_Fim_De_Jogo, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             if (HouveEmpateMessageBox == true)
             {
                 HouveEmpateMessageBox = false;
-                Invoke(new MessageBoxDelegate(ShowMessage), "O Jogo Empatou", "Fim De Jogo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //Invoke(new MessageBoxDelegate(ShowMessage), "O Jogo Empatou", T_TITULO_Fim_De_Jogo, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Invoke(new MessageBoxDelegate(ShowMessage), T_mBox14, T_TITULO_Fim_De_Jogo, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
 
 
         }
+
+
+        private void textBoxHostIP_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Properties.Settings.Default.HostIP = textBoxHostIP.Text;
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxClientIP_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Properties.Settings.Default.ClientIP = textBoxClientIP.Text;
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
 
 
         // para as threads funcionarem
@@ -3844,7 +4677,7 @@ namespace Xadrez
             return MessageBox.Show(this, Conteudo, Titulo, buttons, icon);
         }
 
-      
+       
     }
 
 
